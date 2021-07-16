@@ -28,7 +28,7 @@ namespace Webshop.DTOs
             OrderId = order.Id;
             OrderTotaal = order.OrderTotaal;
             UserId = order.UserId;
-            Products = order.Products.Select(p=>new ProductDTO(p)).ToList();
+           // Products = order.Products.Select(p=>new ProductDTO(p)).ToList();
         }
         
     }

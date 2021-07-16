@@ -24,15 +24,15 @@ namespace Webshop.Models.Domain
        //public ICollection<OrderLine> OrderLines { get; set; }
         #region ctors
        
-        public Product(string productclass, string productname,int unitPrice,int? amount=null, string description=""):this()
+        public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this()
         {
             
             ProductClass = productclass;
             ProductName = productname;
-            UnitPrice = unitPrice;
-            Amount = amount;
+            UnitPrice = unitPrice;            
             Description = description;
-          
+            Amount = amount;
+
         }
         public Product()
         {

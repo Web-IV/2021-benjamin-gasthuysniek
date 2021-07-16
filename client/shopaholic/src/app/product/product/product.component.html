@@ -1,10 +1,10 @@
 <p>
     product for {{name}}
 </p>
-Different productsizes:
+Different productdetails
 <ul>
-    <li *ngFor= "let sizes of productSizes">
-        {{sizes}}
+    <li *ngFor= "let productDetail of productDetails">
+        <app-product-detail [category]= "productDetail"></app-product-detail>
     </li>
 </ul>
 DateAdded:

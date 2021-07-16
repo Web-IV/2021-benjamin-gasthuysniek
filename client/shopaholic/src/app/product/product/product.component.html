@@ -1,11 +1,15 @@
-<p>
-    product for {{name}}
-</p>
-Different productdetails
-<ul>
-    <li *ngFor= "let productDetail of productDetails">
-        <app-product-detail [category]= "productDetail"></app-product-detail>
-    </li>
-</ul>
-DateAdded:
-{{dateAdded | date}}
+<mat-card>
+  <mat-card-header>
+    <!-- https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/ -->
+      <mat-card-title><mat-icon>add_shopping_cart</mat-icon>{{name}}</mat-card-title>
+      <mat-card-subtitle>added on {{dateAdded | date }}</mat-card-subtitle>    
+  </mat-card-header>
+  <mat-card-content>
+    <h3>Different productdetails</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let productDetail of productDetails">
+        <app-product-detail [category]="productDetail"></app-product-detail>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

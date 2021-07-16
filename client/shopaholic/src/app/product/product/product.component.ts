@@ -12,8 +12,8 @@ export class ProductComponent implements OnInit {
 
   @Input() name: string = '';
   constructor() { 
- //   this.name = 'IphoneX';
-    this.productDetails = [];
+    this.name = 'IphoneX';
+    this.productDetails = ['Default productdetails'];
     this.dateAdded = new Date();
   
   }

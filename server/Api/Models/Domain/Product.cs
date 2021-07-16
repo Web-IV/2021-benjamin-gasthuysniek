@@ -14,6 +14,8 @@ namespace Webshop.Models.Domain
         public int UnitPrice { get; set; }
         //public int AantalOpOrder { get; set; } 
         public int? Amount { get; set; }
+
+        public string Description { get; set; }
         #endregion
         //public ICollection<User> Users { get; set; }
         public User User { get; set; }
@@ -22,13 +24,14 @@ namespace Webshop.Models.Domain
        //public ICollection<OrderLine> OrderLines { get; set; }
         #region ctors
        
-        public Product(string productclass, string productname,int unitPrice,int? amount=null):this()
+        public Product(string productclass, string productname,int unitPrice,int? amount=null, string description=""):this()
         {
             
             ProductClass = productclass;
             ProductName = productname;
             UnitPrice = unitPrice;
             Amount = amount;
+            Description = description;
           
         }
         public Product()

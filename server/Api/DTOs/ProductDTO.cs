@@ -19,12 +19,14 @@ namespace Webshop.DTOs
         public string ProductName { get; set; }
         public int Amount { get; set; }
        // public User user { get; set; }
+       public string Description { get; set; }
         public ProductDTO(Product product)
         {
             UnitPrice = product.UnitPrice;
             ProductClass = product.ProductClass;
             ProductName = product.ProductName;
             Amount = product.Amount.Value;
+            Description = product.Description;
             
         }
     }

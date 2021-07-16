@@ -75,6 +75,7 @@ namespace Webshop.Data
             //builder.Entity<Product>().HasKey(p => p.Id);
             builder.Entity<Product>().Property(p => p.ProductName).IsRequired();
             builder.Entity<Product>().Property(p => p.ProductClass).IsRequired(false);
+            builder.Entity<Product>().Property(p => p.Description).IsRequired(false);
             // builder.Entity<Product>().HasMany(p => p.OrderLines).WithOne();
             builder.Entity<Product>().HasKey(p => p.Id);
            

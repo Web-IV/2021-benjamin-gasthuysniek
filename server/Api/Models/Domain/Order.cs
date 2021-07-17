@@ -19,7 +19,7 @@ namespace Webshop.Models.Domain
       
        // public virtual ArrayList<Product, int> OrderContent { get; set; }
        //public virtual ICollection<Product> Products { get; set; }
-       public virtual ICollection<Product> Products { get; set; }
+       public virtual ICollection<Product> Products { get; private set; }
 
         public DateTime CreationDate { get; set; }
        public double OrderTotaal { get; set; }
@@ -42,16 +42,11 @@ namespace Webshop.Models.Domain
        
         public void VoegContentToe(Product product, int aantal=1)
         {
-            //product.AantalOpOrder = aantal;
-            //OrderLines.Add(new OrderLine(product, this));
-            // OrderLines.Add(new OrderLine()
-            // product,this,aantal)); //
-            // { Product = product, ProductId = product.Id, Order = this, OrderId = this.Id, ProductAmount = aantal }); 
-            //product.OrderTotWieHijBehoord = this;
-           
             product.Amount += aantal;
             Products.Add(product);
             OrderTotaal += product.UnitPrice * aantal;
         }
+        public Product GetProduct(int id) => Products.SingleOrDefault(i => i.Id == id);
+
     }
 }

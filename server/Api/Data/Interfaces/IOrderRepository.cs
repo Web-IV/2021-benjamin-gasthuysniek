@@ -11,14 +11,17 @@ namespace Webshop.Data.Interfaces
     {
         Order GetById(int id);
         //to save all the changes made in the context to the db
+        bool TryGetOrder(int id, out Order order);
+        IEnumerable<Order> GetAll();
+        IEnumerable<Order> GetBy(string productName = null, User user = null);
         void SaveChanges();
         void Delete(Order order);
         void Add(Order order);
         void Update(Order order);
-        List<OrderDTO> GetAll();
-        IEnumerable<OrderDTO> GetByUser(User user
+    
+        /*IEnumerable<OrderDTO> GetByUser(User user
             //int userid
-            );
+            );*/
        //bool TryGetProductOutOfContent(int productid, out Product product);
     }
 }

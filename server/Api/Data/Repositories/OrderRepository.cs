@@ -18,9 +18,29 @@ namespace Webshop.Data.Repositories
             _context = dbContext;
             _orders = dbContext.Order;
         }
+        public IEnumerable<Order> GetAll()
+        {
+            return _orders.Include(o => o.Products).ToList();
+        }
+       
+        public Order GetById(int id)
+        {
+            return _orders.Include(o => o.Products).SingleOrDefault(o => o.Id == id);
+        }
+
+        public bool TryGetOrder(int id, out Order order)
+        {
+            order = _context.Order.Include(o => o.Products).FirstOrDefault(o => o.Id == id);
+            return order != null;
+        }
+
         public void Add(Order order)
         {
            _orders.Add(order);
+        }
+        public void Update(Order order)
+        {
+            _context.Update(order);
         }
 
         public void Delete(Order order)
@@ -28,7 +48,7 @@ namespace Webshop.Data.Repositories
             _orders.Remove(order);
         }
 
-        public Order GetById(int id)
+      /*  public Order GetById(int id)
         {
             return _orders.Include(o=>o.Products)//.Include(o=>o.User)
                 .FirstOrDefault(o => o.Id== id);
@@ -42,13 +62,13 @@ namespace Webshop.Data.Repositories
                
                 .Where(dto => dto.UserId == userid);  
         }
-
+      */
         public void SaveChanges()
         {
             _context.SaveChanges();
         }
 
-        public void Update(Order order)
+       /* public void Update(Order order)
         {
             _context.Update(order);
         }
@@ -61,6 +81,20 @@ namespace Webshop.Data.Repositories
             return orderLijst.Select(o => new OrderDTO(o)).ToList();
         }
 
-      
+      */
+       public IEnumerable<Order> GetBy(string product = null, User user= null)
+        {
+            var orders = _orders.Include(r => r.Products).AsQueryable();
+            if (user != null)
+                orders = orders.Where(r => r.User.Equals(user));                
+               
+            
+            if (!string.IsNullOrEmpty(product))
+                orders = orders.Where(r => r.Products.Any(i => i.ProductName == product));
+            return orders.OrderBy(r => r.CreationDate).ToList();
+        }
+
+       
     }
 }
+

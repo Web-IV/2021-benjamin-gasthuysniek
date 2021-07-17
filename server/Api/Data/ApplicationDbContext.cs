@@ -66,7 +66,7 @@ namespace Webshop.Data
             builder.Entity<Order>().Property(o => o.OrderTotaal);
             //builder.Entity<Order>().Property(o => o.Products);
             //   builder.Entity<Order>().Property(o=> o.)
-            builder.Entity<Order>().HasMany(o => o.Products).WithOne().OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Order>().HasMany(o => o.Products).WithOne().OnDelete(DeleteBehavior.Restrict);//.HasForeignKey("OrderId);
             builder.Entity<Order>().HasOne(o => o.User).WithMany().HasForeignKey(o => o.UserId).OnDelete(DeleteBehavior.Cascade);
             
             #endregion

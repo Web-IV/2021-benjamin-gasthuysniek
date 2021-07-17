@@ -37,26 +37,29 @@ namespace Webshop.Controllers
         /// </summary>
         /// <returns>Array of the orders with the given userid, if no userid is giv </returns>
         [HttpGet("{userId}/orders")]
-        public IEnumerable<OrderDTO> GetOrders(string userId = "-1")
+        public IEnumerable<Order> GetOrders(string product = null, User user = null)
         {
             //when nothing is given as a parameter, all products are returned
-            try
-            {
-              
-                    //.GetByEmail(User.Identity.Name);
-                int useridconverted = int.Parse(userId);
-                User loggedInUser = _userRepo.GetById(useridconverted);
-                if (useridconverted == -1)
-                {
-                    return _orderRepo.GetAll();
-                }
-                return _orderRepo.GetByUser(loggedInUser
-                    // useridconverted
-                    );
-            }catch(Exception ex)
-            {
-              return  _orderRepo.GetAll();
-            }
+            /* try
+             {
+
+                     //.GetByEmail(User.Identity.Name);
+                 int useridconverted = int.Parse(userId);
+                 User loggedInUser = _userRepo.GetById(useridconverted);
+                 if (useridconverted == -1)
+                 {
+                     return _orderRepo.GetAll();
+                 }
+                 return _orderRepo.GetByUser(loggedInUser
+                     // useridconverted
+                     );
+             }catch(Exception ex)
+             {
+               return  _orderRepo.GetAll();
+             }*/
+            if (string.IsNullOrEmpty(product) && user == null)
+                return _orderRepo.GetAll();
+            return _orderRepo.GetBy(product, user);
         }
 
         //Get: Api/orders/id
@@ -67,12 +70,12 @@ namespace Webshop.Controllers
         /// <returns>The order</returns>
 
         [HttpGet("{id}")]
-        public ActionResult<OrderDTO> GetOrder(int id)
+        public ActionResult<Order> GetOrder(int id)
         {
 
             Order order = _orderRepo.GetById(id);
             if (order == null) return NotFound();
-            return new OrderDTO(order);
+            return order;
         }
 
         //Post: api/orders
@@ -81,7 +84,7 @@ namespace Webshop.Controllers
         /// </summary>        
         [HttpPost]
         //[Route("[Action]")]
-        public ActionResult<Order> PostOrder( )
+        public ActionResult<Order> PostOrder( OrderDTO order )
         {
            
             User user = new User();
@@ -104,15 +107,16 @@ namespace Webshop.Controllers
         /// Adding product to current order
         /// </summary>
         /// <param name="orderid">orderid</param>
-        /// <param name="productId">The product we want to add</param>
+        /// <param name="product">The product we want to add</param>
         /// <param name="aantal">The amount of the product we want to add</param>
         //     /// <param name="orderId">Id of the order</param>
         //[HttpPut("{id}")]
         [HttpPut("orderId")]
-        public ActionResult AddProductToOrder(int productId, int aantal,int orderid)//,int orderid)
+        public ActionResult AddProductToOrder(ProductDTO product, int aantal,int orderid)//,int orderid)
         {
-            Order order;
-            try
+
+           // Order order;
+            /*try
             {
                 User loggedInUser = _userRepo.GetByEmail(User.Identity.Name);
                 Product productToAdd = _productRepo.GetById(productId);
@@ -129,7 +133,17 @@ namespace Webshop.Controllers
             {
                 return BadRequest();
             }
-            return Ok(order);
+            return Ok(order);*/
+            if(!_orderRepo.TryGetOrder(orderid, out var order))
+            {
+                return NotFound(); 
+            }
+            // public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this()
+
+            var productToCreate = new Product(product.ProductClass, product.ProductName, product.UnitPrice,product.Description,aantal);
+            order.VoegContentToe(productToCreate, aantal);
+            _orderRepo.SaveChanges();
+            return CreatedAtAction("GetProduct", new { id = order.Id, productid = productToCreate.Id }, productToCreate);
         }
 
 

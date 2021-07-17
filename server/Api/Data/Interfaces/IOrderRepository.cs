@@ -13,7 +13,7 @@ namespace Webshop.Data.Interfaces
         //to save all the changes made in the context to the db
         bool TryGetOrder(int id, out Order order);
         IEnumerable<Order> GetAll();
-        IEnumerable<Order> GetBy(string productName = null, User user = null);
+        IEnumerable<Order> GetBy(int userid = -1,string productName = null);
         void SaveChanges();
         void Delete(Order order);
         void Add(Order order);

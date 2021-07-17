@@ -37,7 +37,7 @@ namespace Webshop.Controllers
         /// </summary>
         /// <returns>Array of the orders with the given userid, if no userid is giv </returns>
         [HttpGet("{userId}/orders")]
-        public IEnumerable<Order> GetOrders(string product = null, User user = null)
+        public IEnumerable<Order> GetOrders(string product = null, int userid = -1)
         {
             //when nothing is given as a parameter, all products are returned
             /* try
@@ -57,9 +57,9 @@ namespace Webshop.Controllers
              {
                return  _orderRepo.GetAll();
              }*/
-            if (string.IsNullOrEmpty(product) && user == null)
+            if (string.IsNullOrEmpty(product) && userid == -1)
                 return _orderRepo.GetAll();
-            return _orderRepo.GetBy(product, user);
+            return _orderRepo.GetBy(userid, product);
         }
 
         //Get: Api/orders/id
@@ -140,7 +140,9 @@ namespace Webshop.Controllers
             }
             // public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this()
 
-            var productToCreate = new Product(product.ProductClass, product.ProductName, product.UnitPrice,product.Description,aantal);
+            var productToCreate = new Product(product.ProductClass, product.ProductName, product.UnitPrice,product.Description
+                //,aantal
+                );
             order.VoegContentToe(productToCreate, aantal);
             _orderRepo.SaveChanges();
             return CreatedAtAction("GetProduct", new { id = order.Id, productid = productToCreate.Id }, productToCreate);

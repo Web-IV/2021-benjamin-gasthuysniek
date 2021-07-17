@@ -42,7 +42,9 @@ namespace Webshop.Models.Domain
        
         public void VoegContentToe(Product product, int aantal=1)
         {
-            product.Amount += aantal;
+          //  product.Amount += aantal;
+          //loop for adding products multiple times to order when needed
+          for (var i = 0; i<aantal; i++)
             Products.Add(product);
             OrderTotaal += product.UnitPrice * aantal;
         }

@@ -17,16 +17,9 @@ namespace Webshop.DTOs
         public string ProductClass { get; set; }
         [Required]
         public string ProductName { get; set; }
-        public int Amount { get; set; }
+       // public int Amount { get; set; }
        // public User user { get; set; }
         public string Description { get; set; }
-       /* public ProductDTO(Product product)
-        {//public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this()
-            ProductClass = product.ProductClass;
-            ProductName = product.ProductName;
-            UnitPrice = product.UnitPrice;
-            Description = product.Description;
-            Amount = product.Amount.Value;
-        }*/
+      
     }
 }

@@ -13,7 +13,7 @@ namespace Webshop.Models.Domain
         public string ProductName { get; set; }
         public int UnitPrice { get; set; }
         //public int AantalOpOrder { get; set; } 
-        public int? Amount { get; set; }
+      //  public int? Amount { get; set; }
 
         public string Description { get; set; }
         #endregion
@@ -24,14 +24,16 @@ namespace Webshop.Models.Domain
        //public ICollection<OrderLine> OrderLines { get; set; }
         #region ctors
        
-        public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this()
+        public Product(string productclass, string productname,int unitPrice,string description
+           // , int? amount=null
+            ):this()
         {
             
             ProductClass = productclass;
             ProductName = productname;
             UnitPrice = unitPrice;            
             Description = description;
-            Amount = amount;
+          //  Amount = amount;
 
         }
         public Product()

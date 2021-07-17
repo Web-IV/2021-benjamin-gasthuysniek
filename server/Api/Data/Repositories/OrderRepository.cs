@@ -82,11 +82,11 @@ namespace Webshop.Data.Repositories
         }
 
       */
-       public IEnumerable<Order> GetBy(string product = null, User user= null)
+       public IEnumerable<Order> GetBy(int userid = -1,string product = null)
         {
             var orders = _orders.Include(r => r.Products).AsQueryable();
-            if (user != null)
-                orders = orders.Where(r => r.User.Equals(user));                
+            if (userid > -1)
+                orders = orders.Where(r => r.User.UserId == userid));                
                
             
             if (!string.IsNullOrEmpty(product))

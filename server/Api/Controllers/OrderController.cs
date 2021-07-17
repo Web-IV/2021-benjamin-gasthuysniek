@@ -36,7 +36,7 @@ namespace Webshop.Controllers
         /// Get all the orders of user with userid 
         /// </summary>
         /// <returns>Array of the orders with the given userid, if no userid is giv </returns>
-        [HttpGet("{userId}/orders")]
+        [HttpGet]
         public IEnumerable<Order> GetOrders(string product = null, int userid = -1)
         {
             //when nothing is given as a parameter, all products are returned

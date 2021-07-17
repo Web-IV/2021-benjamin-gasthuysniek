@@ -86,7 +86,7 @@ namespace Webshop.Data.Repositories
         {
             var orders = _orders.Include(r => r.Products).AsQueryable();
             if (userid > -1)
-                orders = orders.Where(r => r.User.UserId == userid));                
+                orders = orders.Where(r => r.User.UserId == userid);                
                
             
             if (!string.IsNullOrEmpty(product))

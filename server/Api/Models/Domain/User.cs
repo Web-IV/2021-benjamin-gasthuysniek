@@ -15,23 +15,31 @@ namespace Webshop.Models.Domain
         #region Properties
         public int UserId { get; set; }
         private string _firstName;
-        public string FirstName { get=>_firstName; set {
-                if (string.IsNullOrEmpty(value)||value.Length>50)
+        public string FirstName
+        {
+            get => _firstName; set
+            {
+                if (string.IsNullOrEmpty(value) || value.Length > 50)
                     throw new ArgumentException("FirstName is invalid");
                 _firstName = value;
-            } }
+            }
+        }
         private string _lastName;
-        public string LastName { get=>_lastName; set {
+        public string LastName
+        {
+            get => _lastName; set
+            {
                 if (string.IsNullOrEmpty(value) || value.Length > 60)
                     throw new ArgumentException("FirstName is invalid");
                 _lastName = value;
-            } }
-       
+            }
+        }
+
         public string Email { get; set; }
 
         //  public string Role { get; set; }
         //  public Dictionary<Product, int> Order { get; set; }//hashmap or dubbel list
-        public ICollection<FavoriteProduct> Favorites{ get;private set; }
+        public ICollection<FavoriteProduct> Favorites { get; private set; }
         public IEnumerable<Product> FavoriteProducts => Favorites.Select(f => f.Product);
         public ICollection<Order> OrderListOfUser { get; set; }
         public ICollection<Comment> CommentList { get; set; }
@@ -42,7 +50,7 @@ namespace Webshop.Models.Domain
         {
             //Order = new Dictionary<Product, int>();
             OrderListOfUser = new List<Order>();
-            Favorites= new List<FavoriteProduct>();
+            Favorites = new List<FavoriteProduct>();
             CommentList = new List<Comment>();
             OrderedProductList = new List<Product>();
             //FavoriteProducts = new List<Product>();
@@ -60,29 +68,29 @@ namespace Webshop.Models.Domain
                 throw new ArgumentException("the product is already added to favorites");
             else
             {
-                Favorites.Add(new FavoriteProduct() { Userid = UserId, ProductID = product.Id, Product = product, User = this });
-             //   FavoriteProducts.Add(product);
+                Favorites.Add(new FavoriteProduct(this, product));
+                //   FavoriteProducts.Add(product);
             }
         }
         public void CreateOrder(//Product product, int aantal
             )
         {
-           
+
             Order order = new Order(this)// { Active=true} //{ User = this }
                 ;
             OrderListOfUser.Add(order);
             //OrderListOfUser.Last().VoegContentToe(product, aantal);
         }
-      /*  public void AddProductToOrder(Product product, int aantal,int orderid)//,int orderid = 1)
-        {
-           
-            OrderListOfUser.Where(o => o.Id == orderid).First().VoegContentToe(product, aantal);
+        /*  public void AddProductToOrder(Product product, int aantal,int orderid)//,int orderid = 1)
+          {
 
-        }*/
+              OrderListOfUser.Where(o => o.Id == orderid).First().VoegContentToe(product, aantal);
+
+          }*/
     }
-    }
+}
 
 
-    
+
 
 

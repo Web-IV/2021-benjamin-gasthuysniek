@@ -8,7 +8,7 @@ namespace Webshop.Models.Domain
 {
     public class OrderLine
     {
-        /*
+
         public int OrderId { get; set; }
 
         public Order Order { get; set; }
@@ -16,7 +16,7 @@ namespace Webshop.Models.Domain
         public int ProductId { get; set; }
         public Product Product { get; set; }
         public int ProductAmount { get; set; }
-         // public Product Product { get; set; }
+        // public Product Product { get; set; }
         /*public OrderLine(
             //Product product, Order order,int amount
             )
@@ -28,5 +28,5 @@ namespace Webshop.Models.Domain
             //ProductAmount = amount;
         }*/
     }
-    }
+}
 

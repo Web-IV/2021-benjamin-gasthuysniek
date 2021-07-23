@@ -50,7 +50,7 @@ namespace Webshop.Data
                 ;
             #endregion
             #region FavoriteProductMapping
-            builder.Entity<FavoriteProduct>().HasKey(fp => new { fp.Userid, fp.ProductID });
+            builder.Entity<FavoriteProduct>().HasKey(fp => fp.Id);
            
             builder.Entity<FavoriteProduct>().HasOne(fp => fp.Product)
                 .WithMany()

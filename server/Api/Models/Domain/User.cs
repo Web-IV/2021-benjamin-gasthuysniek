@@ -13,7 +13,7 @@ namespace Webshop.Models.Domain
     public class User//, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         #region Properties
-        public int Id { get; set; }
+        public int UserId { get; set; }
         private string _firstName;
         public string FirstName
         {

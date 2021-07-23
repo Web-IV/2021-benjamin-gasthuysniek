@@ -34,7 +34,7 @@ namespace Webshop.Data.Repositories
 
         public List<Comment> GetByUser(int userid)
         {
-            return _comments.Where(c => c.User.Id == userid).ToList();
+            return _comments.Where(c => c.User.UserId == userid).ToList();
             
         }
 
@@ -56,7 +56,7 @@ namespace Webshop.Data.Repositories
             if (userid != -1)
             {
                 //string userid = int.Parse(userid);
-                comments = comments.Where(r => r.User.Id == userid);
+                comments = comments.Where(r => r.User.UserId == userid);
             }
             if (productid !=-1)
                 comments = comments.Where(r => r.ProductId == productid);

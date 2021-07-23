@@ -29,6 +29,11 @@ namespace Webshop.Data.Repositories
             _users.Remove(user);
         }
 
+        public List<User> GetAll()
+        {
+            return _users.ToList();
+        }
+
         public User GetByEmail(string email)
         {
             /* return _users.Include(u=>u.OrderListOfUser)
@@ -43,10 +48,10 @@ namespace Webshop.Data.Repositories
         }
 
     
-
+        
         public User GetById(int id)
         {
-            return _users.Include(u=>u.OrderListOfUser).FirstOrDefault(u => u.Id == id);
+            return _users.Include(u=>u.OrderListOfUser).FirstOrDefault(u => u.UserId == id);
         }
         /*public User GetByEmail(string email)
         {

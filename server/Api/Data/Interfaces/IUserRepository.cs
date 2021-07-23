@@ -9,8 +9,9 @@ namespace Webshop.Data.Interfaces
     public interface IUserRepository
     {
         User GetById(int id);
-        
+
         //User GetByUserName(string username);
+        List<User> GetAll();
         User GetByEmail(string email);
         //to save all the changes made in the context to the db
         void SaveChanges();

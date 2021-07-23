@@ -5,7 +5,7 @@ using Webshop.Data.Interfaces;
 using Webshop.DTOs;
 using Webshop.Models.Domain;
 
-namespace RecipeApi.Controllers
+namespace WebshopApi.Controllers
 {
     [ApiConventionType(typeof(DefaultApiConventions))]
     [Produces("application/json")]

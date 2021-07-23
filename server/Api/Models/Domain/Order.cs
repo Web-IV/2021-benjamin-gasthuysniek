@@ -19,14 +19,14 @@ namespace Webshop.Models.Domain
         public bool Active { get; set; }
         // public virtual ArrayList<Product, int> OrderContent { get; set; }
         //public virtual ICollection<Product> Products { get; set; }
-        public virtual ICollection<Product> Products { get; private set; }
+        public virtual ICollection<OrderLine> OrderLines { get; private set; }
 
         public DateTime CreationDate { get; set; }
         public double OrderTotaal { get; set; }
         public Order()
         {
             // Products = new List<Product>();
-            Products = new List<Product>();
+            OrderLines = new List<OrderLine>();
             OrderTotaal = 0;
             CreationDate = DateTime.Now;
             //propertie to tell if an order is still active or not, if not the user has checked out order
@@ -40,16 +40,24 @@ namespace Webshop.Models.Domain
 
 
         }
-
+        // public OrderLine(Order order, Product product, int amount
+            //An order consists of multiple orderlines
+            
         public void VoegContentToe(Product product, int aantal = 1)
         {
             //  product.Amount += aantal;
-            //loop for adding products multiple times to order when needed
-            for (var i = 0; i < aantal; i++)
-                Products.Add(product);
-            OrderTotaal += product.UnitPrice * aantal;
+            OrderLines.Add(new OrderLine(this, product, aantal));
         }
-        public Product GetProduct(int id) => Products.SingleOrDefault(i => i.Id == id);
-
+       
+      
+       public OrderLine GetOrderline(int id)
+        {
+           return OrderLines.SingleOrDefault(ol => ol.OrderId == id);
+        }
+        //rewrite code so that all orderlines are scanned through to find an orderline with a certain product
+       /* public OrderLine GetOrderlineWithCertainProduct (int productId)
+        {
+            //return OrderLines
+       */
     }
 }

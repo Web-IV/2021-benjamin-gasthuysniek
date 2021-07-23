@@ -17,16 +17,17 @@ namespace Webshop.Models.Domain
         public Product Product { get; set; }
         public int ProductAmount { get; set; }
         // public Product Product { get; set; }
-        /*public OrderLine(
-            //Product product, Order order,int amount
+        public OrderLine(Order order, Product product, int amount
+            //An order consists of multiple orderlines
             )
         {
-            Product = new Product();
-            Order = new Order();
-            ProductId = Product.Id;
-            OrderId = Order.Id;
-            //ProductAmount = amount;
-        }*/
+            Order = order;
+            OrderId = order.Id;
+
+            Product = product;
+            ProductId = product.Id;
+            ProductAmount = amount;
+        }
     }
 }
 

@@ -14,7 +14,7 @@ namespace Webshop.Models.Domain
         public int UnitPrice { get; set; }
         //public int AantalOpOrder { get; set; } 
       //  public int? Amount { get; set; }
-
+        public int Availability { get; set; }
         public string Description { get; set; }
         #endregion
         //public ICollection<User> Users { get; set; }
@@ -22,6 +22,8 @@ namespace Webshop.Models.Domain
        // public ICollection<Order> ListOfOrder { get; set; }
        // public ICollection<Order> OrderListTotWieDitProductBehoord { get; set; }
        //public ICollection<OrderLine> OrderLines { get; set; }
+
+        public bool InStock { get; set; }
         #region ctors
        
         public Product(string productclass, string productname,int unitPrice,string description
@@ -38,11 +40,16 @@ namespace Webshop.Models.Domain
         }
         public Product()
         {
-            //AantalOpOrder = 0;
-            //  OrderListTotWieDitProductBehoord = new List<Order>();
-          //  OrderLines = new List<OrderLine>();
-           
+            InStock = false;
+            Availability = 0;
         }
+
         #endregion
+
+        public void AddProductsAvailable (int amount)
+        {
+            InStock = true;
+            Availability += amount;
+        }
     }
 }

@@ -20,17 +20,17 @@ namespace Webshop.Data.Repositories
         }
         public IEnumerable<Order> GetAll()
         {
-            return _orders.Include(o => o.Products).ToList();
+            return _orders.Include(o => o.OrderLines).ToList();
         }
        
         public Order GetById(int id)
         {
-            return _orders.Include(o => o.Products).SingleOrDefault(o => o.Id == id);
+            return _orders.Include(o => o.OrderLines).SingleOrDefault(o => o.Id == id);
         }
 
         public bool TryGetOrder(int id, out Order order)
         {
-            order = _context.Order.Include(o => o.Products).FirstOrDefault(o => o.Id == id);
+            order = _context.Order.Include(o => o.OrderLines).FirstOrDefault(o => o.Id == id);
             return order != null;
         }
 
@@ -84,13 +84,13 @@ namespace Webshop.Data.Repositories
       */
        public IEnumerable<Order> GetBy(int userid = -1,string product = null)
         {
-            var orders = _orders.Include(r => r.Products).AsQueryable();
+            var orders = _orders.Include(r => r.OrderLines).AsQueryable();
             if (userid > -1)
                 orders = orders.Where(r => r.User.UserId == userid);                
                
             
             if (!string.IsNullOrEmpty(product))
-                orders = orders.Where(r => r.Products.Any(i => i.ProductName == product));
+                orders = orders.Where(r => r.OrderLines.Any(i => i.Product.ProductName == product));
             return orders.OrderBy(r => r.CreationDate).ToList();
         }
 

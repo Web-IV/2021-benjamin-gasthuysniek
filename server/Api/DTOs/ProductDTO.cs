@@ -9,17 +9,26 @@ namespace Webshop.DTOs
 {
     public class ProductDTO
     {
-       /* [Required]
-        public int ProductID { get; set; }*/
         [Required]
-        public int UnitPrice { get; set; }
-      /*  [Required]*/
         public string ProductClass { get; set; }
+
         [Required]
         public string ProductName { get; set; }
-       // public int Amount { get; set; }
-       // public User user { get; set; }
+
+
+        [Required]
+        public double UnitPrice { get; set; }
+      
+       
+       [Required]
+            public int Availability { get; set; }
+     
+
+
         public string Description { get; set; }
+        [Required]
+
+        public bool InStock { get; set; }
       
     }
 }

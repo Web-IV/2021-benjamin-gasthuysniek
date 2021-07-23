@@ -15,19 +15,28 @@ namespace Webshop.Models.Domain
 
         public int ProductId { get; set; }
         public Product Product { get; set; }
-        public int ProductAmount { get; set; }
+
+        //public int ProductAmount { get; set; }
+        public int Quantity { get; set; }
+
+        public double Price { get; set; }
         // public Product Product { get; set; }
         public OrderLine(Order order, Product product, int amount
             //An order consists of multiple orderlines
-            )
+            ):this()
         {
             Order = order;
             OrderId = order.Id;
 
             Product = product;
             ProductId = product.Id;
-            ProductAmount = amount;
+            Quantity = amount;
         }
+        public OrderLine()
+        {
+
+        }
+
     }
 }
 

@@ -55,18 +55,19 @@ namespace Webshop.Data
             #endregion
             #region OrderlineMapping
             //builder.Entity<Order>().HasKey(o => o.Id);     
-           /* builder.Entity<OrderLine>().HasKey(ol => new { ol.OrderId, ol.ProductId });
-            builder.Entity<OrderLine>().HasOne(ol => ol.Product).WithMany(p => p.OrderLines).HasForeignKey(ol=> ol.ProductId);
+            builder.Entity<OrderLine>().HasKey(ol => new { ol.OrderId, ol.ProductId });
+            builder.Entity<OrderLine>().HasOne(ol => ol.Product).WithMany().HasForeignKey(ol=> ol.ProductId);
             builder.Entity<OrderLine>().HasOne(ol => ol.Order).WithMany(o => o.OrderLines).HasForeignKey(ol=> ol.OrderId);
             builder.Entity<OrderLine>().Property(ol => ol.OrderId);
             builder.Entity<OrderLine>().Property(ol => ol.ProductId);
-            builder.Entity<OrderLine>().Property(ol => ol.ProductAmount);*/
+            builder.Entity<OrderLine>().Property(ol => ol.Quantity);
+            builder.Entity<OrderLine>().Property(ol => ol.Price);
             #endregion
             #region OrderMapping
             builder.Entity<Order>().Property(o => o.OrderTotaal);
             //builder.Entity<Order>().Property(o => o.Products);
             //   builder.Entity<Order>().Property(o=> o.)
-            builder.Entity<Order>().HasMany(o => o.Products).WithOne().OnDelete(DeleteBehavior.Restrict);//.HasForeignKey("OrderId);
+            builder.Entity<Order>().HasMany(o => o.OrderLines).WithOne().OnDelete(DeleteBehavior.Restrict);//.HasForeignKey("OrderId);
             builder.Entity<Order>().HasOne(o => o.User).WithMany().HasForeignKey(o => o.UserId).OnDelete(DeleteBehavior.Cascade);
             
             #endregion

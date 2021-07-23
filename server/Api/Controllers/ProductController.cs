@@ -21,6 +21,7 @@ namespace Webshop.Controllers
     {
         private readonly IProductRepository _productRepo;
         private readonly IUserRepository _userRepository;
+        private readonly IFavoriteProductRepository _favoiteProductRepo;
         public ProductController(IProductRepository context,IUserRepository userRepository)
         {
             _productRepo = context;
@@ -138,6 +139,8 @@ namespace Webshop.Controllers
             try
             {
                 userThatNeedsAdding.AddFavoriteProduct(productNeedsAdding);
+                _favoiteProductRepo.Add(new FavoriteProduct(userThatNeedsAdding, productNeedsAdding));
+                _favoiteProductRepo.SaveChanges();
                 _userRepository.SaveChanges();
                 _productRepo.SaveChanges();
                 return Ok(productNeedsAdding);

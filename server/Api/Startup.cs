@@ -49,6 +49,7 @@ namespace Web4OwnApi
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IFavorteProductRepository, FavoriteProductRepository>();
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
 

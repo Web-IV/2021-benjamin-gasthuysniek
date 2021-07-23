@@ -29,7 +29,7 @@ namespace Webshop.Data
             if (_dbContext.Database.EnsureCreated())
             {
 
-                Product product = new Product("Strix rog", "Laptop" ,300, "Good laptop"
+                Product product = new Product("Strix rog", "Laptop", 300, "Good laptop"
                     // ,1
                     );
                 //{ ProductClass = productClass};//  public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this();
@@ -44,22 +44,23 @@ namespace Webshop.Data
                 order.VoegContentToe(product, 1);
                 _dbContext.Order.Add(order);
                 
-               // customer.CreateOrder();
+                // customer.CreateOrder();
                 //customer.AddProductToOrder(_dbContext.Product.First(), 2,order.Id);
-                await CreateUser(customer2.Email, "qnyjaa7@N8952");
-                
+                //await CreateUser(customer2.Email, "qnyjaa7@N8952");
+
                 //customer.CreateOrder();
-                _dbContext.SaveChanges();
+                //_dbContext.SaveChanges();
                 //ERROR ZIT HIER !!!
 
                 //customer.AddProductToOrder(product, 2);
-                User student = new User() { Email = "kristel.moyaert@hotmail.com", FirstName = "Kristel", LastName = "Moyaert" };
+                /*User student = new User() { Email = "kristel.moyaert@hotmail.com", FirstName = "Kristel", LastName = "Moyaert" };
                 _dbContext.User.Add(student);
                 student.AddFavoriteProduct(_dbContext.Product.First());                
                 await CreateUser(student.Email, "W@8twoord123");
                 _dbContext.SaveChanges();
 
-               
+               */
+            
 
             }
             else

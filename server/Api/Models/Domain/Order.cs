@@ -36,7 +36,7 @@ namespace Webshop.Models.Domain
         public Order(User user) : this()
         {
             User = user;
-            UserId = user.UserId;
+            UserId = user.Id;
 
 
         }

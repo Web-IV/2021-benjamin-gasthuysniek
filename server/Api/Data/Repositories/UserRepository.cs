@@ -12,16 +12,16 @@ namespace Webshop.Data.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<User> _users;
-      
+
         public UserRepository(ApplicationDbContext dbContext)
         {
             _context = dbContext;
             _users = dbContext.User;
-         
+
         }
         public void Add(User user)
         {
-           _users.Add(user);
+            _users.Add(user);
         }
 
         public void Delete(User user)
@@ -31,20 +31,22 @@ namespace Webshop.Data.Repositories
 
         public User GetByEmail(string email)
         {
-            return _users
-                                
-                .Include(c => c.Favorites)
-                //then include call for product object only possible cause it is a list !
-                .ThenInclude(fp => fp.Product)
-                .Include(u => u.OrderListOfUser)
-                .ThenInclude(ol => ol.OrderLines)
-                .SingleOrDefault(u => u.Email == email);
+            /* return _users.Include(u=>u.OrderListOfUser)
+                 .Include(c => c.Favorites)
+                 //then include call for product object only possible cause it is a list !
+                 .ThenInclude(fp => fp.Product)
 
+                 .SingleOrDefault(u => u.Email == email);*/
+            return _users//.Include(c => c.Favorites).ThenInclude(f => f.Product)
+                //.Include(u => u.FavoriteProducts)
+                .SingleOrDefault(c => c.Email == email);
         }
+
+    
 
         public User GetById(int id)
         {
-            return _users.Include(u=>u.OrderListOfUser).FirstOrDefault(u => u.UserId == id);
+            return _users.Include(u=>u.OrderListOfUser).FirstOrDefault(u => u.Id == id);
         }
         /*public User GetByEmail(string email)
         {

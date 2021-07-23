@@ -20,7 +20,7 @@ namespace Webshop.Models.Domain
         public FavoriteProduct(User user, Product product)
         {
             User = user;
-            Userid = user.UserId;
+            Userid = user.Id;
             Product = product;
             ProductID = product.Id;
         }

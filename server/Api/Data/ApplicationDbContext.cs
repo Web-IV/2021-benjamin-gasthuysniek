@@ -18,7 +18,7 @@ namespace Webshop.Data
           // optionsBuilder.UseSqlServer("server = (LocalDB); database = WebShop; Trusted_Connection=True;MultipleActiveResultSets=true");
 
         }*/
-       //public DbSet<Product> ProductClass { get; set; }
+        public DbSet<FavoriteProduct> Favorites { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Order> Order { get; set; }
@@ -96,13 +96,15 @@ namespace Webshop.Data
             
             #endregion
             #region Usermapping
-           
+            
             builder.Entity<User>().Property(c => c.LastName).IsRequired().HasMaxLength(60);
             builder.Entity<User>().Property(c => c.FirstName).IsRequired().HasMaxLength(50);
             builder.Entity<User>().Property(c => c.Email).IsRequired().HasMaxLength(100);
             builder.Entity<User>().HasMany(u => u.OrderListOfUser).WithOne(o => o.User).HasForeignKey(o => o.UserId);
-                //.OnDelete(DeleteBehavior.Restrict);
+            //.OnDelete(DeleteBehavior.Restrict);
             builder.Entity<User>().Ignore(c => c.FavoriteProducts);
+            builder.Entity<User>().HasMany(u => u.Favorites).WithOne();
+            builder.Entity<User>().HasMany(u => u.FavoriteProducts).WithOne();
             //builder.Entity<User>().Property(u => u.UserName);
             builder.Entity<User>().HasMany(u => u.CommentList).WithOne(c => c.User);
            

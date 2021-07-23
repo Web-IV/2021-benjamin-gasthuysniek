@@ -35,7 +35,7 @@ namespace Webshop.Models.Domain
             ProductId = product.Id;
             Title = title;
             Content = content;
-            UserId = User.UserId;
+            UserId = User.Id;
             
 
         }

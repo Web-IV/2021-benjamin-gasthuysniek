@@ -12,10 +12,12 @@ namespace Webshop.Data.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<Product> _products;
+   
         public ProductRepository(ApplicationDbContext dbcontext)
         {
             _context = dbcontext;
             _products = dbcontext.Product;
+       
 
         }
 

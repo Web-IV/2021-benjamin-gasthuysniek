@@ -26,11 +26,11 @@ namespace Webshop.Models.Domain
         public bool InStock { get; set; }
         #region ctors
        
-        public Product(string productclass, string productname,double unitPrice,string description
+        public Product(string productname,string productclass,double unitPrice,string description
            // , int? amount=null
             ):this()
         {
-            
+
             ProductClass = productclass;
             ProductName = productname;
             UnitPrice = unitPrice;            

@@ -139,10 +139,11 @@ namespace Webshop.Controllers
                 return NotFound(); 
             }
             // public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this()
-
-            var productToCreate = new Product(product.ProductClass, product.ProductName, product.UnitPrice,product.Description
+            //ProductClass productClass = new ProductClass() { Name = product.ProductName };
+            var productToCreate = new Product(product.ProductName, product.ProductClass,product.UnitPrice, product.Description
                 //,aantal
                 );
+            
             order.VoegContentToe(productToCreate, aantal);
             _orderRepo.SaveChanges();
             return CreatedAtAction("GetProduct", new { id = order.Id, productid = productToCreate.Id }, productToCreate);

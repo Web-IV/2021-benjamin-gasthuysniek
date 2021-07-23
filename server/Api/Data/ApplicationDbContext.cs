@@ -18,6 +18,7 @@ namespace Webshop.Data
           // optionsBuilder.UseSqlServer("server = (LocalDB); database = WebShop; Trusted_Connection=True;MultipleActiveResultSets=true");
 
         }*/
+       //public DbSet<Product> ProductClass { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Order> Order { get; set; }
@@ -32,11 +33,17 @@ namespace Webshop.Data
         {
             base.OnModelCreating(builder);
             // builder.Entity<>
+
+            #region ProductClassMapping
+          /*  builder.Entity<ProductClass>().Property(pc => pc.Id);
+            builder.Entity<ProductClass>().Property(pc => pc.Name);*/
+            #endregion
             #region CommentMapping
             builder.Entity<Comment>().HasKey(c => c.CommentId);
-
+            builder.Entity<Comment>().HasOne(c => c.Product).WithMany().HasForeignKey(p => p.ProductId);
             builder.Entity<Comment>().HasOne(c => c.User).WithMany();
             builder.Entity<Comment>().Property(c => c.PostingDateComment).IsRequired();
+            builder.Entity<Comment>().Property(c => c.UpVotes);
             builder.Entity<Comment>().Property(c => c.Content).IsRequired();
             builder.Entity<Comment>().Property(c => c.Title).IsRequired()
                 .HasMaxLength(200)
@@ -65,20 +72,26 @@ namespace Webshop.Data
             #endregion
             #region OrderMapping
             builder.Entity<Order>().Property(o => o.OrderTotaal);
+            builder.Entity<Order>().Property(o => o.CreationDate);
+            builder.Entity<Order>().Property(o => o.Active);
             //builder.Entity<Order>().Property(o => o.Products);
             //   builder.Entity<Order>().Property(o=> o.)
             builder.Entity<Order>().HasMany(o => o.OrderLines).WithOne().OnDelete(DeleteBehavior.Restrict);//.HasForeignKey("OrderId);
             builder.Entity<Order>().HasOne(o => o.User).WithMany().HasForeignKey(o => o.UserId).OnDelete(DeleteBehavior.Cascade);
-            
+
             #endregion
             #region ProductMapping
+            builder.Entity<Product>().HasKey(p => p.Id);
+            //builder.Entity<Product>().HasOne(p => p.ProductClass).WithMany().HasForeignKey(p => p.ProductClass);
+            builder.Entity<Product>().Property(p => p.ProductClass);
+            builder.Entity<Product>().Property(p => p.ProductName).IsRequired();
             builder.Entity<Product>().Property(p => p.UnitPrice).IsRequired();
             //builder.Entity<Product>().HasKey(p => p.Id);
-            builder.Entity<Product>().Property(p => p.ProductName).IsRequired();
-            builder.Entity<Product>().Property(p => p.ProductClass).IsRequired(false);
+            builder.Entity<Product>().Property(p => p.Availability).IsRequired();
+            //builder.Entity<Product>().Property(p => p.ProductClass).IsRequired(false);
             builder.Entity<Product>().Property(p => p.Description).IsRequired(false);
             // builder.Entity<Product>().HasMany(p => p.OrderLines).WithOne();
-            builder.Entity<Product>().HasKey(p => p.Id);
+            builder.Entity<Product>().Property(p => p.InStock);
            
             
             #endregion
@@ -117,11 +130,11 @@ namespace Webshop.Data
               builder.Entity<OrderLine>().Property(ol => ol.ProductAmount).IsRequired();
               */
             #endregion
-            builder.Entity<Product>().HasData(
+            /*builder.Entity<Product>().HasData(
                     //Shadow property can be used for the foreign key, in combination with anaonymous objects
                     new  { Id = 10, ProductName = "Hp Pavilion", ProductClass = "Laptop", UnitPrice = 400 },
                     new { Id = 11, ProductName = "Razer Blad", ProductClass = "Laptop", UnitPrice = 800 }
-                 );
+                 );*/
         }
 
 

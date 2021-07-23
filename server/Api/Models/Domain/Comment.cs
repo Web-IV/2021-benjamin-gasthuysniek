@@ -11,6 +11,7 @@ namespace Webshop.Models.Domain
         
         //public string UserId { get; set; }
         //public Product Product { get; set; }
+        public Product Product { get; set; }
         public int ProductId { get; set; }
         public int CommentId { get; set; }
         //[ForeignKey(nameof(UserId))]
@@ -22,16 +23,16 @@ namespace Webshop.Models.Domain
         public int UpVotes { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public Comment(int productid, //int userid,
+        public Comment(Product product, //int userid,
             string title, string content
             //leaving a rating is option to be later added
             //int Rating
             )
             :this()
         {
-           // User.UserId = userid;
-            //Product.Id = productid;
-            ProductId = productid;
+           
+            Product = product;
+            ProductId = product.Id;
             Title = title;
             Content = content;
             UserId = User.UserId;

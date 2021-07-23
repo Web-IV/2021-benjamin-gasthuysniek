@@ -29,9 +29,10 @@ namespace Webshop.Data
             if (_dbContext.Database.EnsureCreated())
             {
 
-                Product product = new Product("Laptop","Strix rog",300,"Good laptop"
-                   // ,1
-                    );//  public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this();
+                Product product = new Product("Strix rog", "Laptop" ,300, "Good laptop"
+                    // ,1
+                    );
+                //{ ProductClass = productClass};//  public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this();
                 _dbContext.Product.Add(product);
                 _dbContext.SaveChanges();
                 User customer2 = new User { Email = "niek.gasthuys.y9891@student.hogent.be", FirstName = "Niek", LastName = "Gasthuys" };

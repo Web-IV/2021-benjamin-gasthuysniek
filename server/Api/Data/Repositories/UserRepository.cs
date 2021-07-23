@@ -31,11 +31,13 @@ namespace Webshop.Data.Repositories
 
         public User GetByEmail(string email)
         {
-            return _users.Include(u=>u.OrderListOfUser)
+            return _users
+                                
                 .Include(c => c.Favorites)
                 //then include call for product object only possible cause it is a list !
                 .ThenInclude(fp => fp.Product)
-                
+                .Include(u => u.OrderListOfUser)
+                .ThenInclude(ol => ol.OrderLines)
                 .SingleOrDefault(u => u.Email == email);
 
         }

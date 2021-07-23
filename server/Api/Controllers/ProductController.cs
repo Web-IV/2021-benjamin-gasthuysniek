@@ -66,9 +66,13 @@ namespace Webshop.Controllers
         [HttpPost]
         public ActionResult<Product> PostProduct(ProductDTO product)
         {
-            Product newProduct = new Product(product.ProductClass, product.ProductName, product.UnitPrice,product.Description
+
+            User user = _userRepository.GetByEmail(User.Identity.Name);
+            Product newProduct = new Product(product.ProductName, product.ProductClass, product.UnitPrice, product.Description
                 //,product.Amount
-                ); //{ ProductName = product.ProductName, UnitPrice = product.UnitPrice, ProductClass = product.ProductClass };
+                )
+            { User = user}
+           ;// { ProductClass = newProductClass}; //{ ProductName = product.ProductName, UnitPrice = product.UnitPrice, ProductClass = product.ProductClass };
             _productRepo.Add(newProduct);
             _productRepo.SaveChanges();
             //creates a response

@@ -29,7 +29,7 @@ namespace Webshop.Models.Domain
             OrderId = order.Id;
 
             Product = product;
-            ProductId = product.Id;
+            ProductId = product.ProductId;
             Quantity = amount;
         }
         public OrderLine()

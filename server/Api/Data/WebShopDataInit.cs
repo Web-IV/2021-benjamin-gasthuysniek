@@ -28,20 +28,21 @@ namespace Webshop.Data
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
-
+                
                 Product product = new Product("Strix rog", "Laptop", 300, "Good laptop"
                     // ,1
                     );
                 //{ ProductClass = productClass};//  public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this();
                 _dbContext.Product.Add(product);
                 _dbContext.SaveChanges();
-                User customer2 = new User { Email = "niek.gasthuys.y9891@student.hogent.be", FirstName = "Niek", LastName = "Gasthuys" };
+                /*User customer2 = new User { Email = "niek.gasthuys.y9891@student.hogent.be", FirstName = "Niek", LastName = "Gasthuys" };
                 User customer = new User() { Email = "webshop@gmail.com", FirstName = "Niekje", LastName = "Gasthuyst" };
                 _dbContext.User.Add(customer);
                 _dbContext.Add(customer2);
                 customer.AddFavoriteProduct(_dbContext.Product.First());
                 Order order = new Order() { User=customer};
-                order.VoegContentToe(product, 1);
+                OrderLine neworderline = new OrderLine() { Product = product, Quantity = 2 };
+                order.VoegContentToe(neworderline);
                 _dbContext.Order.Add(order);
                 
                 // customer.CreateOrder();

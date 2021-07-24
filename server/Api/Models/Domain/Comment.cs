@@ -32,7 +32,7 @@ namespace Webshop.Models.Domain
         {
            
             Product = product;
-            ProductId = product.Id;
+            ProductId = product.ProductId;
             Title = title;
             Content = content;
             UserId = User.UserId;

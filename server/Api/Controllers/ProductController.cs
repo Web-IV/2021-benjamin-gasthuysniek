@@ -72,14 +72,14 @@ namespace Webshop.Controllers
             Product newProduct = new Product(product.ProductName, product.ProductClass, product.UnitPrice, product.Description
                 //,product.Amount
                 )
-            { User = user}
+            //{ User = user}
            ;// { ProductClass = newProductClass}; //{ ProductName = product.ProductName, UnitPrice = product.UnitPrice, ProductClass = product.ProductClass };
             _productRepo.Add(newProduct);
             _productRepo.SaveChanges();
             //creates a response
             return CreatedAtAction
                 //string actionname
-                (nameof(GetProduct), new { id = newProduct.Id }, newProduct);
+                (nameof(GetProduct), new { id = newProduct.ProductId }, newProduct);
         }
         //Put: api/product/id
         /// <summary>
@@ -90,7 +90,7 @@ namespace Webshop.Controllers
         [HttpPut("{id}")]
         public ActionResult PutProduct(int id, Product product)
         {
-            if(product.Id != id)
+            if(product.ProductId != id)
             {
                 return BadRequest();
             }
@@ -120,10 +120,10 @@ namespace Webshop.Controllers
         /// Get favorite products of current user
         /// </summary>
         [HttpGet("Favorites")]
-        public IEnumerable<Product> GetFavorites()
+        public IEnumerable<FavoriteProduct> GetFavorites()
         {
             User user = _userRepository.GetByEmail(User.Identity.Name);
-            return user.FavoriteProducts;
+            return user.Favorites;
         }
 
         /// <summary>
@@ -135,10 +135,10 @@ namespace Webshop.Controllers
         {
             Product productNeedsAdding = _productRepo.GetById(productId);
             User userThatNeedsAdding = _userRepository.GetByEmail(User.Identity.Name);
-           
+            FavoriteProduct favoriteProduct = new FavoriteProduct() { Product = productNeedsAdding, User = userThatNeedsAdding };
             try
             {
-                userThatNeedsAdding.AddFavoriteProduct(productNeedsAdding);
+                userThatNeedsAdding.AddFavoriteProduct(favoriteProduct);
                 _favoiteProductRepo.Add(new FavoriteProduct(userThatNeedsAdding, productNeedsAdding));
                 _favoiteProductRepo.SaveChanges();
                 _userRepository.SaveChanges();

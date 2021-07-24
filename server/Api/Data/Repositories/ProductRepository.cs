@@ -39,7 +39,7 @@ namespace Webshop.Data.Repositories
         public Product GetById(int id)
         {
             //single or default want returnt maar 1 element dat voldoet aan de voorwaarde
-            return _products.SingleOrDefault(p => p.Id== id);
+            return _products.SingleOrDefault(p => p.ProductId== id);
         }
 
         public IEnumerable<Product> GetByProductName(string name)

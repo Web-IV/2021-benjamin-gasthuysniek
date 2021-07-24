@@ -9,17 +9,18 @@ namespace Webshop.DTOs
 {
     public class OrderDTO
     {
-        [Required]
-        public int OrderId { get; set; }
-        public IEnumerable<ProductDTO>Products {get;set;}
+        /*[Required]
+        public int OrderId { get; set; }*/
+        public IEnumerable<OrderLine>OrderLines {get;set;}
         
-        public double OrderTotaal { get; set; }
-       
-       public int UserId { get; set; }
-       /*public OrderDTO()
+        //public double OrderTotaal { get; set; }
+       //[Required]
+       //public int UserId { get; set; }
+       public OrderDTO()
         {
 
         }
+        /*
        public OrderDTO(Order order):this()
         {
             OrderId = order.Id;

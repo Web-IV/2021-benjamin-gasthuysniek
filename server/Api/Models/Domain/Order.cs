@@ -19,7 +19,7 @@ namespace Webshop.Models.Domain
         public bool Active { get; set; }
         // public virtual ArrayList<Product, int> OrderContent { get; set; }
         //public virtual ICollection<Product> Products { get; set; }
-        public virtual ICollection<OrderLine> OrderLines { get; private set; }
+        public virtual ICollection<OrderLine> OrderLines { get; set; }
 
         public DateTime CreationDate { get; set; }
         public double OrderTotaal { get; set; }
@@ -33,20 +33,20 @@ namespace Webshop.Models.Domain
             Active = true;
 
         }
-        public Order(User user) : this()
+        /*public Order() : this()
         {
             User = user;
             UserId = user.UserId;
 
 
-        }
+        }*/
         // public OrderLine(Order order, Product product, int amount
             //An order consists of multiple orderlines
             
-        public void VoegContentToe(Product product, int aantal = 1)
+        public void VoegContentToe(OrderLine orderline)
         {
             //  product.Amount += aantal;
-            OrderLines.Add(new OrderLine(this, product, aantal));
+            OrderLines.Add(orderline);
         }
        
       

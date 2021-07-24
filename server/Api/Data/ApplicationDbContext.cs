@@ -23,6 +23,8 @@ namespace Webshop.Data
         public DbSet<Product> Product { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<OrderLine> Orderlines { get; internal set; }
+
         //public DbSet<OrderLine> OrderLines { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -65,23 +67,25 @@ namespace Webshop.Data
             builder.Entity<OrderLine>().HasKey(ol => new { ol.OrderId, ol.ProductId });
             builder.Entity<OrderLine>().HasOne(ol => ol.Product).WithMany().HasForeignKey(ol=> ol.ProductId);
             builder.Entity<OrderLine>().HasOne(ol => ol.Order).WithMany(o => o.OrderLines).HasForeignKey(ol=> ol.OrderId);
-            builder.Entity<OrderLine>().Property(ol => ol.OrderId);
-            builder.Entity<OrderLine>().Property(ol => ol.ProductId);
+            //builder.Entity<OrderLine>().Property(ol => ol.OrderId);
+            //builder.Entity<OrderLine>().Property(ol => ol.ProductId);
             builder.Entity<OrderLine>().Property(ol => ol.Quantity);
             builder.Entity<OrderLine>().Property(ol => ol.Price);
             #endregion
             #region OrderMapping
+            builder.Entity<Order>().HasKey(o => o.Id);
             builder.Entity<Order>().Property(o => o.OrderTotaal);
             builder.Entity<Order>().Property(o => o.CreationDate);
             builder.Entity<Order>().Property(o => o.Active);
             //builder.Entity<Order>().Property(o => o.Products);
             //   builder.Entity<Order>().Property(o=> o.)
-            builder.Entity<Order>().HasMany(o => o.OrderLines).WithOne().OnDelete(DeleteBehavior.Restrict);//.HasForeignKey("OrderId);
+          /*  builder.Entity<Order>().HasMany(o => o.OrderLines).WithOne()//.OnDelete(DeleteBehavior.Restrict);//
+                .IsRequired().HasForeignKey("OrderId");*/
             builder.Entity<Order>().HasOne(o => o.User).WithMany().HasForeignKey(o => o.UserId).OnDelete(DeleteBehavior.Cascade);
 
             #endregion
             #region ProductMapping
-            builder.Entity<Product>().HasKey(p => p.Id);
+            builder.Entity<Product>().HasKey(p => p.ProductId);
             //builder.Entity<Product>().HasOne(p => p.ProductClass).WithMany().HasForeignKey(p => p.ProductClass);
             builder.Entity<Product>().Property(p => p.ProductClass);
             builder.Entity<Product>().Property(p => p.ProductName).IsRequired();
@@ -102,9 +106,9 @@ namespace Webshop.Data
             builder.Entity<User>().Property(c => c.Email).IsRequired().HasMaxLength(100);
             builder.Entity<User>().HasMany(u => u.OrderListOfUser).WithOne(o => o.User).HasForeignKey(o => o.UserId);
             //.OnDelete(DeleteBehavior.Restrict);
-            builder.Entity<User>().Ignore(c => c.FavoriteProducts);
-            builder.Entity<User>().HasMany(u => u.Favorites).WithOne();
-            builder.Entity<User>().HasMany(u => u.FavoriteProducts).WithOne();
+            builder.Entity<User>().Ignore(c => c.Favorites);
+            //builder.Entity<User>().HasMany(u => u.Favorites).WithOne();
+            //builder.Entity<User>().HasMany(u => u.FavoriteProducts).WithOne();
             //builder.Entity<User>().Property(u => u.UserName);
             builder.Entity<User>().HasMany(u => u.CommentList).WithOne(c => c.User);
            

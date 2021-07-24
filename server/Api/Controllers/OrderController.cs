@@ -90,15 +90,20 @@ namespace Webshop.Controllers
             User user = new User();
             User loggedInUser = _userRepo.GetByEmail(User.Identity.Name);
             user = loggedInUser;
-            Order newOrder = new Order(user); 
+            Order newOrder = new Order() { User = loggedInUser};
+            foreach (var ol in order.OrderLines)
+                // recipeToCreate.AddIngredient(new Ingredient(i.Name, i.Amount, i.Unit));
+                newOrder.VoegContentToe(ol);
+
             loggedInUser.OrderListOfUser.Add(newOrder);
-        
+            
             _orderRepo.Add(newOrder);
             _orderRepo.SaveChanges();
             //creates a response
             return CreatedAtAction
                 //string actionname
                 (nameof(GetOrder), new { id = newOrder.Id },newOrder );
+            
 
         }
        
@@ -143,10 +148,10 @@ namespace Webshop.Controllers
             var productToCreate = new Product(product.ProductName, product.ProductClass,product.UnitPrice, product.Description
                 //,aantal
                 );
-            
-            order.VoegContentToe(productToCreate, aantal);
+            OrderLine newOrderline = new OrderLine();
+            order.VoegContentToe(newOrderline);
             _orderRepo.SaveChanges();
-            return CreatedAtAction("GetProduct", new { id = order.Id, productid = productToCreate.Id }, productToCreate);
+            return CreatedAtAction("GetProduct", new { id = order.Id, productid = productToCreate.ProductId }, productToCreate);
         }
 
 

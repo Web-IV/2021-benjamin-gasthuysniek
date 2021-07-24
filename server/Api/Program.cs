@@ -13,7 +13,9 @@ namespace Web4OwnApi
     {
         public static void Main(string[] args)
         {
+            
             CreateHostBuilder(args).Build().Run();
+            
         }
 
 

@@ -8,7 +8,7 @@ namespace Webshop.Models.Domain
     public class Product
     {
         #region properties
-        public int Id { get; set;}
+        public int ProductId { get; set;}
         public string ProductClass { get; set; }
         public string ProductName { get; set; }
         public double UnitPrice { get; set; }
@@ -18,7 +18,7 @@ namespace Webshop.Models.Domain
         public string Description { get; set; }
         #endregion
         //public ICollection<User> Users { get; set; }
-        public User User { get; set; }
+        //public User User { get; set; }
        // public ICollection<Order> ListOfOrder { get; set; }
        // public ICollection<Order> OrderListTotWieDitProductBehoord { get; set; }
        //public ICollection<OrderLine> OrderLines { get; set; }

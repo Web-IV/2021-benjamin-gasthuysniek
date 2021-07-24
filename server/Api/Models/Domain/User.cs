@@ -13,6 +13,7 @@ namespace Webshop.Models.Domain
     public class User//, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         #region Properties
+        
         public int UserId { get; set; }
         private string _firstName;
         public string FirstName
@@ -40,7 +41,7 @@ namespace Webshop.Models.Domain
         //  public string Role { get; set; }
         //  public Dictionary<Product, int> Order { get; set; }//hashmap or dubbel list
         public ICollection<FavoriteProduct> Favorites { get; private set; }
-        public IEnumerable<Product> FavoriteProducts => Favorites.Select(f => f.Product);
+       // public ICollection<Product> FavoriteProducts { get; set; }// => get; set;}// Favorites.Select(f => f.Product);
         public ICollection<Order> OrderListOfUser { get; set; }
         public ICollection<Comment> CommentList { get; set; }
         public ICollection<Product> OrderedProductList { get; set; }
@@ -51,6 +52,7 @@ namespace Webshop.Models.Domain
             //Order = new Dictionary<Product, int>();
             OrderListOfUser = new List<Order>();
             Favorites = new List<FavoriteProduct>();
+            //FavoriteProducts = new List<Product>(); 
             CommentList = new List<Comment>();
             OrderedProductList = new List<Product>();
             //FavoriteProducts = new List<Product>();
@@ -61,22 +63,23 @@ namespace Webshop.Models.Domain
 
         #endregion
 
-        public void AddFavoriteProduct(Product product)
+        public void AddFavoriteProduct(FavoriteProduct favoriteProduct)
         {
-
-            if (FavoriteProducts.Contains(product) || product == null)
+            
+            if (Favorites.ToList().Contains(favoriteProduct) || favoriteProduct == null)
                 throw new ArgumentException("the product is already added to favorites");
             else
             {
-                Favorites.Add(new FavoriteProduct(this, product));
-                //   FavoriteProducts.Add(product);
+                //Favorites.Add(new FavoriteProduct(this, product));
+                   Favorites.Add(favoriteProduct);
+                   
             }
         }
         public void CreateOrder(//Product product, int aantal
             )
         {
 
-            Order order = new Order(this)// { Active=true} //{ User = this }
+            Order order = new Order() { User = this, Active = true}// { Active=true} //{ User = this }
                 ;
             OrderListOfUser.Add(order);
             //OrderListOfUser.Last().VoegContentToe(product, aantal);

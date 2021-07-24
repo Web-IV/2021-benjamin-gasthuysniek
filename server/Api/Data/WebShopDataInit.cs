@@ -34,7 +34,7 @@ namespace Webshop.Data
                     );
                 //{ ProductClass = productClass};//  public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this();
                 _dbContext.Product.Add(product);
-                _dbContext.SaveChanges();
+                //_dbContext.SaveChanges();
                 /*User customer2 = new User { Email = "niek.gasthuys.y9891@student.hogent.be", FirstName = "Niek", LastName = "Gasthuys" };
                 User customer = new User() { Email = "webshop@gmail.com", FirstName = "Niekje", LastName = "Gasthuyst" };
                 _dbContext.User.Add(customer);
@@ -44,24 +44,12 @@ namespace Webshop.Data
                 OrderLine neworderline = new OrderLine() { Product = product, Quantity = 2 };
                 order.VoegContentToe(neworderline);
                 _dbContext.Order.Add(order);
-                
-                // customer.CreateOrder();
-                //customer.AddProductToOrder(_dbContext.Product.First(), 2,order.Id);
-                //await CreateUser(customer2.Email, "qnyjaa7@N8952");
-
-                //customer.CreateOrder();
-                //_dbContext.SaveChanges();
-                //ERROR ZIT HIER !!!
-
-                //customer.AddProductToOrder(product, 2);
-                /*User student = new User() { Email = "kristel.moyaert@hotmail.com", FirstName = "Kristel", LastName = "Moyaert" };
-                _dbContext.User.Add(student);
-                student.AddFavoriteProduct(_dbContext.Product.First());                
-                await CreateUser(student.Email, "W@8twoord123");
+                */
+                User user = new User{ Email = "gasthuys.niek@gmail.com", FirstName = "Niek", LastName = "Gasthuys" };
+                _dbContext.User.Add(user);
+                await CreateUser(user.Email, "Niek@12345");
                 _dbContext.SaveChanges();
 
-               */
-            
 
             }
             else
@@ -79,24 +67,6 @@ namespace Webshop.Data
           
         }   
         
-      /*  public async Task InitializeData()
-        {
-            User customer = new User { Email = "webshop@gmail.com", FirstName = "Niek", LastName = "Gasthuys" };
-            _dbContext.User.Add(customer);
-            customer.AddFavoriteProduct(_dbContext.Product.First());
-            await CreateUser(customer.Email, "W@8twoord123");
-            User student = new User { Email = "kristel.moyaert@hotmail.com", FirstName = "Kristel", LastName = "Moyaert" };
-            _dbContext.User.Add(student);
-            student.AddFavoriteProduct(_dbContext.Product.First());
-            // student.AddFavoriteRecipe(_dbContext.Recipes.First());
-            await CreateUser(student.Email, "W@8twoord123");
-            _dbContext.SaveChanges();
-        }*/
-       /* public ActionResult<> InitializeData()
-        {
-            Product product = new Product("laptop", "Strix rog", 300);
-            _dbContext.Product.Add(product);
-        }*/
-
+    
     }
 }

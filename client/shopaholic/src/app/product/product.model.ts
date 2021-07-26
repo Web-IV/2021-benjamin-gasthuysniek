@@ -10,7 +10,7 @@ export class Product {
       return this._name;
     }
    
-    addIngredient(name: string, amount?: number, unit?: string) {
+    addProductDetail(name: string, amount?: number, unit?: string) {
       this._productDetails.push(`${amount || 1} ${unit || ''} ${name}`);
     }
   }

@@ -10,12 +10,13 @@ import { ProductModule } from './product/product.module';
 import { UserModule } from './user/user.module';
 import { MaterialModule } from './material/material.module';
 import { OrderComponent } from './order/order.component';
+import { OrderlineComponent } from './orderline/orderline.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
     MainNavComponent,   
-    PageNotFoundComponent, OrderComponent
+    PageNotFoundComponent, OrderComponent, OrderlineComponent
   ],
   imports: [
     BrowserModule,

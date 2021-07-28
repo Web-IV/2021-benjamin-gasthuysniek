@@ -1,6 +1,5 @@
 interface ProductJson{
   //productId: number
-  name: string;
   productClass: string;
   productName: string;
   unitPrice: number;
@@ -12,8 +11,7 @@ interface ProductJson{
 
 export class Product {
     //private _productId: number;
-    constructor(
-      private _name: string,
+    constructor(    
       private _productClass: string,
       private _productName: string,
       private _unitPrice: number, //ts equivalent of doubles and ints
@@ -25,15 +23,13 @@ export class Product {
     ) {}
 
     static fromJSON(json: ProductJson): Product {
-      const prod = new Product(json.name,json.productClass, json.productName, json.unitPrice, json.availability, json.description, json.userId);
+      const prod = new Product(json.productClass, json.productName, json.unitPrice, json.availability, json.description, json.userId);
       return prod;
     }
 
   
     // [...] other getters
-    get name(): string {
-      return this._name;
-    }
+
 
     get productClass(): string {
       return this._productClass;

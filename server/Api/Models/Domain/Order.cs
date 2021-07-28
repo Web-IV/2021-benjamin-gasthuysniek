@@ -46,7 +46,9 @@ namespace Webshop.Models.Domain
         public void VoegContentToe(OrderLine orderline)
         {
             //  product.Amount += aantal;
+          
             OrderLines.Add(orderline);
+            OrderTotaal += orderline.Product.UnitPrice * orderline.Quantity;
         }
        
       

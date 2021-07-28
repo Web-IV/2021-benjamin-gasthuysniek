@@ -90,15 +90,19 @@ namespace Webshop.Controllers
             User user = new User();
             User loggedInUser = _userRepo.GetByEmail(User.Identity.Name);
             user = loggedInUser;
+            Console.WriteLine("The line after the post order logged in user is retrieved");
+            Console.WriteLine(user);
             Order newOrder = new Order() { User = loggedInUser};
             foreach (var ol in order.OrderLines)
-                // recipeToCreate.AddIngredient(new Ingredient(i.Name, i.Amount, i.Unit));
+            {
+                ol.Product = _productRepo.GetById(ol.ProductId);
                 newOrder.VoegContentToe(ol);
-
+            }
             loggedInUser.OrderListOfUser.Add(newOrder);
             
             _orderRepo.Add(newOrder);
             _orderRepo.SaveChanges();
+            _userRepo.SaveChanges();
             //creates a response
             return CreatedAtAction
                 //string actionname

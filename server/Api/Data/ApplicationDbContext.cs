@@ -70,7 +70,7 @@ namespace Webshop.Data
             //builder.Entity<OrderLine>().Property(ol => ol.OrderId);
             //builder.Entity<OrderLine>().Property(ol => ol.ProductId);
             builder.Entity<OrderLine>().Property(ol => ol.Quantity);
-            builder.Entity<OrderLine>().Property(ol => ol.Price);
+            //builder.Entity<OrderLine>().Property(ol => ol.Price);
             #endregion
             #region OrderMapping
             builder.Entity<Order>().HasKey(o => o.Id);

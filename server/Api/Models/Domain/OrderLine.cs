@@ -19,7 +19,7 @@ namespace Webshop.Models.Domain
         //public int ProductAmount { get; set; }
         public int Quantity { get; set; }
 
-        public double Price { get; set; }
+     //   public double Price { get; set; }
         // public Product Product { get; set; }
         public OrderLine(Order order, Product product, int amount
             //An order consists of multiple orderlines
@@ -27,7 +27,7 @@ namespace Webshop.Models.Domain
         {
             Order = order;
             OrderId = order.Id;
-
+       //     Price = product.UnitPrice;
             Product = product;
             ProductId = product.ProductId;
             Quantity = amount;

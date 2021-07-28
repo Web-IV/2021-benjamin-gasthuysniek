@@ -1,3 +1,10 @@
+interface OrderJson{
+    userId: number;
+    active: boolean;
+    creationDate: string;
+    orderTotaal: number;
+}
+
 export class Order {
     //private _orderId: number;
     constructor(
@@ -7,7 +14,14 @@ export class Order {
     private _orderTotaal: number //float in db
 
     ) {}
-      
+ static fromJson(json: OrderJson): Order{
+    const order = new Order(json.userId, json.active, new Date(json.creationDate), json.orderTotaal);
+    return order;
+ }     
+
+
+
+
     get userId(): number{
         return this._userId;
     }

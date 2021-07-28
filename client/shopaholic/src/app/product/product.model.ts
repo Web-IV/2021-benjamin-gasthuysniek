@@ -1,3 +1,15 @@
+interface ProductJson{
+  //productId: number
+  name: string;
+  productClass: string;
+  productName: string;
+  unitPrice: number;
+  availability: number;
+  description: string;
+  userId: number;
+}
+
+
 export class Product {
     //private _productId: number;
     constructor(
@@ -8,11 +20,15 @@ export class Product {
       private _availability: number,
       private _description: string,
       private _userId: number
-
-
-    //private _dateAdded = new Date()
+      //private _dateAdded = new Date()
 
     ) {}
+
+    static fromJSON(json: ProductJson): Product {
+      const prod = new Product(json.name,json.productClass, json.productName, json.unitPrice, json.availability, json.description, json.userId);
+      return prod;
+    }
+
   
     // [...] other getters
     get name(): string {
@@ -43,7 +59,5 @@ export class Product {
       return this._userId;
     }
    
-    /*addProductDetail(name: string, amount?: number, unit?: string) {
-      this._productDetails.push(`${amount || 1} ${unit || ''} ${name}`);
-    }*/
+    
   }

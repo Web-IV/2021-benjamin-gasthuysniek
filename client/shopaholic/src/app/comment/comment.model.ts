@@ -1,3 +1,12 @@
+interface CommentJson{
+    productId: number;
+    userId: number;
+    postingDateComment: string;
+    upVotes: number;
+    title: string;
+    content: string;
+}
+
 export class Comment {
     //private _commentId: number;
     constructor(
@@ -10,6 +19,11 @@ export class Comment {
 
     ) {}
   
+static fromJson(json: CommentJson): Comment{
+    const comment = new Comment(json.productId, json.userId, new Date(json.postingDateComment), json.upVotes, json.title, json.content);
+    return comment;
+}
+
     get productId(): number{
         return this._productId;
     }

@@ -2,27 +2,22 @@ import { Product } from "./product.model"
 
 const JsonProducts = [
 {
-    productClass: 'Laptop',
-  productName: 'string',
-  unitPrice: 200,
+  productClass: 'Laptop',
+  productName: 'Rog Strix 1060',
+  unitPrice: 500,
   availability: 5,
   description: "good laptop",
   userId: 1,
 
-    /*
-  private _productClass: string,
-      private _productName: string,
-      private _unitPrice: number, //ts equivalent of doubles and ints
-      private _availability: number,
-      private _description: string,
-      private _userId: number
-    */
-}/*,
+},
 {
-    name: 'spaghetti',
-    ingredients: ['tomato', 'onion', 'celery', 'carrot', 'minced meat'],
-    dateAdded: '2020-02-07T18:25:43.511Z'
-}*/
+  productClass: 'Laptop',
+  productName: 'Apple MacBook Pro',
+  unitPrice: 1300,
+  availability: 5,
+  description: "Newest MacBook Pro of 2021",
+  userId: 1,
+}
 ]
 
 export const PRODUCTS: Product[]= JsonProducts.map(Product.fromJSON);

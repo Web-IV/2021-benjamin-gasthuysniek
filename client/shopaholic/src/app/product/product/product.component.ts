@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Product } from '../product.model';
+
 
 @Component({
   selector: 'app-product',
@@ -6,18 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
- // name: string;
- // productDetails : string[];
-  //dateAdded : Date;
+   @Input() public product: Product;
 
-  @Input() name: string = '';
-  constructor() { 
-    this.name = 'IphoneX';
-   // this.productDetails = ['Default productdetails'];
-    //this.dateAdded = new Date();
-  
-  }
-
+  constructor() {}
+ 
   ngOnInit(): void {
   }
 

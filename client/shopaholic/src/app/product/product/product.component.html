@@ -1,8 +1,11 @@
 <mat-card>
   <mat-card-header>
     <!-- https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/ -->
-      <mat-card-title><mat-icon>add_shopping_cart</mat-icon>{{name}}</mat-card-title>
-      <!-- <mat-card-subtitle>added on {{dateAdded | date }}</mat-card-subtitle>     -->
+      <mat-card-title><mat-icon>add_shopping_cart</mat-icon>{{product.productClass}}</mat-card-title>
+      <mat-card-subtitle>{{product.unitPrice}}</mat-card-subtitle>
+      <mat-card-subtitle>{{product.availability}}</mat-card-subtitle>
+      <mat-card-subtitle>{{product.description}}</mat-card-subtitle>
+      <mat-card-subtitle>{{product.userId}}</mat-card-subtitle>    
   </mat-card-header>
   <mat-card-content>
     <!-- <h3 mat-subheader>Different productdetails</h3>

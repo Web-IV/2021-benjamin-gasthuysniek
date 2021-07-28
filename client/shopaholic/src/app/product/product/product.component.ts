@@ -7,14 +7,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
  // name: string;
-  productDetails : string[];
-  dateAdded : Date;
+ // productDetails : string[];
+  //dateAdded : Date;
 
   @Input() name: string = '';
   constructor() { 
     this.name = 'IphoneX';
-    this.productDetails = ['Default productdetails'];
-    this.dateAdded = new Date();
+   // this.productDetails = ['Default productdetails'];
+    //this.dateAdded = new Date();
   
   }
 

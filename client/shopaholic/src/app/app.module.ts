@@ -11,12 +11,13 @@ import { UserModule } from './user/user.module';
 import { MaterialModule } from './material/material.module';
 import { OrderComponent } from './order/order.component';
 import { OrderlineComponent } from './orderline/orderline.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
     MainNavComponent,   
-    PageNotFoundComponent, OrderComponent, OrderlineComponent
+    PageNotFoundComponent, OrderComponent, OrderlineComponent, CommentComponent
   ],
   imports: [
     BrowserModule,

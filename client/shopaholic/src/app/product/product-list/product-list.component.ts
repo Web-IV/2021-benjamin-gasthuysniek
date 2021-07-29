@@ -11,10 +11,13 @@ import { Product } from '../product.model';
 export class ProductListComponent implements OnInit {
   
   constructor(private _productDataService: ProductDataService) { }
-
+  public filterProductName: string;
   ngOnInit(): void {
   }
-  
+  applyFilter(filter:string)
+  {
+    this.filterProductName = filter;
+  }
   get products(){
     return this._productDataService.products;
   }

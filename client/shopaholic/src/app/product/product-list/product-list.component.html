@@ -1,6 +1,14 @@
 <div fxLayout="column" fxLayoutGap="2%">
   <app-add-product (newProduct)="addNewProduct($event)"></app-add-product>
-<div
+<mat-card>
+  <mat-form-field>
+    <input matInput placeholder="filter" type="text" #filter />
+  </mat-form-field>
+  <button (click)= "applyFilter(filter.value)" mat-raised-button>
+    filter
+  </button>
+</mat-card>
+  <div
   fxLayout="row wrap"
   fxLayout.xs="column"
   fxLayoutGap="0.5%"
@@ -8,7 +16,7 @@
 >
   <div 
     class="product"
-    *ngFor="let localProduct of products"
+    *ngFor="let localProduct of (products | productFilter: filterProductName)"
     fxFlex="0 0 calc(25%-0.5%)"
     fxFlex.xs="100%"
   ><!-- the selector for product.component -->

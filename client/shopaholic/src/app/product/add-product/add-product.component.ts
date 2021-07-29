@@ -21,7 +21,12 @@ export class AddProductComponent implements OnInit {
       private _userId: number */
   //the addproduct event is called when the button in the html of add product is clicked
   addProduct(productClass:HTMLInputElement,productName: HTMLInputElement, unitPrice: HTMLInputElement, availability: HTMLInputElement, description: HTMLInputElement,userId: HTMLInputElement): boolean{
+    console.log(productClass.value);
     console.log(productName.value);
+    console.log(unitPrice.value);
+    console.log(availability.value);
+    console.log(description.value);
+    console.log(userId.value);
     const product = new Product(productClass.value, productName.value, unitPrice.valueAsNumber, availability.valueAsNumber, description.value, userId.valueAsNumber);
     this.newProduct.emit(product);
     return false;

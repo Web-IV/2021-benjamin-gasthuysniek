@@ -7,6 +7,7 @@ import { AddCommentComponent } from './add-comment/add-comment.component';
 import { FavorietenComponent } from './favorieten/favorieten.component';
 import { MaterialModule } from '../material/material.module';
 import { ProductListComponent } from './product-list/product-list.component';
+import { ProductFilterPipe } from './product-filter.pipe';
 
 
 
@@ -18,6 +19,7 @@ AddCommentComponent,
 //ProductDetailComponent,
 FavorietenComponent,
 ProductListComponent,
+ProductFilterPipe,
 ],
 imports: [
 CommonModule, MaterialModule

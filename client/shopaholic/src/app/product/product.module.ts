@@ -6,6 +6,7 @@ import { AddCommentComponent } from './add-comment/add-comment.component';
 //import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { FavorietenComponent } from './favorieten/favorieten.component';
 import { MaterialModule } from '../material/material.module';
+import { ProductListComponent } from './product-list/product-list.component';
 
 
 
@@ -16,10 +17,11 @@ AddProductComponent,
 AddCommentComponent,
 //ProductDetailComponent,
 FavorietenComponent,
+ProductListComponent,
 ],
 imports: [
 CommonModule, MaterialModule
 ],
-exports: [ProductComponent]
+exports: [ProductListComponent]
 })
 export class ProductModule { }

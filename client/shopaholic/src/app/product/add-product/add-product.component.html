@@ -1,1 +1,19 @@
-<p>add-product works!</p>
+<mat-card>
+    <mat-form-field>
+      <input matInput placeholder="ProductClass" type="text" #newproductClass>
+      <input matInput placeholder="Name" type="text" #newproductname/>
+      <input matInput placeholder="Unitprice" type="number" #newproductUnitPrice>
+      <input matInput placeholder="Availability" type="number" #newproductAvailability>
+      <input matInput placeholder="Description" type="text" #newproductDescription>
+      <input matInput placeholder="UserId" type="text" #newproductUserId>
+     <!--  private _productClass: string,
+      private _productName: string,
+      private _unitPrice: number, //ts equivalent of doubles and ints
+      private _availability: number,
+      private _description: string,
+      private _userId: number -->
+    </mat-form-field>
+    <button (click)="addProduct(newproductClass,newproductname,newproductUnitPrice,newproductAvailability,newproductDescription,newproductUserId)" mat-raised-button>
+        add product
+    </button>
+  </mat-card> 

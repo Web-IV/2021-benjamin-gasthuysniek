@@ -8,6 +8,7 @@ import { FavorietenComponent } from './favorieten/favorieten.component';
 import { MaterialModule } from '../material/material.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFilterPipe } from './product-filter.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -16,13 +17,12 @@ declarations: [
 ProductComponent,
 AddProductComponent,
 AddCommentComponent,
-//ProductDetailComponent,
 FavorietenComponent,
 ProductListComponent,
 ProductFilterPipe,
 ],
 imports: [
-CommonModule, MaterialModule
+CommonModule, MaterialModule,HttpClientModule
 ],
 exports: [ProductListComponent]
 })

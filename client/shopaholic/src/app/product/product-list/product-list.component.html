@@ -2,11 +2,12 @@
   <app-add-product (newProduct)="addNewProduct($event)"></app-add-product>
 <mat-card>
   <mat-form-field>
-    <input matInput placeholder="filter" type="text" #filter />
+    <input matInput (keyup)='filterProduct$.next($event.target.value)'
+    type="text" placeholder="filter product name">
   </mat-form-field>
-  <button (click)= "applyFilter(filter.value)" mat-raised-button>
+  <!-- <button (click)= "applyFilter(filter.value)" mat-raised-button>
     filter
-  </button>
+  </button> -->
 </mat-card>
   <div
   fxLayout="row wrap"

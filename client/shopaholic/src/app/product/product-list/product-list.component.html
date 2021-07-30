@@ -17,7 +17,7 @@
 >
   <div 
     class="product"
-    *ngFor="let localProduct of (products | productFilter: filterProductName)"
+    *ngFor="let localProduct of (products$ |async | productFilter: filterProductName)"
     fxFlex="0 0 calc(25%-0.5%)"
     fxFlex.xs="100%"
   ><!-- the selector for product.component -->

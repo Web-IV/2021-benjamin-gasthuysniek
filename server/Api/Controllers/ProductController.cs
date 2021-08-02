@@ -45,7 +45,7 @@ namespace Webshop.Controllers
             return _productRepo.GetByProductName(productname);
         }
 
-        //Get: Api/products/id
+        //Get: api/products/id
         /// <summary>
         /// Get products by id
         /// </summary>

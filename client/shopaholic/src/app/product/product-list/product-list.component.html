@@ -9,6 +9,7 @@
     filter
   </button> -->
 </mat-card>
+<div *ngIf="(products$ |async) as products; else loading">
   <div
   fxLayout="row wrap"
   fxLayout.xs="column"
@@ -25,3 +26,5 @@
   </div>
 </div>
 </div>
+</div>
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>

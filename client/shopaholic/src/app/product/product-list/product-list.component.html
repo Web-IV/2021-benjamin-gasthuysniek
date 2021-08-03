@@ -1,30 +1,29 @@
 <div fxLayout="column" fxLayoutGap="2%">
   <app-add-product (newProduct)="addNewProduct($event)"></app-add-product>
-<mat-card>
-  <mat-form-field>
-    <input matInput (keyup)='filterProduct$.next($event.target.value)'
-    type="text" placeholder="filter product name">
-  </mat-form-field>
-  <!-- <button (click)= "applyFilter(filter.value)" mat-raised-button>
+  <mat-card>
+    <mat-form-field>
+      <input matInput (keyup)='filterProduct$.next($event.target.value)' type="text" placeholder="filter product name">
+    </mat-form-field>
+    <!-- <button (click)= "applyFilter(filter.value)" mat-raised-button>
     filter
   </button> -->
-</mat-card>
-<div *ngIf="(products$ |async) as products; else loading">
-  <div
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutGap="0.5%"
-  fxLayoutAlign="start"
->
-  <div 
-    class="product"
-    *ngFor="let localProduct of (products$ |async | productFilter: filterProductName)"
-    fxFlex="0 0 calc(25%-0.5%)"
-    fxFlex.xs="100%"
-  ><!-- the selector for product.component -->
-  <app-product [product]="localProduct"></app-product>
+  </mat-card>
+  <div *ngIf="(products$ |async) as products; else loadingOrError">
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
+      <div class="product" *ngFor="let localProduct of (products$ |async | productFilter: filterProductName)"
+        fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%">
+        <!-- the selector for product.component -->
+        <app-product [product]="localProduct"></app-product>
+      </div>
+    </div>
   </div>
 </div>
-</div>
-</div>
-<ng-template #loading><mat-spinner></mat-spinner></ng-template>
+<ng-template #loadingOrError>
+  <mat-card class="error" *ngIf="errorMessage; else loading">
+    Error loading the product list: {{ errorMessage }}. <br/>
+     Please try again later.
+   <ng-template #loading>
+     <mat-spinner></mat-spinner>
+   </ng-template>
+ </mat-card>
+</ng-template>

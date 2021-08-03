@@ -27,6 +27,17 @@ export class Product {
       return prod;
     }
 
+    toJSON(): ProductJson {
+      return <ProductJson>{       
+        productClass: this.productClass,
+        productName: this.productName,
+        unitPrice: this.unitPrice,
+        availability: this.availability,
+        description: this.description,
+        userId: this.userId,
+      };
+    }
+
   
     // [...] other getters
 

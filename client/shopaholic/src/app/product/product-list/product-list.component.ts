@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, EMPTY } from 'rxjs';
 import { PRODUCTS } from '../mock-product';
-import{distinctUntilChanged, debounceTime,map,filter} from 'rxjs/operators'
+import{distinctUntilChanged, debounceTime,map,filter, catchError} from 'rxjs/operators'
 import { ProductDataService } from '../product-data.service';
 import { Product } from '../product.model';
 import { Observable } from 'rxjs';
@@ -12,8 +12,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  private _fetchProducts$: Observable<Product[]> = this._productDataService.products$;
-  public filterProductName: string;
+  private _fetchProducts$: Observable<Product[]>// = this._productDataService.products$;
+  public errorMessage: string = '';
+  public loading: boolean;
+ public filterProductName: string;
   //storing the filter in an observable
   public filterProduct$ = new Subject<string>();
   constructor(private _productDataService: ProductDataService) { 
@@ -34,6 +36,14 @@ export class ProductListComponent implements OnInit {
   }
  
   ngOnInit(): void {
+    this._fetchProducts$ = this._productDataService.allProducts$.pipe(
+      catchError(err => {
+        this.errorMessage = err;
+        this.loading = true;
+        return EMPTY;
+      })
+      
+    );
   }
   applyFilter(filter:string)
   {

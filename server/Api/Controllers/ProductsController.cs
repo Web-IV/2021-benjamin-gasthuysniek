@@ -17,24 +17,26 @@ namespace Webshop.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly IProductRepository _productRepo;
         private readonly IUserRepository _userRepository;
-        private readonly IFavoriteProductRepository _favoiteProductRepo;
-        public ProductController(IProductRepository context,IUserRepository userRepository)
+        private readonly IFavoriteProductRepository _favoriteProductRepo;
+        public ProductsController(IProductRepository context,IUserRepository userRepository, IFavoriteProductRepository favoriteProductRepository)
         {
             _productRepo = context;
             _userRepository = userRepository;
+            _favoriteProductRepo = favoriteProductRepository;
         }
 
-        // GET: api/products
+        // GET: api/Products
         /// <summary>
         /// Get all the products ordered by productname 
         /// </summary>
         /// <param name="productname"></param>
         /// <returns>Array of products</returns>
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<Product> GetProductsByProductName(string productname = null)
         {
             //when nothing is given as a parameter, all products are returned
@@ -45,7 +47,7 @@ namespace Webshop.Controllers
             return _productRepo.GetByProductName(productname);
         }
 
-        //Get: api/products/id
+        //GET: api/Products/5
         /// <summary>
         /// Get products by id
         /// </summary>
@@ -59,7 +61,7 @@ namespace Webshop.Controllers
             return product;
         }
 
-        //Post: api/products
+        //POST: api/Products
         /// <summary>
         /// Add a new product
         /// </summary>
@@ -81,7 +83,7 @@ namespace Webshop.Controllers
                 //string actionname
                 (nameof(GetProduct), new { id = newProduct.ProductId }, newProduct);
         }
-        //Put: api/product/id
+        //PUT: api/Products/5
         /// <summary>
         /// Modifying a product
         /// </summary>
@@ -99,7 +101,7 @@ namespace Webshop.Controllers
             return NoContent();
         }
 
-        //Delete: api/Product/id
+        //DELETE: api/Products/5
         /// <summary>
         /// Deleting a product
         /// </summary>
@@ -116,6 +118,7 @@ namespace Webshop.Controllers
             _productRepo.SaveChanges();
             return NoContent();
         }
+    
         /// <summary>
         /// Get favorite products of current user
         /// </summary>
@@ -139,8 +142,8 @@ namespace Webshop.Controllers
             try
             {
                 userThatNeedsAdding.AddFavoriteProduct(favoriteProduct);
-                _favoiteProductRepo.Add(new FavoriteProduct(userThatNeedsAdding, productNeedsAdding));
-                _favoiteProductRepo.SaveChanges();
+                _favoriteProductRepo.Add(new FavoriteProduct(userThatNeedsAdding, productNeedsAdding));
+                _favoriteProductRepo.SaveChanges();
                 _userRepository.SaveChanges();
                 _productRepo.SaveChanges();
                 return Ok(productNeedsAdding);

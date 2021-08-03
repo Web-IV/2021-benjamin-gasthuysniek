@@ -18,17 +18,17 @@ namespace Webshop.DTOs
 
         [Required]
         public double UnitPrice { get; set; }
-      
-       
-       [Required]
-            public int Availability { get; set; }
-     
+
+
+        [Required]
+        public int Availability { get; set; }
+
 
 
         public string Description { get; set; }
-        [Required]
+    
 
-        public bool InStock { get; set; }
-      
-    }
+
+
+    } 
 }

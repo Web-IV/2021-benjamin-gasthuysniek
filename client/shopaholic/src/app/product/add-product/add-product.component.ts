@@ -19,26 +19,25 @@ export class AddProductComponent implements OnInit {
   productName: new FormControl('Rog strix'),
   unitPrice: new FormControl(300),
   availability: new FormControl(5),
-  description: new FormControl('Good laptop'),
-  inStock: new FormControl(true),
+  description: new FormControl('Good laptop'),  
   userId: new FormControl(1)
 
   })
   }
   onSubmit()
   {
-    this.newProduct.emit(new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.inStock,this.product.value.userId));
+    this.newProduct.emit(new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.userId));
   }
 
   //the addproduct event is called when the button in the html of add product is clicked
   addProduct(productClass:HTMLInputElement,productName: HTMLInputElement, unitPrice: HTMLInputElement, availability:
-  HTMLInputElement, description: HTMLInputElement,inStock: HTMLInputElement,userId: HTMLInputElement): boolean{
+  HTMLInputElement, description: HTMLInputElement,userId: HTMLInputElement): boolean{
   console.log(productClass.value);
   console.log(productName.value);
   console.log(unitPrice.value);
   console.log(availability.value);
   console.log(description.value);
-  console.log(inStock.value);
+
   console.log(userId.value);
   /*const product = new Product(productClass.value, productName.value, unitPrice.valueAsNumber,
   availability.valueAsNumber, description.value, userId.valueAsNumber);

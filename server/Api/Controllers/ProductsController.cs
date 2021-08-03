@@ -73,10 +73,11 @@ namespace Webshop.Controllers
 
             User user = _userRepository.GetByEmail(User.Identity.Name);
             Product newProduct = new Product(product.ProductName, product.ProductClass, product.UnitPrice, product.Description
-                //,product.Amount
+                //product.Amount
                 )
-            //{ User = user}
+           
            ;// { ProductClass = newProductClass}; //{ ProductName = product.ProductName, UnitPrice = product.UnitPrice, ProductClass = product.ProductClass };
+            newProduct.AddProductsAvailable(product.Availability);
             _productRepo.Add(newProduct);
             _productRepo.SaveChanges();
             //creates a response

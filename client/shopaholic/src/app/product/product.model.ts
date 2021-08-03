@@ -18,14 +18,14 @@ export class Product {
       private _unitPrice: number, //ts equivalent of doubles and ints
       private _availability: number,
       private _description: string,
-      private _inStock: boolean,
+     
       private _userId: number
       //private _dateAdded = new Date()
 
     ) {}
 
     static fromJSON(json: ProductJson): Product {
-      const prod = new Product(json.productClass, json.productName, json.unitPrice, json.availability, json.description,json.inStock, json.userId);
+      const prod = new Product(json.productClass, json.productName, json.unitPrice, json.availability, json.description, json.userId);
       return prod;
     }
 
@@ -35,8 +35,7 @@ export class Product {
         productName: this.productName,
         unitPrice: this.unitPrice,
         availability: this.availability,
-        description: this.description,
-        inStock: this._inStock,
+        description: this.description,        
         userId: this.userId,
       };
     }
@@ -64,9 +63,7 @@ export class Product {
     get description(): string{
       return this._description;
     }
-    get inStock(): boolean{
-      return this._inStock;
-    }
+    
     get userId(): number{
       return this._userId;
     }

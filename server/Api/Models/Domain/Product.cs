@@ -48,8 +48,17 @@ namespace Webshop.Models.Domain
 
         public void AddProductsAvailable (int amount)
         {
-            InStock = true;
-            Availability += amount;
+            //if the availabilty passed in the dto is less or equal to 0, it is nog longer in stock or available
+            if (amount <= 0)
+            {
+                InStock = false;
+                Availability = amount;
+            }
+            else
+            {
+                InStock = true;
+                Availability += amount;
+            }
         }
     }
 }

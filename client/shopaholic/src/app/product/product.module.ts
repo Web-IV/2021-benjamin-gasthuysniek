@@ -9,6 +9,7 @@ import { MaterialModule } from '../material/material.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFilterPipe } from './product-filter.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,10 +20,10 @@ AddProductComponent,
 AddCommentComponent,
 FavorietenComponent,
 ProductListComponent,
-ProductFilterPipe,
+ProductFilterPipe
 ],
 imports: [
-CommonModule, MaterialModule,HttpClientModule
+CommonModule, MaterialModule,HttpClientModule, ReactiveFormsModule
 ],
 exports: [ProductListComponent]
 })

@@ -1,23 +1,28 @@
 <mat-card>
   <mat-card-title>add product</mat-card-title>
-  <mat-card-content>    
-    <form [formGroup]="product">
+  <mat-card-content>
+    <form [formGroup]="product" (ngSubmit)='onSubmit()'>
       <mat-form-field>
-        <input
-          matInput
-          aria-label="productClass"
-          placeholder="productClass"
-          type="text"
-          formControlName="productClass"
-        />
+        <input matInput aria-label="productClass" placeholder="productClass" type="text"
+          formControlName="productClass" />
+        <input matInput aria-label="productName" placeholder="productName" type="text" formControlName="productName" />
+        <input matInput aria-label="unitPrice" placeholder="unitPrice" type="number" formControlName="unitPrice" />
+        <input matInput aria-label="availability" placeholder="availability" type="number" formControlName="availability" />
+        <input matInput aria-label="description" placeholder="description" type="text" formControlName="description" />
+        <!-- <input mat aria-label="inStock" placeholder="stock" type="check" formControlName="inStock" /> -->
+        <input matInput aria-label="inStock" placeholder="inStock" type="text" formControlName="inStock" />
+        <input matInput aria-label="userId" placeholder="userId" type="number" formControlName="userId" />
       </mat-form-field>
-      <button mat-raised-button>
-      <!-- (click)="addProduct(newproductClass,newproductname,newproductUnitPrice,newproductAvailability,newproductDescription,newproductUserId)"
+      <button type='submit' mat-raised-button>
+        <!-- (click)="addProduct(newproductClass,newproductname,newproductUnitPrice,newproductAvailability,newproductDescription,newproductUserId)"
       mat-raised-button>
       add product -->
-      add product
-    </button>
+        add product
+      </button>
     </form>
+
   </mat-card-content>
-    
+
 </mat-card>
+<!-- dumping the formgroup -->
+{{product.value | json}}

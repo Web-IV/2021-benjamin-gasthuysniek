@@ -67,6 +67,7 @@ namespace Webshop.Controllers
         /// </summary>
         /// <param name="product">New product</param>
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult<Product> PostProduct(ProductDTO product)
         {
 

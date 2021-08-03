@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Product } from '../product.model';
 
@@ -15,10 +15,13 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit() {
   this.product = new FormGroup({
-  productClass: new FormControl('Laptop'),
-  productName: new FormControl('Rog strix'),
-  unitPrice: new FormControl(300),
-  availability: new FormControl(5),
+  productClass: new FormControl('Laptop', [Validators.required, Validators.minLength(3)],
+  //async validator
+  []  
+  ),
+  productName: new FormControl('Rog strix', [Validators.required, Validators.minLength(3)]),
+  unitPrice: new FormControl(300, Validators.required),
+  availability: new FormControl(0),
   description: new FormControl('Good laptop'),  
   userId: new FormControl(1)
 
@@ -30,7 +33,7 @@ export class AddProductComponent implements OnInit {
   }
 
   //the addproduct event is called when the button in the html of add product is clicked
-  addProduct(productClass:HTMLInputElement,productName: HTMLInputElement, unitPrice: HTMLInputElement, availability:
+  /*addProduct(productClass:HTMLInputElement,productName: HTMLInputElement, unitPrice: HTMLInputElement, availability:
   HTMLInputElement, description: HTMLInputElement,userId: HTMLInputElement): boolean{
   console.log(productClass.value);
   console.log(productName.value);
@@ -42,7 +45,7 @@ export class AddProductComponent implements OnInit {
   /*const product = new Product(productClass.value, productName.value, unitPrice.valueAsNumber,
   availability.valueAsNumber, description.value, userId.valueAsNumber);
   this.newProduct.emit(product);*/
-  return false;
-  }
+  /*return false;
+  }*/
 
   }

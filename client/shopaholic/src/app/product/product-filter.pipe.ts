@@ -13,7 +13,8 @@ export class ProductFilterPipe implements PipeTransform {
       return products;
     }
     return products.filter(prod =>
-      prod.productName.toLowerCase().startsWith(name.toLowerCase()));
+      prod.productName.toLowerCase().startsWith(       
+        name.toLowerCase()));
       
   }
 

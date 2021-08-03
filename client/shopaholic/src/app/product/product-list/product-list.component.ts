@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
   private _fetchProducts$: Observable<Product[]>// = this._productDataService.products$;
   public errorMessage: string = '';
   public loading: boolean;
- public filterProductName: string;
+  public filterProductName: string;
   //storing the filter in an observable
   public filterProduct$ = new Subject<string>();
   constructor(private _productDataService: ProductDataService) { 

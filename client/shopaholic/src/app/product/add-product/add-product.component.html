@@ -4,14 +4,14 @@
     <form [formGroup]="product" (ngSubmit)='onSubmit()'>
       <mat-form-field>
         <input matInput aria-label="productClass" placeholder="productClass" type="text"
-          formControlName="productClass" />
+          formControlName="productClass" #spy/>
         <input matInput aria-label="productName" placeholder="productName" type="text" formControlName="productName" />
         <input matInput aria-label="unitPrice" placeholder="unitPrice" type="number" formControlName="unitPrice" />
         <input matInput aria-label="availability" placeholder="availability" type="number" formControlName="availability" />
         <input matInput aria-label="description" placeholder="description" type="text" formControlName="description" />              
         <input matInput aria-label="userId" placeholder="userId" type="number" formControlName="userId" />
       </mat-form-field>
-      <button type='submit' mat-raised-button>
+      <button type='submit' mat-raised-button [disabled]='!product.valid'>
         <!-- (click)="addProduct(newproductClass,newproductname,newproductUnitPrice,newproductAvailability,newproductDescription,newproductUserId)"
       mat-raised-button>
       add product -->
@@ -23,4 +23,5 @@
 
 </mat-card>
 <!-- dumping the formgroup -->
-{{product.value | json}}
+<!-- {{product.value | json}} -->
+{{spy.className}}

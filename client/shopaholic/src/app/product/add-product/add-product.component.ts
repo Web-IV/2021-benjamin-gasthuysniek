@@ -1,31 +1,56 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Product } from '../product.model';
 
+
+function validateProductClassAndName(control: FormGroup)
+: { [key: string]: any }{
+  if(
+    control.get('productClass').value.length >=3 && control.get('productName').value.length <3
+  ){
+    return {productClassNoName: true}
+  }
+  else if(
+    control.get('productName').value.length >=3 && control.get('productClass').value.length <3  
+  )
+  {
+    return {productNameNoClass: true}
+  }
+  return null
+}
+
 @Component({
-selector: 'app-add-product',
-templateUrl: './add-product.component.html',
-styleUrls: ['./add-product.component.css']
-})
+  selector: 'app-add-product',
+  templateUrl: './add-product.component.html',
+  styleUrls: ['./add-product.component.css']
+  })
+
 export class AddProductComponent implements OnInit {
  @Output() public newProduct = new EventEmitter<Product>();
   public product: FormGroup;
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-  this.product = new FormGroup({
-  productClass: new FormControl('Laptop', [Validators.required, Validators.minLength(3)],
+  this.product = this.fb.group({
+  productClass: this.fb.control('Laptop'
+ /*  , [Validators.required, Validators.minLength(3)],
   //async validator
-  []  
+  []  */ 
   ),
-  productName: new FormControl('Rog strix', [Validators.required, Validators.minLength(3)]),
-  unitPrice: new FormControl(300, Validators.required),
-  availability: new FormControl(0),
-  description: new FormControl('Good laptop'),  
-  userId: new FormControl(1)
+  productName: this.fb.control('Rog strix'
+  // , [Validators.required, Validators.minLength(3)]
+  ),
+  unitPrice: this.fb.control(300, 
+    //Validators.required
+    ),
+  availability: this.fb.control(0),
+  description: this.fb.control('Good laptop'),  
+  userId: this.fb.control(1)
 
-  })
+  },
+  {validator: validateProductClassAndName}
+  )
   }
   onSubmit()
   {
@@ -47,5 +72,27 @@ export class AddProductComponent implements OnInit {
   this.newProduct.emit(product);*/
   /*return false;
   }*/
+
+  getErrorMessage(errors: any): string {
+    //an error occured on the required state
+    if(errors.required)
+    {
+      return 'is required';
+    }
+    //min length error occured
+    else if (errors.minLength)
+    {
+      return `needs at least ${errors.minlength.requiredLength}
+      characters (got ${errors.minlength.actualLength})`;
+    }
+    else if(errors.productClassNoName)
+    {
+      return `if productclass is set you need to set the productname`
+    }
+    else if(errors.productNameNoClass)
+    {
+      return `if productname is set you need to set the productclass`
+    }
+  }
 
   }

@@ -10,6 +10,11 @@
         <input matInput aria-label="availability" placeholder="availability" type="number" formControlName="availability" />
         <input matInput aria-label="description" placeholder="description" type="text" formControlName="description" />              
         <input matInput aria-label="userId" placeholder="userId" type="number" formControlName="userId" />
+      <mat-error 
+      *ngIf="product.get('productName')['errors']?.required && product.get('productName').touched">
+      {{getErrorMessage(product.get('productName')['errors'])}}
+    </mat-error>
+      
       </mat-form-field>
       <button type='submit' mat-raised-button [disabled]='!product.valid'>
         <!-- (click)="addProduct(newproductClass,newproductname,newproductUnitPrice,newproductAvailability,newproductDescription,newproductUserId)"
@@ -23,5 +28,8 @@
 
 </mat-card>
 <!-- dumping the formgroup -->
-<!-- {{product.value | json}} -->
+REMOVE
+{{product.value | json}} 
 {{spy.className}}
+{{product.get('productName')['errors'] | json}}
+REMOVE TILL HERE

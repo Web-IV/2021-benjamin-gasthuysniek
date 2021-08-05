@@ -22,17 +22,16 @@ export class ProductListComponent implements OnInit {
     //subscribe to act on the values fired from the observable
 /*this._productDataService.products$.subscribe(
   res => this._products = res*/
-/*
+
 
     this.filterProduct$
     .pipe(distinctUntilChanged(),
     debounceTime(400),
-    map(val => val.toLowerCase()),
-    filter(val => !val.startsWith('s'))
+    map(val => val.toLowerCase())    
     )
     .subscribe(
       val => this.filterProductName = val);
-    */
+    
   }
  
   ngOnInit(): void {

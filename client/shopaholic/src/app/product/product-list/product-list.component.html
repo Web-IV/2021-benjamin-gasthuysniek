@@ -2,7 +2,10 @@
   <app-add-product (newProduct)="addNewProduct($event)"></app-add-product>
   <mat-card>
     <mat-form-field>
-      <input matInput (keyup)="filterProduct$.next($event.target.value)" type="text" placeholder="filter product name">
+      <!-- adding attributes to html to target them in the tests -->
+      <input matInput (keyup)="filterProduct$.next($event.target.value)" type="text" placeholder="filter product name"
+      data-cy="filterInput"
+      >
     </mat-form-field>
     <!-- <button (click)= "applyFilter(filter.value)" mat-raised-button>
     filter
@@ -15,7 +18,7 @@
         fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%">
         {{filterProductName}}
         <!-- the selector for product.component -->
-        <app-product [product]="localProduct"></app-product>
+        <app-product [product]="localProduct" data-cy="productCard"></app-product>
       </div>
     </div>
   </div>

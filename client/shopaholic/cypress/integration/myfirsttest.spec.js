@@ -7,15 +7,10 @@ describe('My First Test', function(){ //describe structures multiple tests
     })*/
     it('our app runs', function(){
         cy.visit('http://localhost:4200'),
-        cy.get('button').should('be.disabled');
+        cy.get('[data-cy=filterInput]').type('Str');
+        cy.get('[data-cy=productCard]').should('have.length',1);
     });
 });
 
 
 
-describe('My First Test', function() {
-    it('our app runs', function() {
-      cy.visit('http://localhost:4200');
-      cy.get('button').should('be.disabled');
-    });
-  });

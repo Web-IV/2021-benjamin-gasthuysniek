@@ -2,33 +2,43 @@
   <app-add-product (newProduct)="addNewProduct($event)"></app-add-product>
   <mat-card>
     <mat-form-field>
-      <!-- adding attributes to html to target them in the tests -->
-      <input matInput (keyup)="filterProduct$.next($event.target.value)" type="text" placeholder="filter product name"
-      data-cy="filterInput"
-      >
+      <input
+        matInput
+        (keyup)="filterProduct$.next($event.target.value)"
+        placeholder="filter product name"
+        type="text"
+        data-cy="filterInput"
+      />
     </mat-form-field>
-    <!-- <button (click)= "applyFilter(filter.value)" mat-raised-button>
+     <!-- <button (click)= "applyFilter(filter.value)" mat-raised-button>
     filter
   </button> -->
   </mat-card>
-  <div *ngIf="(products$ |async) as products; else loadingOrError">
-    
-    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
-      <div class="product" *ngFor="let localProduct of (products$ |async | productFilter: filterProductName)"
-        fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%">
-        {{filterProductName}}
-        <!-- the selector for product.component -->
-        <app-product [product]="localProduct" data-cy="productCard"></app-product>
+  <mat-card class="error" *ngIf="errorMessage" data-cy="appError">
+    got an error while loading the product list: {{ errorMessage }}
+  </mat-card>
+  <div *ngIf="products$ | async as products; else loadingOrError">
+    <div
+      fxLayout="row wrap"
+      fxLayout.xs="column"
+      fxLayoutGap="0.5%"
+      fxLayoutAlign="start"
+    >
+      <div
+        class="product"
+        *ngFor="let product of products | productFilter: filterProductName"
+        fxFlex="0 0 calc(25%-0.5%)"
+        fxFlex.xs="100%"
+      >
+        <app-product [product]="product" data-cy="productCard"></app-product>
       </div>
     </div>
   </div>
+
+  <ng-template #loadingOrError>
+    <span *ngIf="errorMessage; else loading"></span>
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </ng-template>
 </div>
-<ng-template #loadingOrError> 
-  <mat-card class="error" *ngIf="errorMessage; else loading">
-    Error loading the product list: {{ errorMessage }}. <br/>
-     Please try again later.
-   <ng-template #loading>
-     <mat-spinner></mat-spinner>
-   </ng-template>
- </mat-card>
-</ng-template>

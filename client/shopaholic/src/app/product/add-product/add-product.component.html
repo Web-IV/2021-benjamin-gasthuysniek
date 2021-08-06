@@ -12,7 +12,7 @@
         <input matInput aria-label="userId" placeholder="userId" type="number" formControlName="userId" />
       <mat-error 
       *ngIf="product.get('productName')['errors']?.required && product.get('productName').touched">
-      {{getErrorMessage(product.get('productName')['errors'])}}
+      {{ getErrorMessage(product.get('productName')['errors']) }}
     </mat-error>
       
       </mat-form-field>

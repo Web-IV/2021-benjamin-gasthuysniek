@@ -20,12 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-const appRoutes : Routes = [
-  {path: 'product/list', component: ProductListComponent},
-  {path: 'product/add', component: AddProductComponent},
-  {path: '', redirectTo: 'product/list', pathMatch: 'full'},
-  {path: '**', component: PageNotFoundComponent}
-];
+import { AppRoutingModule } from './app-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -37,14 +33,14 @@ const appRoutes : Routes = [
     BrowserModule,
     ProductModule,
     UserModule,
-    MaterialModule,
-    RouterModule.forRoot(appRoutes),
+    MaterialModule,    
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductDataService } from '../product-data.service';
 
 import { Product } from '../product.model';
 
@@ -29,7 +30,10 @@ function validateProductClassAndName(control: FormGroup)
 export class AddProductComponent implements OnInit {
  @Output() public newProduct = new EventEmitter<Product>();
   public product: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  public errorMessage : string = '';
+  constructor(private fb: FormBuilder,
+    private _productDataService: ProductDataService   
+    ) { }
 
   ngOnInit() {
   this.product = this.fb.group({
@@ -54,7 +58,10 @@ export class AddProductComponent implements OnInit {
   }
   onSubmit()
   {
-    this.newProduct.emit(new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.userId));
+    //this.newProduct.emit(new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.userId));
+    this._productDataService.addNewProduct(
+      new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.userId)
+    );
   }
 
   //the addproduct event is called when the button in the html of add product is clicked

@@ -25,6 +25,6 @@ ProductFilterPipe
 imports: [
 CommonModule, MaterialModule,HttpClientModule, ReactiveFormsModule
 ],
-exports: [ProductListComponent]
+exports: [ProductListComponent,AddProductComponent]
 })
 export class ProductModule { }

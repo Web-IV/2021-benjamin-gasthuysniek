@@ -34,6 +34,17 @@ this.products$.subscribe((products: Product[])=> {
       );
       }
 
+  
+  addNewProduct(product: Product)
+  {
+    return this.http
+    .post(`${environment.apiUrl}/products/`, product.toJSON())
+    .pipe(catchError(this.handleError), map(Product.fromJSON))
+    //observables are cold so nothing happens unless someone subscribes to them
+    .subscribe((prod: Product) =>{
+      this._products = [...this._products, prod];
+    });
+  }
   handleError(err: any): Observable<never>{
     let errorMessage: string;
     if (err.error instanceof ErrorEvent) {
@@ -45,18 +56,7 @@ this.products$.subscribe((products: Product[])=> {
       else{
       errorMessage = `an unknown error occured ${err}`;
       }
-    console.error(err);
+    
     return throwError(errorMessage);
   }
-  addNewProduct(product: Product)
-  {
-    return this.http
-    .post(`${environment.apiUrl}/products/`, product.toJSON())
-    .pipe(catchError(this.handleError), map(Product.fromJSON))
-    //observables are cold so nothing happens unless someone subscribes to them
-    .subscribe((prod: Product) =>{
-      this._products = [...this._products, prod];
-    });
-  }
-
 }

@@ -27,9 +27,10 @@
   </mat-card-content>
 
 </mat-card>
+<mat-card class="error" *ngIf="errorMessage" data-cy="appError">
+  got an error while adding the recipe: {{ errorMessage }}
+</mat-card>
 <!-- dumping the formgroup -->
 REMOVE
-{{product.value | json}} 
-{{spy.className}}
 {{product.get('productName')['errors'] | json}}
 REMOVE TILL HERE

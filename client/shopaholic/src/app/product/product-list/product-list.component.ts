@@ -13,11 +13,12 @@ import { Observable } from 'rxjs';
 })
 export class ProductListComponent implements OnInit {
   private _fetchProducts$: Observable<Product[]>// = this._productDataService.products$;
-  public errorMessage: string = '';
+ 
   public loading: boolean;
   public filterProductName: string;
   //storing the filter in an observable
   public filterProduct$ = new Subject<string>();
+  public errorMessage: string = '';
   constructor(private _productDataService: ProductDataService) { 
     //subscribe to act on the values fired from the observable
 /*this._productDataService.products$.subscribe(

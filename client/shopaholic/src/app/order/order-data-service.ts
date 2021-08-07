@@ -3,49 +3,49 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, pipe, throwError } from 'rxjs';
 import { map, tap, delay, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { PRODUCTS } from './mock-product';
-import { Product } from './product.model';
+import { Order } from './order.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductDataService {
-  private _products$ = new BehaviorSubject<Product[]>([]);
-  private _products : Product[];
+export class OrderDataService {
+  private _orders$ = new BehaviorSubject<Order[]>([]);
+  private _orders : Order[];
 
   constructor(private http: HttpClient) {
-this.products$.subscribe((products: Product[])=> {
-  this._products = products;
-  this._products$.next(this._products);
+this.orders$.subscribe((orders: Order[])=> {
+  this._orders = orders;
+  this._orders$.next(this._orders);
 })
 
    }
 
-   get allProducts$(): Observable<Product[]>{
-     return this._products$;
+   get allOrders$(): Observable<Order[]>{
+     return this._orders$;
    }
 
 
-  get products$(): Observable< Product[] > {
-    return this.http.get(`${environment.apiUrl}/products/`).pipe(
+  get orders$(): Observable< Order[] > {
+    return this.http.get(`${environment.apiUrl}/orders/`).pipe(
       
         catchError(this.handleError),
-        map((list: any[]): Product[] => list.map(Product.fromJSON))
+        map((list: any[]): Order[] => list.map(Order.fromJson))
       );
       }
-  getProduct$(id: string): Observable<Product>{
-    return this.http.get(`${environment.apiUrl}/products/${id}`)
-    .pipe(catchError(this.handleError),map(Product.fromJSON));
+  getOrder$(id: string): Observable<Order>{
+    return this.http.get(`${environment.apiUrl}/orders/${id}`)
+    .pipe(catchError(this.handleError),map(Order.fromJson));
   }
   
-  addNewProduct(product: Product)
+  addNewOrder(order:Order)
   {
     return this.http
-    .post(`${environment.apiUrl}/products/`, product.toJSON())
-    .pipe(catchError(this.handleError), map(Product.fromJSON))
+    .post(`${environment.apiUrl}/orders/`, order.toJSON())
+    .pipe(catchError(this.handleError), map(Order.fromJson))
     //observables are cold so nothing happens unless someone subscribes to them
-    .subscribe((prod: Product) =>{
-      this._products = [...this._products, prod];
+    .subscribe((ord: Order) =>{
+      this._orders = [...this._orders, ord];
     });
   }
   handleError(err: any): Observable<never>{

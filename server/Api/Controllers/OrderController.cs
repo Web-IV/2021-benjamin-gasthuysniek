@@ -37,6 +37,7 @@ namespace Webshop.Controllers
         /// </summary>
         /// <returns>Array of the orders with the given userid, if no userid is giv </returns>
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<Order> GetOrders(string product = null, int userid = -1)
         {
             //when nothing is given as a parameter, all products are returned
@@ -98,10 +99,13 @@ namespace Webshop.Controllers
                 ol.Product = _productRepo.GetById(ol.ProductId);
                 newOrder.VoegContentToe(ol);
             }
+            Console.WriteLine("the loggedin user"); Console.WriteLine(loggedInUser);
+            Console.WriteLine("the new order"); Console.WriteLine(newOrder);
             loggedInUser.OrderListOfUser.Add(newOrder);
-            
+            _userRepo.Update(loggedInUser);
             _orderRepo.Add(newOrder);
             _orderRepo.SaveChanges();
+            _userRepo.Update(user);
             _userRepo.SaveChanges();
             //creates a response
             return CreatedAtAction

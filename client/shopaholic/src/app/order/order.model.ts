@@ -17,7 +17,16 @@ export class Order {
  static fromJson(json: OrderJson): Order{
     const order = new Order(json.userId, json.active, new Date(json.creationDate), json.orderTotaal);
     return order;
- }     
+ }   
+
+  toJSON(): OrderJson {
+    return <OrderJson>{       
+      userId: this.userId,
+      active: this.active,
+      creationDate: this.creationDate.toString(),
+      orderTotaal: this.orderTotaal     
+    };
+  }
 
 
 

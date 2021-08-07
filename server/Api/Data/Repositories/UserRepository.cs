@@ -44,6 +44,7 @@ namespace Webshop.Data.Repositories
                  .SingleOrDefault(u => u.Email == email);*/
             return _users//.Include(c => c.Favorites).ThenInclude(f => f.Product)
                 //.Include(u => u.FavoriteProducts)
+                .Include(u => u.OrderListOfUser)
                 .SingleOrDefault(c => c.Email == email);
         }
 

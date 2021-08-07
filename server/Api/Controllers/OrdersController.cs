@@ -17,14 +17,14 @@ namespace Webshop.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderController : ControllerBase
+    public class OrdersController : ControllerBase
     {
         private readonly IOrderRepository _orderRepo;
         private readonly IUserRepository _userRepo;
         private readonly IProductRepository _productRepo;
 
         // private User _loggedInUser;
-        public OrderController(IOrderRepository context, IUserRepository userRepo, IProductRepository productRepo)
+        public OrdersController(IOrderRepository context, IUserRepository userRepo, IProductRepository productRepo)
         {
             _orderRepo = context;
             _userRepo = userRepo;

@@ -1,1 +1,19 @@
-<p>order works!</p>
+<mat-card>
+    <mat-card-header>
+      <!-- https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/ -->       
+        <mat-card-subtitle>{{order.userId}}</mat-card-subtitle>
+        <mat-card-subtitle>{{order.active}}</mat-card-subtitle>
+        <mat-card-subtitle>{{order.creationDate}}</mat-card-subtitle>
+        <mat-card-subtitle>{{order.orderTotaal}}</mat-card-subtitle>     
+         
+    </mat-card-header>
+    <mat-card-content>
+      <!-- <h3 mat-subheader>Different productdetails</h3>
+      <mat-list>
+        <mat-list-item *ngFor="let productDetail of productDetails">
+          <app-product-detail [category]="productDetail"></app-product-detail>
+        </mat-list-item>
+      </mat-list> -->
+    </mat-card-content>
+  </mat-card>
+  

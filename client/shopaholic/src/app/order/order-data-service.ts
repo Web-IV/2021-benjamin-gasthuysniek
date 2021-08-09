@@ -34,7 +34,7 @@ this.orders$.subscribe((orders: Order[])=> {
       );
       }
   getOrder$(id: string): Observable<Order>{
-    return this.http.get(`${environment.apiUrl}/orders/${id}`)
+    return this.http.get(`${environment.apiUrl}/order/${id}`)
     .pipe(catchError(this.handleError),map(Order.fromJson));
   }
   

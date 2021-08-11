@@ -5,11 +5,14 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddProductComponent } from './product/add-product/add-product.component';
 import { OrderComponent } from './order/order.component';
+import { AuthGuard } from './user/auth.guard';
 
 
 const appRoutes : Routes = [
   {path: 'product/list', component: ProductListComponent},
-  {path: 'product/add', component: AddProductComponent},
+  {path: 'product/add', 
+  canActivate: [AuthGuard],
+  component: AddProductComponent},
   {path: 'order/detail/:userId', component: OrderComponent},
   {path: 'order/list', component: OrderComponent},
   {path: '', redirectTo: 'product/list', pathMatch: 'full'},

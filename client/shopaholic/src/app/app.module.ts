@@ -12,6 +12,7 @@ import { OrderlineComponent } from './orderline/orderline.component';
 import { CommentComponent } from './comment/comment.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { httpInterceptorProviders } from './interceptors';
 
 
 
@@ -28,7 +29,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     LayoutModule,   
     AppRoutingModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

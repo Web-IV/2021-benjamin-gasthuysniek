@@ -47,7 +47,7 @@ namespace Webshop.Controllers
             //implement a generator for userid
             var amountOfUsers = _customerRepository.GetAll().Count;
             IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
-            User user2 = new User { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName , UserId = amountOfUsers+1};
+            User user2 = new User { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName};
             var result = await _userManager.CreateAsync(user, model.PassWord);
 
             if (result.Succeeded)

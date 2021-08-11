@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Webshop.Models.Domain;
@@ -111,7 +112,9 @@ namespace Webshop.Data
             //builder.Entity<User>().HasMany(u => u.FavoriteProducts).WithOne();
             //builder.Entity<User>().Property(u => u.UserName);
             builder.Entity<User>().HasMany(u => u.CommentList).WithOne(c => c.User);
-           
+            
+
+
             //builder.Entity<User>().Ignore(c=>c.)
 
             #endregion

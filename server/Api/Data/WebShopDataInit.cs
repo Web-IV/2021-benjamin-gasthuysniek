@@ -26,7 +26,8 @@ namespace Webshop.Data
         public async Task InititalizeData()
         {
             _dbContext.Database.EnsureDeleted();
-            if (_dbContext.Database.EnsureCreated())
+            _dbContext.Database.EnsureCreated();
+           /* if (_dbContext.Database.EnsureCreated())
             {
                 
                 Product product = new Product("Strix rog", "Laptop", 300, "Good laptop"
@@ -44,18 +45,18 @@ namespace Webshop.Data
                 OrderLine neworderline = new OrderLine() { Product = product, Quantity = 2 };
                 order.VoegContentToe(neworderline);
                 _dbContext.Order.Add(order);
-                */
+                
                 User user = new User{ Email = "gasthuys.niek@gmail.com", FirstName = "Niek", LastName = "Gasthuys" };
                 _dbContext.User.Add(user);
                 await CreateUser(user.Email, "Niek@12345");
                 _dbContext.SaveChanges();
 
-
+            
             }
             else
             {
                 throw new Exception("The database could not be created");
-            }
+            }*/
         }
        public async Task CreateUser(string email, string password)
         {

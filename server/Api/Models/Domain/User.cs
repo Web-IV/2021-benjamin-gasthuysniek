@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -13,7 +15,9 @@ namespace Webshop.Models.Domain
     public class User//, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         #region Properties
-        
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserId { get; set; }
         private string _firstName;
         public string FirstName

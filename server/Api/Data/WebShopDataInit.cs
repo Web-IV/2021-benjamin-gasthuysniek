@@ -27,7 +27,7 @@ namespace Webshop.Data
         {
             _dbContext.Database.EnsureDeleted();
             _dbContext.Database.EnsureCreated();
-           /* if (_dbContext.Database.EnsureCreated())
+            if (_dbContext.Database.EnsureCreated())
             {
                 
                 Product product = new Product("Strix rog", "Laptop", 300, "Good laptop"
@@ -35,20 +35,23 @@ namespace Webshop.Data
                     );
                 //{ ProductClass = productClass};//  public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this();
                 _dbContext.Product.Add(product);
-                //_dbContext.SaveChanges();
+                _dbContext.SaveChanges();
                 /*User customer2 = new User { Email = "niek.gasthuys.y9891@student.hogent.be", FirstName = "Niek", LastName = "Gasthuys" };
                 User customer = new User() { Email = "webshop@gmail.com", FirstName = "Niekje", LastName = "Gasthuyst" };
                 _dbContext.User.Add(customer);
-                _dbContext.Add(customer2);
-                customer.AddFavoriteProduct(_dbContext.Product.First());
-                Order order = new Order() { User=customer};
-                OrderLine neworderline = new OrderLine() { Product = product, Quantity = 2 };
-                order.VoegContentToe(neworderline);
-                _dbContext.Order.Add(order);
+                _dbContext.Add(customer2);*/
+                //customer.AddFavoriteProduct(_dbContext.Product.First());
+                //Order order = new Order() { User=customer};
+                //OrderLine neworderline = new OrderLine() { Product = product, Quantity = 2 };
+                //order.VoegContentToe(neworderline);
+                //_dbContext.Order.Add(order);
                 
-                User user = new User{ Email = "gasthuys.niek@gmail.com", FirstName = "Niek", LastName = "Gasthuys" };
-                _dbContext.User.Add(user);
-                await CreateUser(user.Email, "Niek@12345");
+                //User user = new User{ Email = "gasthuys.niek@gmail.com", FirstName = "Niek", LastName = "Gasthuys" };
+                User customer = new User { Email = "amber.vlerick@gmail.com", FirstName = "Amber", LastName = "Vlerick" };
+                //_dbContext.User.Add(user);
+                _dbContext.User.Add(customer);
+               // await CreateUser(user.Email, "Niek@12345");
+                await CreateUser(customer.Email, "Amber@12345");
                 _dbContext.SaveChanges();
 
             
@@ -56,7 +59,7 @@ namespace Webshop.Data
             else
             {
                 throw new Exception("The database could not be created");
-            }*/
+            }
         }
        public async Task CreateUser(string email, string password)
         {

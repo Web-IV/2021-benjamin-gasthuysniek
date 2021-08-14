@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Webshop.Data;
 using Webshop.Data.Interfaces;
 using Webshop.DTOs;
 using Webshop.Models.Domain;
@@ -23,17 +24,19 @@ namespace Webshop.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserRepository _customerRepository;
         private readonly IConfiguration _config;
+        private readonly ApplicationDbContext _dbContext;
 
         public AccountController(
           SignInManager<IdentityUser> signInManager,
           UserManager<IdentityUser> userManager,
           IUserRepository customerRepository,
-          IConfiguration config)
+          IConfiguration config, 
+          ApplicationDbContext dbContext)
         {
             _signInManager = signInManager;
-            _userManager = userManager;
-            _customerRepository = customerRepository;
+            _userManager = userManager;            
             _config = config;
+            _dbContext = dbContext;
         }
         /// <summary>
         /// Register a user
@@ -49,11 +52,13 @@ namespace Webshop.Controllers
             IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
             User user2 = new User { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName};
             var result = await _userManager.CreateAsync(user, model.PassWord);
-
+            
             if (result.Succeeded)
             {
-                _customerRepository.Add(user2);
-                _customerRepository.SaveChanges();
+             /*  _customerRepository.Add(user2);
+                _customerRepository.SaveChanges();*/
+                _dbContext.User.Add(user2);
+                _dbContext.SaveChanges();
                 string token = GetToken(user);
                 return Created("", token);
             }

@@ -38,6 +38,7 @@ namespace Webshop.Controllers
             _userManager = userManager;
             _config = config;
             _dbContext = dbContext;
+            _customerRepository = customerRepository;
         }
         /// <summary>
         /// Register a user
@@ -52,14 +53,17 @@ namespace Webshop.Controllers
 
 
             IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
-
+            User customer = new User { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
             var result = await _userManager.CreateAsync(user, model.PassWord);
            
             if (result.Succeeded)
             {
-                User user2 = new User { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
-                _customerRepository.Add(user2);
-                   _customerRepository.SaveChanges();
+              
+                _customerRepository.Add(customer);
+                _customerRepository.SaveChanges();
+                string token = GetToken(user);
+                return Created("", token);
+                _customerRepository.SaveChanges();
                 /* _dbContext.User.Add(user2);
                  _dbContext.SaveChanges();*/
                 Console.WriteLine("helllllooooo");
@@ -69,18 +73,18 @@ namespace Webshop.Controllers
             /*   string token = GetToken(user);
                return Created("", token);*/
            }
-          /* using (var transaction = _dbContext.Database.BeginTransaction())
-           {
-               var userid = _customerRepository.GetAll().Count + 1;
-               var sqlstring = "SET IDENTITY_INSERT [Webshop].[dbo].[User] ON; INSERT INTO[Webshop].[dbo].[User](UserId, Email, FirstName, LastName) VALUES(" + userid + ",'" + model.Email + "','" + model.FirstName + "','" + model.LastName + "');";
-               User user2 = new User { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
-               await _dbContext.Database.ExecuteSqlRawAsync(sqlstring);
-               transaction.Commit();
-       */
+            /* using (var transaction = _dbContext.Database.BeginTransaction())
+             {
+                 var userid = _customerRepository.GetAll().Count + 1;
+                 var sqlstring = "SET IDENTITY_INSERT [Webshop].[dbo].[User] ON; INSERT INTO[Webshop].[dbo].[User](UserId, Email, FirstName, LastName) VALUES(" + userid + ",'" + model.Email + "','" + model.FirstName + "','" + model.LastName + "');";
+                 User user2 = new User { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+                 await _dbContext.Database.ExecuteSqlRawAsync(sqlstring);
+                 transaction.Commit();
+         */
             //}
 
             //return BadRequest(result);
-            return Ok();
+            return BadRequest();
     
            
         }

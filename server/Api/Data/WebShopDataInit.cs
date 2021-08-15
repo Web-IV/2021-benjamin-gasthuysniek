@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -26,42 +27,40 @@ namespace Webshop.Data
         public async Task InititalizeData()
         {
             _dbContext.Database.EnsureDeleted();
-            _dbContext.Database.EnsureCreated();
+
             if (_dbContext.Database.EnsureCreated())
             {
-                
-                Product product = new Product("Strix rog", "Laptop", 300, "Good laptop"
-                    // ,1
-                    );
-                //{ ProductClass = productClass};//  public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this();
-                _dbContext.Product.Add(product);
-                _dbContext.SaveChanges();
-                /*User customer2 = new User { Email = "niek.gasthuys.y9891@student.hogent.be", FirstName = "Niek", LastName = "Gasthuys" };
-                User customer = new User() { Email = "webshop@gmail.com", FirstName = "Niekje", LastName = "Gasthuyst" };
-                _dbContext.User.Add(customer);
-                _dbContext.Add(customer2);*/
-                //customer.AddFavoriteProduct(_dbContext.Product.First());
-                //Order order = new Order() { User=customer};
-                //OrderLine neworderline = new OrderLine() { Product = product, Quantity = 2 };
-                //order.VoegContentToe(neworderline);
-                //_dbContext.Order.Add(order);
-                
-                //User user = new User{ Email = "gasthuys.niek@gmail.com", FirstName = "Niek", LastName = "Gasthuys" };
-                User customer = new User { Email = "amber.vlerick@gmail.com", FirstName = "Amber", LastName = "Vlerick" };
-                //_dbContext.User.Add(user);
-                _dbContext.User.Add(customer);
-               // await CreateUser(user.Email, "Niek@12345");
-                await CreateUser(customer.Email, "Amber@12345");
-                _dbContext.SaveChanges();
+             /*   using (var transaction = _dbContext.Database.BeginTransaction())
+                {
+                    await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [Webshop].[dbo].[User] ON; INSERT INTO[Webshop].[dbo].[User](UserId, Email, FirstName, LastName) VALUES(2, 'niek.gasthuys2@gmail.com', 'Niek', 'Gasthuys'");
 
-            
+                    transaction.Commit();
+                }*/
+                    Product product = new Product("Strix rog", "Laptop", 300, "Good laptop"
+                        // ,1
+                        );
+                    //{ ProductClass = productClass};//  public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this();
+                    _dbContext.Product.Add(product);
+
+                    User customer = new User { Email = "amber.vlerick@gmail.com", FirstName = "Amber", LastName = "Vlerick" };
+
+                    _dbContext.User.Add(customer);
+                    // await CreateUser(user.Email, "Niek@12345");
+                    await CreateUser(customer.Email, "Amber@12345");
+
+                    User customer2 = new User { Email = "niek.gasthuys.y9891@student.hogent.be", FirstName = "Niek", LastName = "Gasthuys" };
+                    _dbContext.User.Add(customer2);
+                    await CreateUser(customer2.Email, "Nieker@12345");
+                    _dbContext.SaveChanges();
+
+                
             }
             else
             {
                 throw new Exception("The database could not be created");
             }
         }
-       public async Task CreateUser(string email, string password)
+       private async Task CreateUser(string email, string password)
         {
           
             var user = new IdentityUser { UserName = email, Email=email} ;// { Email = email, UserName = firstname + lastname ,FirstName = firstname, LastName=lastname};

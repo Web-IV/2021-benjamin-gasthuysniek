@@ -16,8 +16,6 @@ namespace Webshop.Models.Domain
     {
         #region Properties
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserId { get; set; }
         private string _firstName;
         public string FirstName

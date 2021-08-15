@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Webshop.Data;
@@ -30,11 +31,11 @@ namespace Webshop.Controllers
           SignInManager<IdentityUser> signInManager,
           UserManager<IdentityUser> userManager,
           IUserRepository customerRepository,
-          IConfiguration config, 
+          IConfiguration config,
           ApplicationDbContext dbContext)
         {
             _signInManager = signInManager;
-            _userManager = userManager;            
+            _userManager = userManager;
             _config = config;
             _dbContext = dbContext;
         }
@@ -48,21 +49,40 @@ namespace Webshop.Controllers
         public async Task<ActionResult<String>> Register(RegisterDTO model)
         {
             //implement a generator for userid
-            var amountOfUsers = _customerRepository.GetAll().Count;
+
+
             IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
-            User user2 = new User { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName};
+
             var result = await _userManager.CreateAsync(user, model.PassWord);
-            
+           
             if (result.Succeeded)
             {
-             /*  _customerRepository.Add(user2);
-                _customerRepository.SaveChanges();*/
-                _dbContext.User.Add(user2);
-                _dbContext.SaveChanges();
-                string token = GetToken(user);
-                return Created("", token);
-            }
-            return BadRequest(result);
+                User user2 = new User { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+                _customerRepository.Add(user2);
+                   _customerRepository.SaveChanges();
+                /* _dbContext.User.Add(user2);
+                 _dbContext.SaveChanges();*/
+                Console.WriteLine("helllllooooo");
+
+            /* await _dbContext.Database.ExecuteSqlRawAsync(sqlstring);
+             transaction.Commit();*/
+            /*   string token = GetToken(user);
+               return Created("", token);*/
+           }
+          /* using (var transaction = _dbContext.Database.BeginTransaction())
+           {
+               var userid = _customerRepository.GetAll().Count + 1;
+               var sqlstring = "SET IDENTITY_INSERT [Webshop].[dbo].[User] ON; INSERT INTO[Webshop].[dbo].[User](UserId, Email, FirstName, LastName) VALUES(" + userid + ",'" + model.Email + "','" + model.FirstName + "','" + model.LastName + "');";
+               User user2 = new User { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+               await _dbContext.Database.ExecuteSqlRawAsync(sqlstring);
+               transaction.Commit();
+       */
+            //}
+
+            //return BadRequest(result);
+            return Ok();
+    
+           
         }
         /// <summary>
         /// Login

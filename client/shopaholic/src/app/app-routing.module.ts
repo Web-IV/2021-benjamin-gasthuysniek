@@ -15,7 +15,7 @@ const appRoutes : Routes = [
   component: AddProductComponent},
   {path: 'order/detail/:userId', component: OrderComponent},
   {path: 'order/list', component: OrderComponent},
-  {path: '', redirectTo: 'product/list', pathMatch: 'full'},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
 

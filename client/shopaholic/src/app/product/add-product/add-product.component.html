@@ -5,17 +5,28 @@
       <mat-form-field>
         <input matInput aria-label="productClass" placeholder="productClass" type="text"
           formControlName="productClass" #spy/>
+      </mat-form-field>
+      <mat-form-field>
         <input matInput aria-label="productName" placeholder="productName" type="text" formControlName="productName" />
+      </mat-form-field>
+      <mat-form-field>
         <input matInput aria-label="unitPrice" placeholder="unitPrice" type="number" formControlName="unitPrice" />
+      </mat-form-field>
+      <mat-form-field>
         <input matInput aria-label="availability" placeholder="availability" type="number" formControlName="availability" />
-        <input matInput aria-label="description" placeholder="description" type="text" formControlName="description" />              
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput aria-label="description" placeholder="description" type="text" formControlName="description" />    
+      </mat-form-field>
+      <mat-form-field>       
         <input matInput aria-label="userId" placeholder="userId" type="number" formControlName="userId" />
+      </mat-form-field>   
       <mat-error 
       *ngIf="product.get('productName')['errors']?.required && product.get('productName').touched">
       {{ getErrorMessage(product.get('productName')['errors']) }}
     </mat-error>
       
-      </mat-form-field>
+
       <button type='submit' mat-raised-button [disabled]='!product.valid'>
         <!-- (click)="addProduct(newproductClass,newproductname,newproductUnitPrice,newproductAvailability,newproductDescription,newproductUserId)"
       mat-raised-button>
@@ -31,6 +42,3 @@
   got an error while adding the product: {{ errorMessage }}
 </mat-card>
 <!-- dumping the formgroup -->
-REMOVE
-{{product.get('productName')['errors'] | json}}
-REMOVE TILL HERE

@@ -1,15 +1,18 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
+
+  <mat-sidenav   #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    
+  <div *ngIf="UserLoggedIn | async as User">
     <mat-nav-list>
       <a mat-list-item [routerLink]="['product/list']">Products</a>
       <a mat-list-item [routerLink]="['product/add']">Add product</a>   
       <a mat-list-item [routerLink]="['order/list']">Oders</a>
     </mat-nav-list>
+  </div>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button

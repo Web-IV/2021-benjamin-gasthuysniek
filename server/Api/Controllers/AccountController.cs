@@ -115,7 +115,7 @@ namespace Webshop.Controllers
         {
             // Create the token
             var claims = new[]
-            {
+            { 
               new Claim(JwtRegisteredClaimNames.Sub, user.Email),
               new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
             };

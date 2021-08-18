@@ -12,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
-
 @NgModule({
 declarations: [
 ProductComponent,
@@ -23,7 +22,8 @@ ProductListComponent,
 ProductFilterPipe
 ],
 imports: [
-CommonModule, MaterialModule,HttpClientModule, ReactiveFormsModule
+CommonModule, MaterialModule,HttpClientModule, ReactiveFormsModule,
+
 ],
 exports: [ProductListComponent,AddProductComponent]
 })

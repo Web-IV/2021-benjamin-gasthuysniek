@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthenticationService } from '../user/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-nav',
@@ -11,6 +12,8 @@ import { AuthenticationService } from '../user/authentication.service';
 })
 export class MainNavComponent {
  public UserLoggedIn: any;
+ 
+ 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -18,10 +21,17 @@ export class MainNavComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-    private authService: AuthenticationService) {
+    private authService: AuthenticationService,
+    private _router: Router) {
    
      this.UserLoggedIn =  this.authService.user$;
      console.log(this.UserLoggedIn);
   }
-
+  logout() {
+    this.authService.logout();
+  }
+  login() {
+    console.log('login');
+    this._router.navigate(['/login']);
+  }
 }

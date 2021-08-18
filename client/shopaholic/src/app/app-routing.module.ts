@@ -13,6 +13,7 @@ const appRoutes : Routes = [
   {path: 'product/add', 
   canActivate: [AuthGuard],
   component: AddProductComponent},
+  
   {path: 'order/detail/:userId', component: OrderComponent},
   {path: 'order/list', component: OrderComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'},

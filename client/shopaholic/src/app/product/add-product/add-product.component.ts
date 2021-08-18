@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProductDataService } from '../product-data.service';
 
 import { Product } from '../product.model';
@@ -32,7 +33,8 @@ export class AddProductComponent implements OnInit {
   public product: FormGroup;
   public errorMessage : string = '';
   constructor(private fb: FormBuilder,
-    private _productDataService: ProductDataService   
+    private _productDataService: ProductDataService  ,
+   private _router: Router
     ) { }
 
   ngOnInit() {
@@ -62,6 +64,8 @@ export class AddProductComponent implements OnInit {
     this._productDataService.addNewProduct(
       new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.userId)
     );
+    this._router.navigate(['/product/list']);
+    
   }
 
   //the addproduct event is called when the button in the html of add product is clicked
@@ -101,5 +105,8 @@ export class AddProductComponent implements OnInit {
       return `if productname is set you need to set the productclass`
     }
   }
+  /*showProductList(){
+    this._router.navigate(['/product/list']);
+  }*/
 
   }

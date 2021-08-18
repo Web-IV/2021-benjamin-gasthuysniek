@@ -25,9 +25,10 @@
       *ngIf="product.get('productName')['errors']?.required && product.get('productName').touched">
       {{ getErrorMessage(product.get('productName')['errors']) }}
     </mat-error>
-      
+    
 
-      <button type='submit' mat-raised-button [disabled]='!product.valid'>
+      <button type='submit'  mat-raised-button [disabled]='!product.valid' >
+
         <!-- (click)="addProduct(newproductClass,newproductname,newproductUnitPrice,newproductAvailability,newproductDescription,newproductUserId)"
       mat-raised-button>
       add product -->

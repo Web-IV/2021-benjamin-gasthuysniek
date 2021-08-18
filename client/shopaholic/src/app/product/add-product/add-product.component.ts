@@ -64,6 +64,7 @@ export class AddProductComponent implements OnInit {
     this._productDataService.addNewProduct(
       new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.userId)
     );
+    
     this._router.navigate(['/product/list']);
     
   }

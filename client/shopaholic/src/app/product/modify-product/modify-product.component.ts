@@ -61,8 +61,8 @@ export class ModifyProductComponent implements OnInit {
       new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.userId)
     );*/
    this.newestProduct =   this._productDataService.productToModify;
-   this.newestProduct.setProductClass(this.product.value.productclass);
-   this.newestProduct.setProductName(this.product.value.productname);
+   this.newestProduct.setProductClass(this.product.value.productClass);
+   this.newestProduct.setProductName(this.product.value.productName);
    this.newestProduct.setUnitPrice(this.product.value.unitPrice);
    this.newestProduct.setAvailability(this.product.value.availability);
    this.newestProduct.setDescription(this.product.value.description);
@@ -73,7 +73,7 @@ export class ModifyProductComponent implements OnInit {
       )
 
       console.log("TESSSST");
-   console.log(this.newestProduct.productId);
+   console.log(this.newestProduct);
     this._router.navigate(['/product/list']);
     
   }

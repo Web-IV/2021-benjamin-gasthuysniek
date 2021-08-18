@@ -10,6 +10,7 @@ import { Product } from './product.model';
   providedIn: 'root'
 })
 export class ProductDataService {
+  private _reloadProducts$ = new BehaviorSubject<boolean>(true);
   private _products$ = new BehaviorSubject<Product[]>([]);
   private _products : Product[];
 
@@ -46,7 +47,23 @@ this.products$.subscribe((products: Product[])=> {
     //observables are cold so nothing happens unless someone subscribes to them
     .subscribe((prod: Product) =>{
       this._products = [...this._products, prod];
+    }),
+    tap((prod: Product) => {
+      this._reloadProducts$.next(true);
     });
+  }
+
+  modifyProduct(product: Product)
+  {
+
+  }
+  deleteProduct(product: Product) {
+    return this.http
+      .delete(`${environment.apiUrl}/products/${product.id}`)
+      .pipe(tap(console.log), catchError(this.handleError))
+      .subscribe(() => {
+        this._reloadProducts$.next(true);
+      });
   }
   handleError(err: any): Observable<never>{
     let errorMessage: string;

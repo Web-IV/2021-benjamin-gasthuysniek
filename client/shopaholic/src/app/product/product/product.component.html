@@ -2,6 +2,7 @@
   <mat-card-header>
     <!-- https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/ -->
       <mat-card-title><mat-icon>add_shopping_cart</mat-icon>{{product.productClass}}</mat-card-title>
+      <mat-card-subtitle>{{product.id}}</mat-card-subtitle>
       <mat-card-subtitle>{{product.productName}}</mat-card-subtitle>
       <mat-card-subtitle>{{product.unitPrice}}</mat-card-subtitle>
       <mat-card-subtitle>{{product.availability}}</mat-card-subtitle>
@@ -15,5 +16,8 @@
         <app-product-detail [category]="productDetail"></app-product-detail>
       </mat-list-item>
     </mat-list> -->
+    <button (click)="deleteProduct()">
+      <mat-icon>delete_forever</mat-icon>
+    </button>
   </mat-card-content>
 </mat-card>

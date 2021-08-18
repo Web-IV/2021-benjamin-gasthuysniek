@@ -13,8 +13,11 @@ export class ProductDataService {
   private _reloadProducts$ = new BehaviorSubject<boolean>(true);
   private _products$ = new BehaviorSubject<Product[]>([]);
   private _products : Product[];
+  public _productToModify: Product;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient
+    ) {
+  
 this.products$.subscribe((products: Product[])=> {
   this._products = products;
   this._products$.next(this._products);
@@ -25,7 +28,12 @@ this.products$.subscribe((products: Product[])=> {
    get allProducts$(): Observable<Product[]>{
      return this._products$;
    }
-
+  get productToModify(): Product{
+    return this._productToModify;
+  }
+  setProductToModify(product: Product){
+    this._productToModify = product;
+  }
 
   get products$(): Observable< Product[] > {
     return this.http.get(`${environment.apiUrl}/products/`).pipe(
@@ -55,7 +63,16 @@ this.products$.subscribe((products: Product[])=> {
 
   modifyProduct(product: Product)
   {
-
+    return this.http
+    .put(`${environment.apiUrl}/products/${product.productId}`, product.toJSON())
+    .pipe(catchError(this.handleError), map(Product.fromJSON))
+    //observables are cold so nothing happens unless someone subscribes to them
+    .subscribe((prod: Product) =>{
+      this._products = [...this._products, prod];
+    }),
+    tap((prod: Product) => {
+      this._reloadProducts$.next(true);
+    });
   }
   deleteProduct(product: Product) {
     return this.http

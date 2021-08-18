@@ -34,6 +34,30 @@ export class Product {
     get productId(): number {
       return this._productId;
     }
+    setProductName(productName: string)
+    {
+      this._productName = productName;
+    }
+    setProductClass(productClass: string)
+    {
+      this._productClass = productClass;
+    }
+    setUnitPrice(unitPrice: number)
+    {
+      this._unitPrice = unitPrice;
+    }
+    setAvailability(availability: number)
+    {
+      this._availability = availability;
+    }
+    setDescription(description: string)
+    {
+      this._description = description;
+    }
+    setUserId(userId: number)
+    {
+      this._userId = userId;
+    }
     toJSON(): ProductJson {
       return <ProductJson>{       
         productClass: this.productClass,

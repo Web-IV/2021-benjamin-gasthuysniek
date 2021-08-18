@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AddProductComponent } from './product/add-product/add-product.component';
 import { OrderComponent } from './order/order.component';
 import { AuthGuard } from './user/auth.guard';
+import { ModifyProductComponent } from './product/modify-product/modify-product.component';
 
 
 const appRoutes : Routes = [
@@ -13,7 +14,7 @@ const appRoutes : Routes = [
   {path: 'product/add', 
   canActivate: [AuthGuard],
   component: AddProductComponent},
-  
+  {path: 'product/modify/:id', component: ModifyProductComponent},
   {path: 'order/detail/:userId', component: OrderComponent},
   {path: 'order/list', component: OrderComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'},

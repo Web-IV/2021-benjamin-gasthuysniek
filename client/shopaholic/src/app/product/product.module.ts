@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductResolver } from './ProductResolver';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ModifyProductComponent } from './modify-product/modify-product.component';
 
 const routes: Routes = [
     {path: 'products/:id',
@@ -27,7 +28,8 @@ AddCommentComponent,
 FavorietenComponent,
 ProductListComponent,
 ProductFilterPipe,
-ProductDetailComponent
+ProductDetailComponent,
+ModifyProductComponent
 ],
 imports: [
 CommonModule, MaterialModule,HttpClientModule, ReactiveFormsModule,

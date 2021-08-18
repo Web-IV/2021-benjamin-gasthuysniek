@@ -10,6 +10,7 @@ import { Product } from '../product.model';
 })
 export class ProductComponent implements OnInit {
    @Input() public product: Product;
+  
 
   constructor(private _productDataService: ProductDataService) {}
  
@@ -17,6 +18,9 @@ export class ProductComponent implements OnInit {
 
   } 
   deleteProduct() {
+    console.log(this.product);
+    
     this._productDataService.deleteProduct(this.product);
+    //window.location.reload();
   }
 }

@@ -10,8 +10,15 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFilterPipe } from './product-filter.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductResolver } from './ProductResolver';
+import { RouterModule, Routes } from '@angular/router';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
-
+const routes: Routes = [
+    {path: 'products/:id',
+component: ProductComponent,
+resolve: {product: ProductResolver}}
+];
 @NgModule({
 declarations: [
 ProductComponent,
@@ -19,11 +26,12 @@ AddProductComponent,
 AddCommentComponent,
 FavorietenComponent,
 ProductListComponent,
-ProductFilterPipe
+ProductFilterPipe,
+ProductDetailComponent
 ],
 imports: [
 CommonModule, MaterialModule,HttpClientModule, ReactiveFormsModule,
-
+RouterModule.forChild(routes)
 ],
 exports: [ProductListComponent,AddProductComponent]
 })

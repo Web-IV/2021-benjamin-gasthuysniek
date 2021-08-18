@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, pipe, throwError } from 'rxjs';
-import { map, tap, delay, catchError } from 'rxjs/operators';
+import { map, tap, delay, catchError, shareReplay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { PRODUCTS } from './mock-product';
 import { Product } from './product.model';
@@ -29,7 +29,7 @@ this.products$.subscribe((products: Product[])=> {
 
   get products$(): Observable< Product[] > {
     return this.http.get(`${environment.apiUrl}/products/`).pipe(
-      
+      shareReplay(1),
         catchError(this.handleError),
         map((list: any[]): Product[] => list.map(Product.fromJSON))
       );
@@ -38,7 +38,7 @@ this.products$.subscribe((products: Product[])=> {
     return this.http.get(`${environment.apiUrl}/products/${id}`)
     .pipe(catchError(this.handleError),map(Product.fromJSON));
   }
-  
+ 
   addNewProduct(product: Product)
   {
     return this.http
@@ -59,7 +59,7 @@ this.products$.subscribe((products: Product[])=> {
   }
   deleteProduct(product: Product) {
     return this.http
-      .delete(`${environment.apiUrl}/products/${product.id}`)
+      .delete(`${environment.apiUrl}/products/${product.productId}`)
       .pipe(tap(console.log), catchError(this.handleError))
       .subscribe(() => {
         this._reloadProducts$.next(true);

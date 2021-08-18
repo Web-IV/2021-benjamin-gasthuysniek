@@ -1,5 +1,5 @@
 interface ProductJson{
-  id: number;
+  productId: number;
   //productId: number
   productClass: string;
   productName: string;
@@ -12,7 +12,7 @@ interface ProductJson{
 
 
 export class Product {
-  private _id: number;
+  private _productId: number;
     //private _productId: number;
     constructor(    
       private _productClass: string,
@@ -28,11 +28,11 @@ export class Product {
 
     static fromJSON(json: ProductJson): Product {
       const prod = new Product(json.productClass, json.productName, json.unitPrice, json.availability, json.description, json.userId);
-      prod._id = json.id;
+      prod._productId = json.productId;
       return prod;
     }
-    get id(): number {
-      return this._id;
+    get productId(): number {
+      return this._productId;
     }
     toJSON(): ProductJson {
       return <ProductJson>{       

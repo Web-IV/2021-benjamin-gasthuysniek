@@ -56,4 +56,5 @@ export class ProductListComponent implements OnInit {
   {
     this._productDataService.addNewProduct(product);
   }
+
 }

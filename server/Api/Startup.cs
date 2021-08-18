@@ -167,7 +167,7 @@ namespace Web4OwnApi
             {
                 endpoints.MapControllers();
             });
-           dataInit.InititalizeData().Wait();
+          // dataInit.InititalizeData().Wait();
            
         }
     }

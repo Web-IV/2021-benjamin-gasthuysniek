@@ -7,33 +7,36 @@ interface ProductJson{
   availability: number;
   description: string;
   inStock: boolean;
-  userId: number;
+  
 }
 
 
 export class Product {
   private _productId: number;
     //private _productId: number;
-    constructor(    
+    constructor(        
       private _productClass: string,
       private _productName: string,
       private _unitPrice: number, //ts equivalent of doubles and ints
       private _availability: number,
-      private _description: string,
-     
-      private _userId: number
+      private _description: string,   
+
+      private _inStock: boolean,
       //private _dateAdded = new Date()
 
     ) {}
 
     static fromJSON(json: ProductJson): Product {
-      const prod = new Product(json.productClass, json.productName, json.unitPrice, json.availability, json.description, json.userId);
+     // console.log("printing fromjson");
+     // console.log(json);
+      const prod = new Product(json.productClass, json.productName, json.unitPrice, json.availability, json.description, json.inStock);
+      //private _productId: number;
       prod._productId = json.productId;
+     console.log("printing fromjson");
+      console.log(prod);
       return prod;
     }
-    get productId(): number {
-      return this._productId;
-    }
+   
     setProductName(productName: string)
     {
       this._productName = productName;
@@ -54,18 +57,25 @@ export class Product {
     {
       this._description = description;
     }
-    setUserId(userId: number)
+    setInStock(instock: boolean)
     {
-      this._userId = userId;
+      this._inStock = instock;
     }
+    setProductId(productId : number)
+    {
+      this._productId = productId;
+    }
+
     toJSON(): ProductJson {
-      return <ProductJson>{       
+     // console.log("printing toJson");
+      return <ProductJson>{  
+        productId: this.productId,     
         productClass: this.productClass,
         productName: this.productName,
         unitPrice: this.unitPrice,
         availability: this.availability,
         description: this.description,        
-        userId: this.userId,
+        inStock: this._inStock,
       };
     }
 
@@ -75,6 +85,10 @@ export class Product {
 
     get productClass(): string {
       return this._productClass;
+    }
+
+    get productId(): number {
+      return this._productId;
     }
 
     get productName(): string{
@@ -93,8 +107,8 @@ export class Product {
       return this._description;
     }
     
-    get userId(): number{
-      return this._userId;
+    get inStock(): boolean{
+      return this._inStock;
     }
    
     

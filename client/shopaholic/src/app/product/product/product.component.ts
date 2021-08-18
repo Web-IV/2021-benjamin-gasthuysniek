@@ -28,7 +28,13 @@ export class ProductComponent implements OnInit {
   modifyProduct()
   {
    // this._router.navigate(['/product/modify/:id']);
+   //console.log("line in modifyproduct");
+   //console.log(this.product);
    this._productDataService.setProductToModify(this.product);
    this._router.navigate([`/product/modify/${this.product.productId}`]);
+  }
+  addProductToOrder()
+  {
+    this._router.navigate([`order/list`]);
   }
 }

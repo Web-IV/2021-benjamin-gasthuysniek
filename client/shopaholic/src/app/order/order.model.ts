@@ -1,4 +1,5 @@
 interface OrderJson{
+    orderId: number;
     userId: number;
     active: boolean;
     creationDate: string;
@@ -6,7 +7,7 @@ interface OrderJson{
 }
 
 export class Order {
-    //private _orderId: number;
+    private _orderId: number;
     constructor(
     private _userId: number,
     private _active: boolean,
@@ -15,12 +16,16 @@ export class Order {
 
     ) {}
  static fromJson(json: OrderJson): Order{
-    const order = new Order(json.userId, json.active, new Date(json.creationDate), json.orderTotaal);
-    return order;
+    const order = new Order(
+      json.userId,
+       json.active, new Date(json.creationDate), json.orderTotaal);
+    order._orderId = json.orderId;
+       return order;
  }   
 
   toJSON(): OrderJson {
-    return <OrderJson>{       
+    return <OrderJson>{  
+      orderId: this.orderId,    
       userId: this.userId,
       active: this.active,
       creationDate: this.creationDate.toString(),
@@ -45,6 +50,10 @@ export class Order {
 
     get orderTotaal(): number{
         return this._orderTotaal;
+    }
+
+    get orderId(): number{
+      return this._orderId;
     }
     
   }

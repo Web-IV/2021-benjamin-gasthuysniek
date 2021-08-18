@@ -14,11 +14,14 @@ import { ProductResolver } from './ProductResolver';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ModifyProductComponent } from './modify-product/modify-product.component';
+import { OrderComponent } from '../order/order.component';
 
 const routes: Routes = [
     {path: 'products/:id',
 component: ProductComponent,
-resolve: {product: ProductResolver}}
+resolve: {product: ProductResolver}},
+{path: 'order/list',
+component: OrderComponent}
 ];
 @NgModule({
 declarations: [
@@ -33,7 +36,9 @@ ModifyProductComponent
 ],
 imports: [
 CommonModule, MaterialModule,HttpClientModule, ReactiveFormsModule,
-RouterModule.forChild(routes)
+
+RouterModule.forChild(routes),
+
 ],
 exports: [ProductListComponent,AddProductComponent]
 })

@@ -8,7 +8,7 @@ const JsonProducts = [
   availability: 5,
   description: "good laptop",
   inStock: true,
-  userId: 1,
+  
 
 },
 {
@@ -18,7 +18,7 @@ const JsonProducts = [
   availability: 5,
   description: "Newest MacBook Pro of 2021",
   inStock: true,
-  userId: 1,
+  
 }
 ]
 

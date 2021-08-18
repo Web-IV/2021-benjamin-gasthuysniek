@@ -48,7 +48,7 @@ export class ModifyProductComponent implements OnInit {
     ),
   availability: this.fb.control(0),
   description: this.fb.control('Good laptop'),  
-  userId: this.fb.control(1)
+  inStock: this.fb.control(true)
 
   },
   {validator: validateProductClassAndName}
@@ -60,20 +60,23 @@ export class ModifyProductComponent implements OnInit {
    /* this._productDataService.addNewProduct(
       new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.userId)
     );*/
-   this.newestProduct =   this._productDataService.productToModify;
-   this.newestProduct.setProductClass(this.product.value.productClass);
+ //  this.newestProduct = this._productDataService.productToModify;
+   
+ this.newestProduct =  new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.userId)
+    ;
+    this.newestProduct.setProductId(this._productDataService.productToModify.productId);
+   /*this.newestProduct.setProductClass(this.product.value.productClass);
    this.newestProduct.setProductName(this.product.value.productName);
    this.newestProduct.setUnitPrice(this.product.value.unitPrice);
    this.newestProduct.setAvailability(this.product.value.availability);
    this.newestProduct.setDescription(this.product.value.description);
-   this.newestProduct.setUserId(this.product.value.userId);
-
+   this.newestProduct.setInStock(this.product.value.inStock);
+   */
     this._productDataService.modifyProduct(
      this.newestProduct
       )
 
-      console.log("TESSSST");
-   console.log(this.newestProduct);
+    
     this._router.navigate(['/product/list']);
     
   }

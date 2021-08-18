@@ -1,13 +1,13 @@
 <mat-card>
   <mat-card-header>
     <!-- https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/ -->
-      <mat-card-title><mat-icon>add_shopping_cart</mat-icon>{{product.productClass}}</mat-card-title>
+      <mat-card-title>{{product.productName}}</mat-card-title>
       <mat-card-subtitle>{{product.productId}}</mat-card-subtitle>
-      <mat-card-subtitle>{{product.productName}}</mat-card-subtitle>
+      <mat-card-subtitle>{{product.productClass}}</mat-card-subtitle>
       <mat-card-subtitle>{{product.unitPrice}}</mat-card-subtitle>
       <mat-card-subtitle>{{product.availability}}</mat-card-subtitle>
       <mat-card-subtitle>{{product.description}}</mat-card-subtitle>      
-      <mat-card-subtitle>{{product.userId}}</mat-card-subtitle>    
+      <mat-card-subtitle>{{product.inStock}}</mat-card-subtitle>    
   </mat-card-header>
   <mat-card-content>
     <!-- <h3 mat-subheader>Different productdetails</h3>
@@ -21,6 +21,9 @@
     </button>
     <button (click)="modifyProduct()">
       <mat-icon>build_circle</mat-icon>
+    </button>
+    <button (click)="addProductToOrder()">
+      <mat-icon>add_shopping_cart</mat-icon>
     </button>
   </mat-card-content>
 </mat-card>

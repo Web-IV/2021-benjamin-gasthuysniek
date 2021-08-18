@@ -19,7 +19,7 @@
           <input matInput aria-label="description" placeholder="description" type="text" formControlName="description" />    
         </mat-form-field>
         <mat-form-field>       
-          <input matInput aria-label="userId" placeholder="userId" type="number" formControlName="userId" />
+          <input matInput aria-label="inStock" placeholder="inStock" type="boolean" formControlName="inStock" />
         </mat-form-field>   
         <mat-error 
         *ngIf="product.get('productName')['errors']?.required && product.get('productName').touched">

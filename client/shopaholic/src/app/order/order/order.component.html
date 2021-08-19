@@ -3,12 +3,33 @@
     <mat-card-header>
       <!-- https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/ -->       
        
-        <mat-card-subtitle>{{order.active}}</mat-card-subtitle>
-        <mat-card-subtitle>{{order.creationDate}}</mat-card-subtitle>
-        <mat-card-subtitle>{{order.orderTotaal}}</mat-card-subtitle>     
-         
     </mat-card-header>
+    
     <mat-card-content>
+      <div>
+        <div
+          fxLayout="row wrap"
+          fxLayout.xs="column"
+          fxLayoutGap="0.5%"
+          fxLayoutAlign="start"
+        >
+          <div
+            class="orderline"
+            *ngFor="let orderline of orderlines$"
+            fxFlex="0 0 calc(25%-0.5%)"
+            fxFlex.xs="100%"
+          >
+          <app-orderline [orderLine]="orderline" data-cy="orderLineCard"> </app-orderline>         
+            
+          </div>
+        </div>
+      </div>
+      <div>
+        <mat-card-subtitle>Ordertotaal: {{order.orderTotaal}}</mat-card-subtitle>     
+        <mat-card-subtitle>Active{{order.active}}</mat-card-subtitle>
+        <mat-card-subtitle>Creationdate{{order.creationDate}}</mat-card-subtitle>
+       
+      </div>
       <!-- <h3 mat-subheader>Different productdetails</h3>
       <mat-list>
         <mat-list-item *ngFor="let productDetail of productDetails">

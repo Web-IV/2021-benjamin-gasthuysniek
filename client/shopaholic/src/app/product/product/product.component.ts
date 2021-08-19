@@ -35,6 +35,6 @@ export class ProductComponent implements OnInit {
   }
   addProductToOrder()
   {
-    this._router.navigate([`order/list`]);
+    this._router.navigate([`order/${this.product.productId}`]);
   }
 }

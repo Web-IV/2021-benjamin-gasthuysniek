@@ -62,7 +62,8 @@ this.products$.subscribe((products: Product[])=> {
   }
 
   modifyProduct(product: Product)
-  {    
+  {   
+    console.log("printing the product we want to modify"); 
     console.log(product);
     return this.http
     .put(`${environment.apiUrl}/products/${product.productId}`, product.toJSON())

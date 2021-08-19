@@ -1,7 +1,10 @@
+import { Orderline, OrderLineJson } from "../orderline/orderline.model";
+
 interface OrderJson{
     orderId: number;
     userId: number;
     active: boolean;
+    orderLines: OrderLineJson[];
     creationDate: string;
     orderTotaal: number;
 }
@@ -11,6 +14,7 @@ export class Order {
     constructor(
     private _userId: number,
     private _active: boolean,
+    private _orderLines = new Array<Orderline>(),
     private _creationDate = new Date(),
     private _orderTotaal: number //float in db
 
@@ -18,7 +22,9 @@ export class Order {
  static fromJson(json: OrderJson): Order{
     const order = new Order(
       json.userId,
-       json.active, new Date(json.creationDate), json.orderTotaal);
+       json.active,
+       json.orderLines.map(Orderline.fromJson)
+       ,new Date(json.creationDate), json.orderTotaal);
     order._orderId = json.orderId;
        return order;
  }   
@@ -54,6 +60,10 @@ export class Order {
 
     get orderId(): number{
       return this._orderId;
+    }
+
+    get orderLines(): Orderline[]{
+      return this._orderLines;
     }
     
   }

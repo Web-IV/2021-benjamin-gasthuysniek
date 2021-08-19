@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, pipe, throwError } from 'rxjs';
 import { map, tap, delay, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Orderline } from '../orderline/orderline.model';
 import { Product } from '../product/product.model';
 import { Order } from './order.model';
 
@@ -15,6 +16,7 @@ export class OrderDataService {
   private _orders : Order[];
   private _currentOrder : Order;
   private _hasOrder : boolean;
+  private _orderLine : Orderline;
 
   constructor(private http: HttpClient) {
     this._hasOrder = false;
@@ -27,6 +29,10 @@ this.orders$.subscribe((orders: Order[])=> {
 
    setCurrentOrder(order: Order){
      this._currentOrder = order;
+   }
+
+   get orderLine(): Orderline{
+     return this._orderLine;
    }
 
   get currentOrder(): Order{
@@ -68,7 +74,14 @@ this.orders$.subscribe((orders: Order[])=> {
     });
   }
 //put request
-  addProductToOrder(product: Product){
+  addProductToOrder( orderId :number, productId : number, amount: number){
+    console.log("PRINTING THE ORDERID");
+    console.log(orderId);
+    this._orderLine = new Orderline(orderId,productId,amount);
+    console.log("printing current order");
+    console.log(this.currentOrder);
+    return this.http.put(`${environment.apiUrl}/orders/${orderId}/${amount}`,this._orderLine.toJSON())
+    .pipe(catchError(this.handleError), map(Orderline.fromJson)).subscribe(resp => console.log(resp));
     
   }
   handleError(err: any): Observable<never>{

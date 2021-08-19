@@ -6,6 +6,8 @@ export interface OrderLineJson{
     quantity: number;
 }
 
+
+
 export class Orderline{
     //private _orderId: number;
     private _product: Product;

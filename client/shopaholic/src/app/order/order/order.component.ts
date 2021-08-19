@@ -85,6 +85,7 @@ export class OrderComponent implements OnInit {
 
   confirmOrderCreation(): void{
     console.log(this.orderDataService.hasCurrentOrder);
+    console.log(this.product);
     //has no active order so a new one is created
     if(!this.orderDataService.hasCurrentOrder)
     {
@@ -92,7 +93,7 @@ export class OrderComponent implements OnInit {
       this.orderDataService.addNewOrder(this.order);
     }
     else{
-      this.orderDataService.addProductToOrder(this.product);
+      this.orderDataService.addProductToOrder(this.order.orderId,this.product.productId,this.order.orderLines.pop().quantity);
     }
   }
 

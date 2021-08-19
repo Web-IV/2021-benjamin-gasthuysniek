@@ -117,25 +117,54 @@ namespace Webshop.Controllers
 
 
         }
-
         //PUT: api/Orders/5
         /// <summary>
         /// Adding product to current order
         /// </summary>
-        /// <param name="order">the order we want the product to be added to</param>      
-         /// <param name="id">id of the order we wabt to add the product to</param>
+        /// <param name="addProductDTO"></param>        
+        /// <param name="id">id of the order we wabt to add the product to</param>
+        /// <param name="amount">amount</param>
         [HttpPut("{id}")]
-        public ActionResult AddProductToOrder(Order order, int id)//,int orderid)
+        public ActionResult AddProductToOrder(AddProductDTO addProductDTO, int id, int amount)//,int orderid)
         {
-            if (order.Id != id)
+            if (addProductDTO.OrderId != id)
             {
                 return BadRequest();
             }
-            _orderRepo.Update(order);
-            _orderRepo.SaveChanges();
+            Order order = _orderRepo.GetById(id);
+            Product product = _productRepo.GetById(addProductDTO.ProductId);
+            OrderLine newOrderline = _orderLineRepository.GetById(id, addProductDTO.ProductId);
+            Console.WriteLine(newOrderline);
+            if(newOrderline == null)
+            {
+                Console.WriteLine("the orderid does not exist yet");
+               newOrderline = new OrderLine(order, product, amount);
+                _orderLineRepository.Add(newOrderline);
+                _orderLineRepository.SaveChanges();
+                order.VoegContentToe(newOrderline);
+                _orderRepo.Update(order);
+                _orderRepo.SaveChanges();
+                _orderLineRepository.SaveChanges();
+                return NoContent();
+            }
+            else
+            {
+                newOrderline.ProductId = addProductDTO.ProductId;
+                newOrderline.OrderId = addProductDTO.OrderId;
+                newOrderline.Quantity = amount;
+
+                _orderLineRepository.Update(newOrderline);
+                order.VoegContentToe(newOrderline);
+                _orderLineRepository.SaveChanges();
+                _orderRepo.Update(order);
+                _orderRepo.SaveChanges();
+                return NoContent();
+
+            }
+          
+           
             return NoContent();
         }
-
 
         //Delete: api/Order/id
         /// <summary>

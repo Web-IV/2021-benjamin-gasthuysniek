@@ -12,8 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  private _fetchProducts$: Observable<Product[]>// = this._productDataService.products$;
- 
+  private _fetchProducts$: Observable<Product[]>// = this._productDataService.products$; 
   public loading: boolean;
   public filterProductName: string;
   //storing the filter in an observable

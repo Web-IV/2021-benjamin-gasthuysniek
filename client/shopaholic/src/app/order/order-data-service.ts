@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, pipe, throwError } from 'rxjs';
 import { map, tap, delay, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Product } from '../product/product.model';
 import { Order } from './order.model';
 
 
@@ -13,8 +14,10 @@ export class OrderDataService {
   private _orders$ = new BehaviorSubject<Order[]>([]);
   private _orders : Order[];
   private _currentOrder : Order;
+  private _hasOrder : boolean;
 
   constructor(private http: HttpClient) {
+    this._hasOrder = false;
 this.orders$.subscribe((orders: Order[])=> {
   this._orders = orders;
   this._orders$.next(this._orders);
@@ -34,6 +37,9 @@ this.orders$.subscribe((orders: Order[])=> {
      return this._orders$;
    }
 
+   get hasCurrentOrder(): boolean{
+     return this._hasOrder;
+   }
 
   get orders$(): Observable< Order[] > {
     return this.http.get(`${environment.apiUrl}/Orders?userid=-1`).pipe(
@@ -49,14 +55,21 @@ this.orders$.subscribe((orders: Order[])=> {
   
   addNewOrder(order:Order)
   {
-    
+    console.log("line before post request in addneworder");
+    console.log(order);
     return this.http
-    .post(`${environment.apiUrl}/orders/`, order.toJSON())
+    .post(`${environment.apiUrl}/orders/`, order.toJSONAdd())
     .pipe(catchError(this.handleError), map(Order.fromJson))
     //observables are cold so nothing happens unless someone subscribes to them
     .subscribe((ord: Order) =>{
       this._orders = [...this._orders, ord];
+      this._currentOrder = ord;
+      this._hasOrder = true;
     });
+  }
+//put request
+  addProductToOrder(product: Product){
+    
   }
   handleError(err: any): Observable<never>{
     let errorMessage: string;

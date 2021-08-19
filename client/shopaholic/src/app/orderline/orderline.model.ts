@@ -1,3 +1,5 @@
+import { Product } from "../product/product.model";
+
 export interface OrderLineJson{
     orderId: number;
     productId: number;
@@ -6,7 +8,7 @@ export interface OrderLineJson{
 
 export class Orderline{
     //private _orderId: number;
-    //private _productId: number;
+    private _product: Product;
     constructor(
     private _orderId: number,
     private _productId: number,
@@ -35,6 +37,11 @@ static fromJson(json: OrderLineJson): Orderline{
     get quantity(): number{
         return this._quantity;
     }
-
+    get product(): Product{
+        return this._product;
+    }
+    setProduct(product: Product){
+        this._product = product;
+    }
     
 }

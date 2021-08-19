@@ -1,27 +1,17 @@
-<mat-card>
 
-  <mat-card-content>
+  
     <div>
-      <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
+      <!-- <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start"> -->
+      <!-- <div class="orderlinedetail" fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%"> -->
+      <mat-card>
+        <mat-card-content>
+          <!-- https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/ -->
+          <mat-card-title>{{orderLine.product.productName}}</mat-card-title>
+          <mat-card-subtitle>{{orderLine.product.productClass}}</mat-card-subtitle>
+          <mat-card-subtitle>{{orderLine.product.unitPrice}}</mat-card-subtitle>        
+          <mat-card-subtitle>{{orderLine.product.description}}</mat-card-subtitle>          
+        </mat-card-content>
+      </mat-card>
+    </div>  
 
-        <div class="orderlinedetail" fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%">
-          ORDERLINE
 
-          ProductId: {{orderLine.productId}}
-         
-          Quantity: {{orderLine.quantity}}
-
-        </div>
-      </div>
-    </div>
-
-
-
-    <!-- <h3 mat-subheader>Different productdetails</h3>
-      <mat-list>
-        <mat-list-item *ngFor="let productDetail of productDetails">
-          <app-product-detail [category]="productDetail"></app-product-detail>
-        </mat-list-item>
-      </mat-list> -->
-  </mat-card-content>
-</mat-card>

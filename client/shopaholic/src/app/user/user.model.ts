@@ -47,12 +47,12 @@ export class User {
   }
 
   get lastName(): string{
-      return this.lastName;
+      return this._lastName;
   }
   get email(): string{
-      return this.email;
+      return this._email;
   }
   get orders(): Array<Order>{
-      return this.orders;
+      return this._orders;
   }
 }

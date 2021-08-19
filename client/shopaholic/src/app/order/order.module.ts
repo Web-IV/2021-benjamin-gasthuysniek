@@ -5,6 +5,8 @@ import { MaterialModule } from '../material/material.module';
 import { OrderlineComponent } from '../orderline/orderline.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductComponent } from '../product/product/product.component';
+import { ProductModule } from '../product/product.module';
 
 
 
@@ -12,12 +14,14 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     OrderComponent,
     OrderlineComponent,
-    OrderListComponent
+    OrderListComponent,
+    
   ],
   imports: [
     CommonModule,
     MaterialModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProductModule
   ],
   exports:[OrderComponent]
 })

@@ -17,11 +17,15 @@ import { Order } from '../order.model';
 })
 export class OrderComponent implements OnInit {  
   @Input() public order: Order;
+
    private currentUser: BehaviorSubject<string>; 
-   private productId: number;  
+   private productId: number;
+   private ordersOfUser = new Array<Order>();
    private product: Product;
+   private userId : number;
    //private productId: number;
-  constructor(private route : ActivatedRoute, private orderDataService: OrderDataService, private authService: AuthenticationService, private productDataService: ProductDataService) {
+  constructor(private route : ActivatedRoute, private orderDataService: OrderDataService, private authService: AuthenticationService, private productDataService: ProductDataService,
+    ) {
       
    }
 
@@ -45,10 +49,12 @@ export class OrderComponent implements OnInit {
     return this.order.orderLines;
   }
 
+ 
+
   public settingInitialValues():void{
      //getting the current user
      this.currentUser = this.authService.user$;
-    
+   
      //passing productid for new order and creating new order
      this.route.paramMap.subscribe(pa =>
        {
@@ -76,8 +82,33 @@ export class OrderComponent implements OnInit {
        });
  
   }
-  showLoggedInUser(){
-    this.authService.currentLoggedInUser().subscribe( u => console.log(u));
+
+  confirmOrderCreation(): void{
+    console.log(this.orderDataService.hasCurrentOrder);
+    //has no active order so a new one is created
+    if(!this.orderDataService.hasCurrentOrder)
+    {
+      console.log(this.order);
+      this.orderDataService.addNewOrder(this.order);
+    }
+    else{
+      this.orderDataService.addProductToOrder(this.product);
+    }
+  }
+
+  //test method for retrieving the userid
+  getLoggedInUserId(): number{
+    this.authService.currentLoggedInUser().subscribe( u => 
+      {
+        this.userId = u.orders.pop().userId;
+        console.log(this.userId);
+     //this.ordersOfUser = u.orders;
+     //console.log("printing orders of user");
+    // console.log(this.ordersOfUser);
+      });
+      
+      return this.userId;
+    
   }
 
 }

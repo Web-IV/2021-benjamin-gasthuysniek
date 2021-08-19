@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { OrderDataService } from 'src/app/order/order-data-service';
+import { Order } from 'src/app/order/order.model';
 import { ProductDataService } from '../product-data.service';
 import { Product } from '../product.model';
 
@@ -14,6 +16,7 @@ export class ProductComponent implements OnInit {
   
 
   constructor(private _productDataService: ProductDataService,
+    private _orderDataService: OrderDataService,
     private _router: Router) {}
  
   ngOnInit(): void {
@@ -35,6 +38,17 @@ export class ProductComponent implements OnInit {
   }
   addProductToOrder()
   {
+    console.log(this._orderDataService.currentOrder);
+    /*if(!this._orderDataService.currentOrder.active)
+    {
+      this._orderDataService.addNewOrder(new Order(0,true,[],new Date(),0));
+    }*/
     this._router.navigate([`order/${this.product.productId}`]);
+
   }
+  retrieveProduct(): Product{
+    return this.product;
+  }
+
+ 
 }

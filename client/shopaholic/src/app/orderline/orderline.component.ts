@@ -11,16 +11,30 @@ import { Orderline } from './orderline.model';
 })
 export class OrderlineComponent implements OnInit {
   @Input() public orderLine: Orderline;
-  //@Input() public product: Observable<Product>;
+  @Input() public product: Product
 
   constructor(private _productdataservice: ProductDataService
-    //, private product: string
-    ) { 
-    //this.product =  this._productdataservice.getProduct$(productId);
+   
+    ) {  this.orderLine = new Orderline(0,0,0);
+    //this.orderLine.setProduct (new Product("","",0,0,"",false));
+      
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+   
+
+   this._productdataservice.getProduct$(this.orderLine.productId.toString()).subscribe(prod => {
+   
+     this.orderLine.setProduct(prod);
+     console.log("printing product from productline");
+     console.log(this.product);
+     console.log("printing orderline");
+     console.log(this.orderLine);
+    });
+ 
   }
+
+
 
   
 

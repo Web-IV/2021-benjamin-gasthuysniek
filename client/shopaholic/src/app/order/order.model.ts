@@ -8,6 +8,19 @@ interface OrderJson{
     creationDate: string;
     orderTotaal: number;
 }
+interface OrderJsonAdd{  
+  orderLines: OrderLineJson[]; 
+}
+interface OrderJsonPut{  
+  
+  /*"productClass": "string",
+  "productName": "string",
+  "unitPrice": 0,
+  "availability": 0,
+  "description": "string"
+  */
+  orderLines: OrderLineJson[]; 
+}
 
 export class Order {
     private _orderId: number;
@@ -37,6 +50,18 @@ export class Order {
       creationDate: this.creationDate.toString(),
       orderTotaal: this.orderTotaal     
     };
+    
+  }
+  toJSONAdd(): OrderJsonAdd {
+    return <OrderJsonAdd>{  
+      orderLines : this.orderLines,
+    };
+  }
+
+  toJSONPut(): OrderJsonPut{
+    return <OrderJsonPut>{
+
+    }
   }
 
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Webshop.Data.Interfaces;
+using Webshop.Data.Repositories;
 using Webshop.DTOs;
 using Webshop.Models.Domain;
 
@@ -22,13 +23,15 @@ namespace Webshop.Controllers
         private readonly IOrderRepository _orderRepo;
         private readonly IUserRepository _userRepo;
         private readonly IProductRepository _productRepo;
+        private readonly IOrderlineRepository _orderLineRepository;
 
         // private User _loggedInUser;
-        public OrdersController(IOrderRepository context, IUserRepository userRepo, IProductRepository productRepo)
+        public OrdersController(IOrderRepository context, IUserRepository userRepo, IProductRepository productRepo, IOrderlineRepository orderLineRepo)
         {
             _orderRepo = context;
             _userRepo = userRepo;
             _productRepo = productRepo;
+            _orderLineRepository = orderLineRepo;
         }
 
         // GET: api/orders
@@ -85,15 +88,15 @@ namespace Webshop.Controllers
         /// </summary>        
         [HttpPost]
         //[Route("[Action]")]
-        public ActionResult<Order> PostOrder( OrderDTO order )
+        public ActionResult<Order> PostOrder(OrderDTO order)
         {
-           
+
             User user = new User();
             User loggedInUser = _userRepo.GetByEmail(User.Identity.Name);
             user = loggedInUser;
             Console.WriteLine("The line after the post order logged in user is retrieved");
             Console.WriteLine(user);
-            Order newOrder = new Order() { User = loggedInUser};
+            Order newOrder = new Order() { User = loggedInUser };
             foreach (var ol in order.OrderLines)
             {
                 ol.Product = _productRepo.GetById(ol.ProductId);
@@ -110,56 +113,27 @@ namespace Webshop.Controllers
             //creates a response
             return CreatedAtAction
                 //string actionname
-                (nameof(GetOrder), new { id = newOrder.Id },newOrder );
-            
+                (nameof(GetOrder), new { id = newOrder.Id }, newOrder);
+
 
         }
-       
-        //Put: api/order/id/
+
+        //PUT: api/Orders/5
         /// <summary>
         /// Adding product to current order
         /// </summary>
-        /// <param name="orderid">orderid</param>
-        /// <param name="product">The product we want to add</param>
-        /// <param name="aantal">The amount of the product we want to add</param>
-        //     /// <param name="orderId">Id of the order</param>
-        //[HttpPut("{id}")]
-        [HttpPut("orderId")]
-        public ActionResult AddProductToOrder(ProductDTO product, int aantal,int orderid)//,int orderid)
+        /// <param name="order">the order we want the product to be added to</param>      
+         /// <param name="id">id of the order we wabt to add the product to</param>
+        [HttpPut("{id}")]
+        public ActionResult AddProductToOrder(Order order, int id)//,int orderid)
         {
-
-           // Order order;
-            /*try
-            {
-                User loggedInUser = _userRepo.GetByEmail(User.Identity.Name);
-                Product productToAdd = _productRepo.GetById(productId);
-                order = _orderRepo.GetById(orderid);
-                order.VoegContentToe(productToAdd, aantal);
-
-
-                _userRepo.Update(loggedInUser);
-                _userRepo.SaveChanges();
-                _orderRepo.Update(order);
-                _orderRepo.SaveChanges();
-            }
-            catch(Exception ex)
+            if (order.Id != id)
             {
                 return BadRequest();
             }
-            return Ok(order);*/
-            if(!_orderRepo.TryGetOrder(orderid, out var order))
-            {
-                return NotFound(); 
-            }
-            // public Product(string productclass, string productname,int unitPrice,string description, int? amount=null):this()
-            //ProductClass productClass = new ProductClass() { Name = product.ProductName };
-            var productToCreate = new Product(product.ProductName, product.ProductClass,product.UnitPrice, product.Description
-                //,aantal
-                );
-            OrderLine newOrderline = new OrderLine();
-            order.VoegContentToe(newOrderline);
+            _orderRepo.Update(order);
             _orderRepo.SaveChanges();
-            return CreatedAtAction("GetProduct", new { id = order.Id, productid = productToCreate.ProductId }, productToCreate);
+            return NoContent();
         }
 
 
@@ -172,17 +146,19 @@ namespace Webshop.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteOrder(int id)
         {
-            try { 
-            Order orderThatNeedsDeleting = _orderRepo.GetById(id);
-          /*  if (orderThatNeedsDeleting == null)
+            try
             {
-                return BadRequest();
-            }*/
-            
-            _orderRepo.Delete(orderThatNeedsDeleting);
-            _orderRepo.SaveChanges();
-            return NoContent();
-            }catch(Exception ex)
+                Order orderThatNeedsDeleting = _orderRepo.GetById(id);
+                /*  if (orderThatNeedsDeleting == null)
+                  {
+                      return BadRequest();
+                  }*/
+
+                _orderRepo.Delete(orderThatNeedsDeleting);
+                _orderRepo.SaveChanges();
+                return NoContent();
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }

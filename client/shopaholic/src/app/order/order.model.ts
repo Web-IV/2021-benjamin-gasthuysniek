@@ -65,5 +65,10 @@ export class Order {
     get orderLines(): Orderline[]{
       return this._orderLines;
     }
+
+    addOrderline(productid: number, quantity: number)
+    {
+      this._orderLines.push(new Orderline(0,productid, quantity));
+    }
     
   }

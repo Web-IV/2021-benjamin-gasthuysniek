@@ -12,6 +12,7 @@ import { Order } from './order.model';
 export class OrderDataService {
   private _orders$ = new BehaviorSubject<Order[]>([]);
   private _orders : Order[];
+  private _currentOrder : Order;
 
   constructor(private http: HttpClient) {
 this.orders$.subscribe((orders: Order[])=> {
@@ -21,13 +22,21 @@ this.orders$.subscribe((orders: Order[])=> {
 
    }
 
+   setCurrentOrder(order: Order){
+     this._currentOrder = order;
+   }
+
+  get currentOrder(): Order{
+    return this._currentOrder;
+  }
+
    get allOrders$(): Observable<Order[]>{
      return this._orders$;
    }
 
 
   get orders$(): Observable< Order[] > {
-    return this.http.get(`${environment.apiUrl}/orders/`).pipe(
+    return this.http.get(`${environment.apiUrl}/Orders?userid=-1`).pipe(
       
         catchError(this.handleError),
         map((list: any[]): Order[] => list.map(Order.fromJson))
@@ -40,6 +49,7 @@ this.orders$.subscribe((orders: Order[])=> {
   
   addNewOrder(order:Order)
   {
+    
     return this.http
     .post(`${environment.apiUrl}/orders/`, order.toJSON())
     .pipe(catchError(this.handleError), map(Order.fromJson))

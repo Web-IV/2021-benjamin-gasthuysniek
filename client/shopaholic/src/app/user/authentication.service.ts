@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
+import { User } from './user.model';
 
 function parseJwt(token) {
   if (!token) {
@@ -113,4 +114,23 @@ export class AuthenticationService {
       }
     );
   };
+  currentLoggedInUser(): Observable<User>{
+    //console.log("PRINTING CURRENT LOGGED IN USER");
+return  this.http.get(`${environment.apiUrl}/User`)
+.pipe(
+ map(User.fromJson)
+)
+/*.subscribe(u => 
+    {
+    console.log(u);
+    //console.log( u._tokenKey);
+    }
+    );*/
+    /*.pipe(
+      shareReplay(1),
+        catchError(this.handleError),
+        map((list: any[]): Product[] => list.map(Product.fromJSON))
+      );*/
+  }
+
 }

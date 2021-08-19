@@ -32,8 +32,8 @@ export class Product {
       const prod = new Product(json.productClass, json.productName, json.unitPrice, json.availability, json.description, json.inStock);
       //private _productId: number;
       prod._productId = json.productId;
-     console.log("printing fromjson");
-      console.log(prod);
+    /* console.log("printing fromjson");
+      console.log(prod);*/
       return prod;
     }
    

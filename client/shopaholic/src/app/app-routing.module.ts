@@ -8,6 +8,7 @@ import { AddProductComponent } from './product/add-product/add-product.component
 import { AuthGuard } from './user/auth.guard';
 import { ModifyProductComponent } from './product/modify-product/modify-product.component';
 import { OrderComponent } from './order/order/order.component';
+import { OrderListComponent } from './order/order-list/order-list.component';
 
 
 const appRoutes : Routes = [
@@ -16,8 +17,8 @@ const appRoutes : Routes = [
   canActivate: [AuthGuard],
   component: AddProductComponent},
   {path: 'product/modify/:id', component: ModifyProductComponent},
-  {path: 'orders:userId', component: OrderComponent},
-  {path: 'order/list', component: OrderComponent},
+  {path: 'orders/:id', component: OrderComponent},
+  {path: 'order/list', component: OrderListComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];

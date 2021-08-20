@@ -77,7 +77,7 @@ this.products$.subscribe((products: Product[])=> {
     console.log(this._productToModify.toJSON());
     
     return this.http.put(`${environment.apiUrl}/products/${product.productId}`, this._productToModify.toJSON())
-    .pipe(catchError(this.handleError), map(Product.fromJSON))// map(Product.fromJSON))
+    .pipe(catchError(this.handleError)) //map(Product.fromJSON))// map(Product.fromJSON))
     //observables are cold so nothing happens unless someone subscribes to them
     /*.subscribe((prod: Product) =>{
       this._products = [...this._products, prod];

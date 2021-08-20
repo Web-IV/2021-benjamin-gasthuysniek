@@ -12,13 +12,16 @@ import { OrderListComponent } from './order/order-list/order-list.component';
 
 
 const appRoutes : Routes = [
-  {path: 'product/list', component: ProductListComponent},
+  {path: 'product/list', canActivate: [AuthGuard], component: ProductListComponent}
+  ,
   {path: 'product/add', 
   canActivate: [AuthGuard],
   component: AddProductComponent},
-  {path: 'product/modify/:id', component: ModifyProductComponent},
-  {path: 'order/list/user', component: OrderListComponent},
-  {path: 'orders/id/:amount', component: OrderComponent},
+  {path: 'product/modify/:id',  canActivate: [AuthGuard],component: ModifyProductComponent},
+  {path: 'order/list/user',  canActivate: [AuthGuard],component: OrderListComponent},
+  {path: 'orders/id/:amount',
+  canActivate: [AuthGuard], component: OrderComponent},
+  
  
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}

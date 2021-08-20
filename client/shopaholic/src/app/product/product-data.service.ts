@@ -60,7 +60,7 @@ this.products$.subscribe((products: Product[])=> {
     //observables are cold so nothing happens unless someone subscribes to them
     .subscribe((prod: Product) =>{
       this._products = [...this._products, prod];
-      window.location.reload();
+    //window.location.reload();
     }),
     tap((prod: Product) => {
       this._reloadProducts$.next(true);

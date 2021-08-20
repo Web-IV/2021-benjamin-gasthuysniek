@@ -12,6 +12,8 @@ import { Order } from '../order.model';
 export class OrderListComponent implements OnInit {
   private _fetchOrders$: Observable<Order[]>
 
+
+  public booleanWaarde: boolean = true;
   public loading: boolean;
   public errorMessage: string = '';
 
@@ -27,7 +29,12 @@ export class OrderListComponent implements OnInit {
       }),
       
     );
-    this.orders$.subscribe(orders => console.log(orders));
+    this.orders$.subscribe(orders => {
+      if(orders.length === 0){
+          this.booleanWaarde = false;
+      }
+      console.log(orders)
+    });
     
   }
   

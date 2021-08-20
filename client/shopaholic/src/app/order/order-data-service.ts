@@ -102,7 +102,10 @@ this.orders$.subscribe((orders: Order[])=> {
     return this.http
     .delete(`${environment.apiUrl}/Orders/${orderid}`)
     .pipe(tap(console.log), catchError(this.handleError))
-    .subscribe();
+    .subscribe(t =>{
+       window.location.reload();
+    });
+   
   }
   handleError(err: any): Observable<never>{
     let errorMessage: string;

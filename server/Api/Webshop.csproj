@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>2e3e476e-acf0-4915-8a39-c1bc100baef6</UserSecretsId>
   </PropertyGroup>
-
+ 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>D:\hogent\web42019-2020\Webshop\BE\Webshop.xml</DocumentationFile>
     <NoWarn>1701;1702</NoWarn>

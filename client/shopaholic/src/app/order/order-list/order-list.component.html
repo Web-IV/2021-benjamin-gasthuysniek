@@ -6,35 +6,47 @@
   </mat-card>
 
 
+
   <div *ngIf="orders$ | async as orders; else loadingOrError">
     <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start">
-      <div class="order" *ngFor="let order of orders" fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>Ordertotaal: {{order.orderTotaal}}</mat-card-title>
+      <div *ngIf="booleanWaarde">
+      <mat-card>
+       
+          <mat-card-title>Ordertotaal: {{orders[0].orderTotaal}}</mat-card-title>
+          <mat-card-subtitle>Created: {{orders[0].creationDate | date}}</mat-card-subtitle>
 
-          </mat-card-header>
-          <mat-card-content>
-            <mat-card-subtitle>OrderId: {{order.id}}</mat-card-subtitle>
-            <mat-card-subtitle>Created: {{order.creationDate | date}}</mat-card-subtitle>
-          </mat-card-content>
-
-
-          <button (click)="deleteOrder(order.id)">
+          <button *ngIf="orders[0]" (click)="deleteOrder(orders[0].id)">
             <mat-icon>delete_forever</mat-icon>
           </button>
 
+
+      </mat-card>
+      <div class="order" *ngFor="let orderLine of orders[0].orderLines" fxFlex="0 0 calc(25%-0.5%)" fxFlex.xs="100%">
+        <span class="display: flex;margin-left:auto;order:2">
+        <mat-card>
+          <mat-card-content>
+            <mat-card-subtitle>OrderId: {{orderLine.orderId}}</mat-card-subtitle>
+            <mat-card-subtitle>ProductId: {{orderLine.productId}}</mat-card-subtitle>
+            <mat-card-subtitle>Quantity: {{orderLine.quantity}}</mat-card-subtitle>
+                    
+          </mat-card-content>
+     
+
+
+
         </mat-card>
+      </span>
       </div>
     </div>
   </div>
+</div>
 
 
 
-  <ng-template #loadingOrError>
-    <span *ngIf="errorMessage; else loading"></span>
-    <ng-template #loading>
-      <mat-spinner></mat-spinner>
-    </ng-template>
+<ng-template #loadingOrError>
+  <span *ngIf="errorMessage; else loading"></span>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
   </ng-template>
+</ng-template>
 </div>

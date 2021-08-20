@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ProductListComponent implements OnInit {
   private _fetchProducts$: Observable<Product[]>// = this._productDataService.products$; 
+
   public loading: boolean;
 
   public filterProductName: string;
@@ -37,22 +38,14 @@ export class ProductListComponent implements OnInit {
   }
  
   ngOnInit(): void {
-    this._fetchProducts$ = this._productDataService.allProducts$.pipe(
-      catchError(err => {
-        this.errorMessage = err;
-        this.loading = true;
-        return EMPTY;
-      })
-      
-    );
-    //this.reloadCurrentRoute();
-    
+   this._fetchProducts$ = this._productDataService.getProducts$();
   }
   applyFilter(filter:string)
   {
     this.filterProductName = filter;
   }
-  get products$(): Observable<Product[]>{
+
+  get products$():Observable<Product[]>{
     return this._fetchProducts$;
   }
   addNewProduct(product: Product)

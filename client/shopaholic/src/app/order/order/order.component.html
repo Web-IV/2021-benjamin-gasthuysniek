@@ -16,12 +16,14 @@
             fxFlex.xs="100%"
           >
           <app-orderline [orderLine]="orderline" data-cy="orderLineCard"> </app-orderline>         
-            
-          </div>
           
+          </div>
+        <div>
           <button (click)="confirmOrderCreation()" mat-flat-button>
-            Are u sure u want to add the product to your order?<mat-icon>check</mat-icon>
+            Add Product To Basket<mat-icon>check</mat-icon>
           </button>
+          </div>
+        
         </div>
       </div>
 
@@ -34,15 +36,5 @@
       </mat-list> -->
     </mat-card-content>    
   </mat-card>
-  <mat-card>
-    <mat-card-content>
-      <div>
-     
-        <mat-card-subtitle>Ordertotaal: {{order.orderTotaal}}</mat-card-subtitle>    
-        
-        <mat-card-subtitle>Creationdate: {{order.creationDate | date}}</mat-card-subtitle>
-       
-      </div>
-    </mat-card-content>
-  </mat-card>
+  
   

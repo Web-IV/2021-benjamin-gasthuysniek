@@ -8,7 +8,7 @@
     <mat-nav-list>
       <a mat-list-item [routerLink]="['product/list']">Products</a>
       <a mat-list-item [routerLink]="['product/add']">Add product</a>   
-      <a mat-list-item [routerLink]="['order/list/user']">Orders</a>
+      <a mat-list-item [routerLink]="['order/list/user']">Order</a>
     </mat-nav-list>
   </div>
   </mat-sidenav>
@@ -32,8 +32,8 @@
         </button>
       </span>
       <ng-template #loginTemplate>
-        <span>
-          <button (click)="login()" mat-flat-button>
+        <span style="display: flex;margin-left:auto;order:2">
+          <button style="margin-left:5px" (click)="login()" mat-flat-button>
             login
           </button>
         </span>

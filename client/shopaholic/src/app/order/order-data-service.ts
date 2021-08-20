@@ -40,7 +40,7 @@ this.orders$.subscribe((orders: Order[])=> {
   }
 
    get allOrders$(): Observable<Order[]>{
-     return this._orders$;
+     return this.orders$;
    }
 
    get hasCurrentOrder(): boolean{
@@ -54,6 +54,8 @@ this.orders$.subscribe((orders: Order[])=> {
         map((list: any[]): Order[] => list.map(Order.fromJson))
       );
       }
+
+      
   getOrder$(id: string): Observable<Order>{
     return this.http.get(`${environment.apiUrl}/orders/${id}`)
     .pipe(catchError(this.handleError),map(Order.fromJson));
@@ -63,6 +65,7 @@ this.orders$.subscribe((orders: Order[])=> {
   {
     console.log("line before post request in addneworder");
     console.log(order);
+    
     return this.http
     .post(`${environment.apiUrl}/orders/`, order.toJSONAdd())
     .pipe(catchError(this.handleError), map(Order.fromJson))
@@ -70,19 +73,22 @@ this.orders$.subscribe((orders: Order[])=> {
     .subscribe((ord: Order) =>{
       this._orders = [...this._orders, ord];
       this._currentOrder = ord;
+      this.setCurrentOrder(ord);
       this._hasOrder = true;
     });
   }
 //put request
   addProductToOrder( orderId :number, productId : number, amount: number){
     console.log("PRINTING THE ORDERID");
-    console.log(orderId);
-    this._orderLine = new Orderline(orderId,productId,amount);
+    console.log(this.currentOrder.id);
+    this._orderLine = new Orderline(this.currentOrder.id,productId,amount);
     console.log("printing current order");
     console.log(this.currentOrder);
-    return this.http.put(`${environment.apiUrl}/orders/${orderId}/${amount}`,this._orderLine.toJSON())
-    .pipe(catchError(this.handleError), map(Orderline.fromJson)).subscribe(resp => console.log(resp));
-    
+    return this.http.put(`${environment.apiUrl}/orders/${this.currentOrder.id}?${amount}`,this._orderLine.toJSON())
+    .pipe(catchError(this.handleError), map(Orderline.fromJson)).subscribe(resp => {
+      console.log("printing response in pipe");
+      console.log(resp);
+    })
   }
   handleError(err: any): Observable<never>{
     let errorMessage: string;

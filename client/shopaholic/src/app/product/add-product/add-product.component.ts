@@ -53,7 +53,7 @@ export class AddProductComponent implements OnInit {
     ),
   availability: this.fb.control(0),
   description: this.fb.control('Good laptop'),  
-  inStock: this.fb.control(1)
+  inStock: this.fb.control(false)
 
   },
   {validator: validateProductClassAndName}

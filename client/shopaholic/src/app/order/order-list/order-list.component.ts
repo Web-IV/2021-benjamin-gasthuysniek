@@ -18,13 +18,17 @@ export class OrderListComponent implements OnInit {
   constructor(private _orderDataService: OrderDataService) { }
 
   ngOnInit(): void {
+    console.log("ngoniti in orderlistcomponent");
     this._fetchOrders$ = this._orderDataService.allOrders$.pipe(
       catchError(err =>{
         this.errorMessage = err;
         this.loading = true;
         return EMPTY;
-      })
+      }),
+      
     );
+    this.orders$.subscribe(orders => console.log(orders));
+    
   }
 
   get orders$(): Observable<Order[]>{

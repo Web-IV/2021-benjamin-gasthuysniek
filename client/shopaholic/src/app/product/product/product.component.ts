@@ -31,24 +31,31 @@ export class ProductComponent implements OnInit {
   modifyProduct()
   {
    // this._router.navigate(['/product/modify/:id']);
-   //console.log("line in modifyproduct");
-   //console.log(this.product);
+   console.log("line in modifyproduct");
+   console.log(this.product);
    this._productDataService.setProductToModify(this.product);
    this._router.navigate([`/product/modify/${this.product.productId}`]);
   }
   addProductToOrder()
   {
+    console.log("PRINTING IN ADDPRODUCTTOORDER")
     console.log(this._orderDataService.currentOrder);
     /*if(!this._orderDataService.currentOrder.active)
     {
       this._orderDataService.addNewOrder(new Order(0,true,[],new Date(),0));
     }*/
     this._router.navigate([`order/${this.product.productId}`]);
+    /*
+    setting the initial value
+    
+    */
+   
 
   }
   retrieveProduct(): Product{
     return this.product;
   }
+  
 
  
 }

@@ -1,4 +1,4 @@
-interface ProductJson{
+export interface ProductJson{
   productId: number;
   //productId: number
   productClass: string;
@@ -19,16 +19,14 @@ export class Product {
       private _productName: string,
       private _unitPrice: number, //ts equivalent of doubles and ints
       private _availability: number,
-      private _description: string,   
-
-      private _inStock: boolean,
-      //private _dateAdded = new Date()
+      private _description: string,  
+      private _inStock: boolean,     
 
     ) {}
 
     static fromJSON(json: ProductJson): Product {
-     // console.log("printing fromjson");
-     // console.log(json);
+      console.log("printing fromjson");
+      console.log(json);
       const prod = new Product(json.productClass, json.productName, json.unitPrice, json.availability, json.description, json.inStock);
       //private _productId: number;
       prod._productId = json.productId;
@@ -37,7 +35,7 @@ export class Product {
       return prod;
     }
    
-    setProductName(productName: string)
+    /*setProductName(productName: string)
     {
       this._productName = productName;
     }
@@ -57,15 +55,18 @@ export class Product {
     {
       this._description = description;
     }
-    setInStock(instock: boolean)
+    
+    setProductId(productId : number)
     {
-      this._inStock = instock;
-    }
+      this._productId = productId;
+    }*/
     setProductId(productId : number)
     {
       this._productId = productId;
     }
-
+    setInStock(instock: boolean){
+      this._inStock = instock;
+    }
     toJSON(): ProductJson {
      // console.log("printing toJson");
       return <ProductJson>{  
@@ -75,7 +76,7 @@ export class Product {
         unitPrice: this.unitPrice,
         availability: this.availability,
         description: this.description,        
-        inStock: this._inStock,
+        inStock: this.inStock,
       };
     }
 

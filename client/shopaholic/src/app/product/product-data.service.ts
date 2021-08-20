@@ -63,11 +63,13 @@ this.products$.subscribe((products: Product[])=> {
 
   modifyProduct(product: Product)
   {   
-    console.log("printing the product we want to modify"); 
-    console.log(product);
-    return this.http
-    .put(`${environment.apiUrl}/products/${product.productId}`, product.toJSON())
-    .pipe(catchError(this.handleError), map(Product.fromJSON))
+
+    console.log("printing the product we want to modify");
+    this._productToModify = new Product("string","string",0,0,"string",true);
+    this._productToModify = product; 
+    console.log(this._productToModify.toJSON());
+    return this.http.put(`${environment.apiUrl}/products/${product.productId}`, this._productToModify.toJSON())
+    .pipe(catchError(this.handleError), map(Product.fromJSON))// map(Product.fromJSON))
     //observables are cold so nothing happens unless someone subscribes to them
     /*.subscribe((prod: Product) =>{
       this._products = [...this._products, prod];
@@ -75,7 +77,10 @@ this.products$.subscribe((products: Product[])=> {
     tap((prod: Product) => {
       this._reloadProducts$.next(true);
     });*/
-    .subscribe(data => {console.log(data)})
+   /* .subscribe(
+    
+    })*/
+    .subscribe();
   }
   deleteProduct(product: Product) {
     return this.http

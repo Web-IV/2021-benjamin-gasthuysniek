@@ -17,8 +17,9 @@ const appRoutes : Routes = [
   canActivate: [AuthGuard],
   component: AddProductComponent},
   {path: 'product/modify/:id', component: ModifyProductComponent},
+  {path: 'order/list/user', component: OrderListComponent},
   {path: 'orders/:id', component: OrderComponent},
-  {path: 'order/list', component: OrderListComponent},
+ 
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];

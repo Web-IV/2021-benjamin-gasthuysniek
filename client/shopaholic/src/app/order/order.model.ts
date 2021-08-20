@@ -1,29 +1,29 @@
 import { Orderline, OrderLineJson } from "../orderline/orderline.model";
 
-interface OrderJson{
-    orderId: number;
+export interface OrderJson{
+    id: number;
     userId: number;
     active: boolean;
     orderLines: OrderLineJson[];
     creationDate: string;
     orderTotaal: number;
 }
-interface OrderJsonAdd{  
+export interface OrderJsonAdd{  
   orderLines: OrderLineJson[]; 
 }
-interface OrderJsonPut{  
+/*interface OrderJsonPut{  
   
   /*"productClass": "string",
   "productName": "string",
   "unitPrice": 0,
   "availability": 0,
   "description": "string"
-  */
+  
   orderLines: OrderLineJson[]; 
-}
+}*/
 
 export class Order {
-    private _orderId: number;
+    private _id: number;
     constructor(
     private _userId: number,
     private _active: boolean,
@@ -38,13 +38,13 @@ export class Order {
        json.active,
        json.orderLines.map(Orderline.fromJson)
        ,new Date(json.creationDate), json.orderTotaal);
-    order._orderId = json.orderId;
+    order._id = json.id;
        return order;
  }   
 
   toJSON(): OrderJson {
     return <OrderJson>{  
-      orderId: this.orderId,    
+      id: this.id,    
       userId: this.userId,
       active: this.active,
       creationDate: this.creationDate.toString(),
@@ -58,11 +58,11 @@ export class Order {
     };
   }
 
-  toJSONPut(): OrderJsonPut{
+  /*toJSONPut(): OrderJsonPut{
     return <OrderJsonPut>{
 
     }
-  }
+  }*/
 
 
 
@@ -83,8 +83,8 @@ export class Order {
         return this._orderTotaal;
     }
 
-    get orderId(): number{
-      return this._orderId;
+    get id(): number{
+      return this._id;
     }
 
     get orderLines(): Orderline[]{
@@ -94,6 +94,9 @@ export class Order {
     addOrderline(productid: number, quantity: number)
     {
       this._orderLines.push(new Orderline(0,productid, quantity));
+    }
+    setId(id: number){
+      this._id = id;
     }
     
   }

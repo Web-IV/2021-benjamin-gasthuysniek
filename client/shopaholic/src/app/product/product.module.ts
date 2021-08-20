@@ -41,6 +41,6 @@ CommonModule, MaterialModule,HttpClientModule, ReactiveFormsModule,
 RouterModule.forChild(routes),
 
 ],
-exports: [ProductListComponent,AddProductComponent]
+exports: [ProductListComponent,AddProductComponent, ModifyProductComponent]
 })
 export class ProductModule { }

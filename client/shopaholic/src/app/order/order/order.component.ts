@@ -26,11 +26,13 @@ export class OrderComponent implements OnInit {
    //private productId: number;
   constructor(private route : ActivatedRoute, private orderDataService: OrderDataService, private authService: AuthenticationService, private productDataService: ProductDataService,
     ) {
+     
       
    }
 
   ngOnInit(): void {
     this.order = new Order(0,true,[],new Date(),0);
+    this.order.setId(0);
     this.settingInitialValues();
     
   }
@@ -48,7 +50,7 @@ export class OrderComponent implements OnInit {
   get orderlines$(): Orderline[]{
     return this.order.orderLines;
   }
-
+  
  
 
   public settingInitialValues():void{
@@ -63,11 +65,14 @@ export class OrderComponent implements OnInit {
          console.log(pa.get("id"));
          this.productId =+ pa.get("id");
         
+        
        }
        );
+      
        //this.orderlines.push( new Orderline(0,this.productId,1));
        console.log("printing productid")
        console.log(this.productId);
+       if(this.productId.toString() != "NaN"){
        this.productDataService.getProduct$(this.productId.toString()).subscribe((prod: Product) =>{
          this.product = prod;
          console.log("printing the product in getproduct");
@@ -80,6 +85,7 @@ export class OrderComponent implements OnInit {
          console.log("printing order after adding orderline");
          console.log(this.order);
        });
+      }
  
   }
 
@@ -93,7 +99,9 @@ export class OrderComponent implements OnInit {
       this.orderDataService.addNewOrder(this.order);
     }
     else{
-      this.orderDataService.addProductToOrder(this.order.orderId,this.product.productId,this.order.orderLines.pop().quantity);
+      console.log("printing in else in ordercomponent");
+      console.log(this.order.id);
+      this.orderDataService.addProductToOrder(this.order.id,this.product.productId,1);
     }
   }
 

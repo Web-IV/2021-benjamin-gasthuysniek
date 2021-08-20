@@ -23,6 +23,6 @@ import { ProductModule } from '../product/product.module';
     ReactiveFormsModule,
     ProductModule
   ],
-  exports:[OrderComponent]
+  exports:[OrderComponent, OrderListComponent, OrderlineComponent]
 })
 export class OrderModule { }

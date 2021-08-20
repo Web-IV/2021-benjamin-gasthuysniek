@@ -25,7 +25,10 @@ function validateProductClassAndName(control: FormGroup)
 })
 export class ModifyProductComponent implements OnInit {
   @Output() public newProduct = new EventEmitter<Product>();
-  public newestProduct: Product;  
+  public newestProduct: Product; 
+  //to pass the values from before
+  public originalProduct: Product;
+ 
   public product: FormGroup;
   public errorMessage : string = '';
   constructor(private fb: FormBuilder,
@@ -34,21 +37,24 @@ export class ModifyProductComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.originalProduct =  this._productDataService.productToModify;
+    console.log("printing from ngoninit");
+    console.log(this.originalProduct);
   this.product = this.fb.group({
-  productClass: this.fb.control('Laptop'
+  productClass: this.fb.control(this.originalProduct.productClass
  /*  , [Validators.required, Validators.minLength(3)],
   //async validator
   []  */ 
   ),
-  productName: this.fb.control('Rog strix'
+  productName: this.fb.control(this.originalProduct.productName
   // , [Validators.required, Validators.minLength(3)]
   ),
-  unitPrice: this.fb.control(300, 
+  unitPrice: this.fb.control(this.originalProduct.unitPrice
     //Validators.required
     ),
-  availability: this.fb.control(0),
-  description: this.fb.control('Good laptop'),  
-  inStock: this.fb.control(true),
+  availability: this.fb.control(this.originalProduct.availability),
+  description: this.fb.control(this.originalProduct.description),  
+  
 
   },
   {validator: validateProductClassAndName}
@@ -84,6 +90,10 @@ export class ModifyProductComponent implements OnInit {
     
     this._router.navigate(['/product/list']);
     
+  }
+  
+  getoriginalProduct(): Product{
+    return this.originalProduct;
   }
   getErrorMessage(errors: any): string {
     //an error occured on the required state

@@ -90,19 +90,43 @@ export class OrderComponent implements OnInit {
   }
 
   confirmOrderCreation(): void{
-    console.log(this.orderDataService.hasCurrentOrder);
-    console.log(this.product);
-    //has no active order so a new one is created
-    if(!this.orderDataService.hasCurrentOrder)
+    
+    this.orderDataService.orders$.subscribe(resp =>
+      {
+       
+        this.ordersOfUser = resp;
+        console.log("printin length");
+        console.log(this.ordersOfUser[0]);
+        if(!this.ordersOfUser[0])
     {
+      console.log("hasnoorder");
       console.log(this.order);
       this.orderDataService.addNewOrder(this.order);
+      this.orderDataService.sethasOrder();
+      
+    }
+    else{
+      console.log("printing in else in ordercomponent");
+      console.log(this.ordersOfUser[0].id);
+      this.orderDataService.addProductToOrder(this.ordersOfUser[0].id,this.product.productId,1);
+    }
+      });
+      console.log("printing after assigning orders")
+      console.log(this.ordersOfUser);
+    //has no active order so a new one is created
+   /* if(!this.orderDataService.hasOrder)
+    {
+      console.log("hasnoorder");
+      console.log(this.order);
+      this.orderDataService.addNewOrder(this.order);
+      this.orderDataService.sethasOrder();
+      
     }
     else{
       console.log("printing in else in ordercomponent");
       console.log(this.order.id);
       this.orderDataService.addProductToOrder(this.order.id,this.product.productId,1);
-    }
+    }*/
   }
 
   //test method for retrieving the userid

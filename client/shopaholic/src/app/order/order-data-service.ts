@@ -27,6 +27,9 @@ this.orders$.subscribe((orders: Order[])=> {
 
    }
 
+   sethasOrder(){
+     this._hasOrder = true;
+   }
    setCurrentOrder(order: Order){
      this._currentOrder = order;
    }
@@ -39,15 +42,16 @@ this.orders$.subscribe((orders: Order[])=> {
     return this._currentOrder;
   }
 
-   get allOrders$(): Observable<Order[]>{
+  /* get allOrders$(): Observable<Order[]>{
      return this.orders$;
-   }
+   }*/
 
-   get hasCurrentOrder(): boolean{
+   get hasOrder(): boolean{
      return this._hasOrder;
    }
 
   get orders$(): Observable< Order[] > {
+    
     return this.http.get(`${environment.apiUrl}/Orders?userid=-1`).pipe(
       
         catchError(this.handleError),
@@ -63,9 +67,9 @@ this.orders$.subscribe((orders: Order[])=> {
   
   addNewOrder(order:Order)
   {
-    console.log("line before post request in addneworder");
+   /* console.log("line before post request in addneworder");
     console.log(order);
-    
+    */
     return this.http
     .post(`${environment.apiUrl}/orders/`, order.toJSONAdd())
     .pipe(catchError(this.handleError), map(Order.fromJson))
@@ -74,21 +78,24 @@ this.orders$.subscribe((orders: Order[])=> {
       this._orders = [...this._orders, ord];
       this._currentOrder = ord;
       this.setCurrentOrder(ord);
-      this._hasOrder = true;
+      this.sethasOrder();
     });
   }
 //put request
   addProductToOrder( orderId :number, productId : number, amount: number){
     console.log("PRINTING THE ORDERID");
-    console.log(this.currentOrder.id);
-    this._orderLine = new Orderline(this.currentOrder.id,productId,amount);
+    console.log(orderId);
+    this._orderLine = new Orderline(orderId,productId,amount);
     console.log("printing current order");
     console.log(this.currentOrder);
-    return this.http.put(`${environment.apiUrl}/orders/${this.currentOrder.id}?${amount}`,this._orderLine.toJSON())
-    .pipe(catchError(this.handleError), map(Orderline.fromJson)).subscribe(resp => {
+    return this.http.put(`${environment.apiUrl}/orders/${orderId}/${amount}`,this._orderLine.toJSON())
+    .pipe(catchError(this.handleError)).subscribe();
+    //, map(Orderline.fromJson));
+    //.subscribe()
+    /*resp => {
       console.log("printing response in pipe");
       console.log(resp);
-    })
+    })*/
   }
 
   deleteOrder(orderid: number){

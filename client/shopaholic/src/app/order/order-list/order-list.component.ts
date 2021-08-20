@@ -19,7 +19,7 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("ngoniti in orderlistcomponent");
-    this._fetchOrders$ = this._orderDataService.allOrders$.pipe(
+    this._fetchOrders$ = this._orderDataService.orders$.pipe(
       catchError(err =>{
         this.errorMessage = err;
         this.loading = true;

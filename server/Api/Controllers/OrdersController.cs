@@ -124,7 +124,7 @@ namespace Webshop.Controllers
         /// <param name="addProductDTO"></param>        
         /// <param name="id">id of the order we wabt to add the product to</param>
         /// <param name="amount">amount</param>
-        [HttpPut("{id}")]
+        [HttpPut("{id}/{amount}")]
         public ActionResult AddProductToOrder(AddProductDTO addProductDTO, int id, int amount)//,int orderid)
         {
             if (addProductDTO.OrderId != id)
@@ -151,7 +151,7 @@ namespace Webshop.Controllers
             {
                 newOrderline.ProductId = addProductDTO.ProductId;
                 newOrderline.OrderId = addProductDTO.OrderId;
-                newOrderline.Quantity = amount;
+                newOrderline.Quantity += amount;
 
                 _orderLineRepository.Update(newOrderline);
                 order.VoegContentToe(newOrderline);

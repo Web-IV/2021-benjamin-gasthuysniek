@@ -22,7 +22,10 @@ export class Product {
       private _description: string,  
       private _inStock: boolean,     
 
-    ) {}
+    ) {
+        this.calculateInStock();
+
+    }
 
     static fromJSON(json: ProductJson): Product {
       console.log("printing fromjson");
@@ -66,6 +69,15 @@ export class Product {
     }
     setInStock(instock: boolean){
       this._inStock = instock;
+    }
+
+    calculateInStock(){
+        if(this.availability<=0){
+          this.setInStock(false);
+        }
+        else{
+          this.setInStock(true);
+        }
     }
     toJSON(): ProductJson {
      // console.log("printing toJson");

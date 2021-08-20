@@ -151,7 +151,7 @@ namespace Webshop.Controllers
             {
                 newOrderline.ProductId = addProductDTO.ProductId;
                 newOrderline.OrderId = addProductDTO.OrderId;
-                newOrderline.Quantity += amount;
+                newOrderline.Quantity = amount;
 
                 _orderLineRepository.Update(newOrderline);
                 order.VoegContentToe(newOrderline);

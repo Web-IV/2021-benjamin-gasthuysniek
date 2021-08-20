@@ -17,6 +17,17 @@ describe('Login Test', function(){ //describe structures multiple tests
 )
         
     });
-   
+    describe('Register Test', function(){ //describe structures multiple tests
+  
+        it('register', function(){
+            cy.server({delay: 1000}); //the requests will pass throught this server
+           
+            
+            cy.visit('/register');
+            cy.get('[data-cy=register-button]').should('be.visible');   
+      }
+    )
+            
+        });
     
 

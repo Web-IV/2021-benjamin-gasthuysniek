@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, pipe, throwError } from 'rxjs';
-import { map, tap, delay, catchError, shareReplay } from 'rxjs/operators';
+import { map, tap, delay, catchError, shareReplay, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { PRODUCTS } from './mock-product';
 import { Product } from './product.model';
@@ -45,6 +45,11 @@ this.products$.subscribe((products: Product[])=> {
   getProduct$(id: string): Observable<Product>{
     return this.http.get(`${environment.apiUrl}/products/${id}`)
     .pipe(catchError(this.handleError),map(Product.fromJSON));
+  }
+  getProducts$(){
+  return this._reloadProducts$.pipe(
+    switchMap(()=>this.products$)
+  );
   }
  
   addNewProduct(product: Product)

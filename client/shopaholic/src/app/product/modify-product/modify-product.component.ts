@@ -59,7 +59,7 @@ export class ModifyProductComponent implements OnInit {
   },
   {validator: validateProductClassAndName}
   )
-  }
+  } 
   onSubmit()
   {
     //this.newProduct.emit(new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.userId));

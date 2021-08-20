@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, EMPTY } from 'rxjs';
 import { PRODUCTS } from '../mock-product';
-import{distinctUntilChanged, debounceTime,map,filter, catchError} from 'rxjs/operators'
+import{distinctUntilChanged, debounceTime,map,filter, catchError, switchMap} from 'rxjs/operators'
 import { ProductDataService } from '../product-data.service';
 import { Product } from '../product.model';
 import { Observable } from 'rxjs';
@@ -31,7 +31,7 @@ export class ProductListComponent implements OnInit {
     )
     .subscribe(
       val => this.filterProductName = val);
-    
+
   }
  
   ngOnInit(): void {
@@ -43,6 +43,7 @@ export class ProductListComponent implements OnInit {
       })
       
     );
+    
   }
   applyFilter(filter:string)
   {
@@ -54,6 +55,7 @@ export class ProductListComponent implements OnInit {
   addNewProduct(product: Product)
   {
     this._productDataService.addNewProduct(product);
+  
   }
 
 }

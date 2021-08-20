@@ -25,9 +25,9 @@
       </button>
       <span>shopaholic</span>
       <span class="fill-space"></span>
-      <span *ngIf="UserLoggedIn | async as user; else loginTemplate">
+      <span style="display: flex;margin-left:auto;order:2" *ngIf="UserLoggedIn | async as user; else loginTemplate">
         {{ user }}
-        <button (click)="logout()" mat-flat-button>
+        <button style="margin-left:5px" (click)="logout()" mat-flat-button>
           logout
         </button>
       </span>

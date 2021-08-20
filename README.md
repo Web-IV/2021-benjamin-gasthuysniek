@@ -35,7 +35,7 @@ Use the following commands in your  Terminal to navigate to the right folder and
 
 ### Printscreens Swagger
 * Account controller
-![](acccountController.PNG)
+![](accountController.PNG)
 
 * Comment controller
 ![](commentController.PNG)

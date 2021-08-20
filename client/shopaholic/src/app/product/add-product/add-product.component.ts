@@ -65,21 +65,13 @@ export class AddProductComponent implements OnInit {
     this._productDataService.addNewProduct(
       new Product(this.product.value.productClass, this.product.value.productName, this.product.value.unitPrice, this.product.value.availability, this.product.value.description,this.product.value.inStock)
     );
-
+    
     this._router.navigate(['/product/list']);
+    
     console.log("line before reloading");
-    this.reloadTargetRoute();
+   
   }
-   //reload component
-   reloadTargetRoute() {
-    let targetUrl = '/product/list'//this._router.url;
-    this._router.navigateByUrl('/', {skipLocationChange: false}).then(() => {
-        this._router.navigate([targetUrl]);
-        console.log(targetUrl);
-    });
-  
-}
-
+   
 
   //the addproduct event is called when the button in the html of add product is clicked
   /*addProduct(productClass:HTMLInputElement,productName: HTMLInputElement, unitPrice: HTMLInputElement, availability:

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Orderline } from 'src/app/orderline/orderline.model';
 import { ProductDataService } from 'src/app/product/product-data.service';
@@ -25,6 +25,7 @@ export class OrderComponent implements OnInit {
    private userId : number;
    //private productId: number;
   constructor(private route : ActivatedRoute, private orderDataService: OrderDataService, private authService: AuthenticationService, private productDataService: ProductDataService,
+    private _router : Router
     ) {
      
       
@@ -101,14 +102,21 @@ export class OrderComponent implements OnInit {
     {
       console.log("hasnoorder");
       console.log(this.order);
+     
       this.orderDataService.addNewOrder(this.order);
       this.orderDataService.sethasOrder();
-      
+      console.log("PRINTING BEFORE REDIRECT");
+      this._router.navigate(['/order/list/user']);
+    
     }
     else{
       console.log("printing in else in ordercomponent");
       console.log(this.ordersOfUser[0].id);
+      
       this.orderDataService.addProductToOrder(this.ordersOfUser[0].id,this.product.productId,1);
+      console.log("PRINTING BEFORE REDIRECT");
+      this._router.navigate(['/order/list/user']);
+    
     }
       });
       console.log("printing after assigning orders")
@@ -127,6 +135,7 @@ export class OrderComponent implements OnInit {
       console.log(this.order.id);
       this.orderDataService.addProductToOrder(this.order.id,this.product.productId,1);
     }*/
+    
   }
 
   //test method for retrieving the userid

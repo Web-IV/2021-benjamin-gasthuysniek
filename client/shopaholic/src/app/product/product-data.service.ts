@@ -60,9 +60,11 @@ this.products$.subscribe((products: Product[])=> {
     //observables are cold so nothing happens unless someone subscribes to them
     .subscribe((prod: Product) =>{
       this._products = [...this._products, prod];
+      window.location.reload();
     }),
     tap((prod: Product) => {
       this._reloadProducts$.next(true);
+      
     });
   }
 
@@ -73,6 +75,7 @@ this.products$.subscribe((products: Product[])=> {
     this._productToModify = new Product("string","string",0,0,"string",true);
     this._productToModify = product; 
     console.log(this._productToModify.toJSON());
+    
     return this.http.put(`${environment.apiUrl}/products/${product.productId}`, this._productToModify.toJSON())
     .pipe(catchError(this.handleError), map(Product.fromJSON))// map(Product.fromJSON))
     //observables are cold so nothing happens unless someone subscribes to them
@@ -85,6 +88,7 @@ this.products$.subscribe((products: Product[])=> {
    /* .subscribe(
     
     })*/
+    
     .subscribe();
   }
   deleteProduct(product: Product) {
@@ -93,6 +97,7 @@ this.products$.subscribe((products: Product[])=> {
       .pipe(tap(console.log), catchError(this.handleError))
       .subscribe(() => {
         this._reloadProducts$.next(true);
+        window.location.reload();
       });
   }
   handleError(err: any): Observable<never>{
@@ -108,5 +113,8 @@ this.products$.subscribe((products: Product[])=> {
       }
     
     return throwError(errorMessage);
+  }
+  reloadPage(){
+    window.location.reload();
   }
 }

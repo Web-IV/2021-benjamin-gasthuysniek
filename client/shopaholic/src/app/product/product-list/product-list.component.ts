@@ -5,6 +5,7 @@ import{distinctUntilChanged, debounceTime,map,filter, catchError, switchMap} fro
 import { ProductDataService } from '../product-data.service';
 import { Product } from '../product.model';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -14,11 +15,12 @@ import { Observable } from 'rxjs';
 export class ProductListComponent implements OnInit {
   private _fetchProducts$: Observable<Product[]>// = this._productDataService.products$; 
   public loading: boolean;
+
   public filterProductName: string;
   //storing the filter in an observable
   public filterProduct$ = new Subject<string>();
   public errorMessage: string = '';
-  constructor(private _productDataService: ProductDataService) { 
+  constructor(private _productDataService: ProductDataService, private _router: Router) { 
     //subscribe to act on the values fired from the observable
 /*this._productDataService.products$.subscribe(
   res => this._products = res*/
@@ -43,6 +45,7 @@ export class ProductListComponent implements OnInit {
       })
       
     );
+    //this.reloadCurrentRoute();
     
   }
   applyFilter(filter:string)
@@ -55,7 +58,8 @@ export class ProductListComponent implements OnInit {
   addNewProduct(product: Product)
   {
     this._productDataService.addNewProduct(product);
-  
+   
   }
+  
 
 }

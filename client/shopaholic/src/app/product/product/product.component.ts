@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
     console.log(this.product);
     
     this._productDataService.deleteProduct(this.product);
-    //window.location.reload();
+    
   }
   modifyProduct()
   {

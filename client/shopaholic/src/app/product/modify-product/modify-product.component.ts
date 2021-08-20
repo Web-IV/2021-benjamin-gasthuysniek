@@ -87,8 +87,9 @@ export class ModifyProductComponent implements OnInit {
      this.newestProduct
       )
 
-    
+     
     this._router.navigate(['/product/list']);
+    
     
   }
   

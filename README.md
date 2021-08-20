@@ -1,27 +1,50 @@
-# Shopaholic
+# Shopaholic Webshop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
+---
 
-## Development server
+# Start the frontend
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## How to
+Use these commands in your  Terminal to clone the Back- and Front-End
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+```bash
+~$ git clone https://github.com/Web-IV/2021-benjamin-gasthuysniek.git
+~$ cd client/shopaholic
+~$ npm start
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Then open  http://localhost:4200/ in a browser
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+# Start the backend
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## How to
 
-## Further help
+Use the following commands in your  Terminal to navigate to the right folder and start the backend
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+
+~$ cd client/shopaholic
+~$ cd ../../server/api
+~$ dotnet run
+
+```
+
+### Printscreens Swagger
+* Account controller
+![](acccountController.PNG)
+
+* Comment controller
+![](commentController.PNG)
+
+* Order controller
+![](orderController.PNG)
+
+* Product controller
+![](productController.PNG)
+
+* User controller
+![](userController.PNG)

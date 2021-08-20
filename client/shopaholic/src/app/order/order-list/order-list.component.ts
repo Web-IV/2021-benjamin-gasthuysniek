@@ -30,7 +30,7 @@ export class OrderListComponent implements OnInit {
     this.orders$.subscribe(orders => console.log(orders));
     
   }
-
+  
   get orders$(): Observable<Order[]>{
     return this._fetchOrders$;
   }
@@ -38,5 +38,9 @@ export class OrderListComponent implements OnInit {
   addNewOrder( order: Order){
     this._orderDataService.addNewOrder(order);
   }
+  deleteOrder(orderid: number){
+    this._orderDataService.deleteOrder(orderid);
+   }
+ 
 
 }

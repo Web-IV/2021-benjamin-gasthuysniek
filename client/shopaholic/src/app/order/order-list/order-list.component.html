@@ -1,5 +1,3 @@
-<p>order-list works!</p>
-
 <div fxLayout="column" fxLayoutGap="2%">
 
 
@@ -14,10 +12,18 @@
         <mat-card>
           <mat-card-header>
             <mat-card-title>Ordertotaal: {{order.orderTotaal}}</mat-card-title>
-            <mat-card-subtitle>OrderId: {{order.id}}</mat-card-subtitle>
-            <mat-card-subtitle>Creationdate: {{order.creationDate | date}}</mat-card-subtitle>
+
           </mat-card-header>
-          
+          <mat-card-content>
+            <mat-card-subtitle>OrderId: {{order.id}}</mat-card-subtitle>
+            <mat-card-subtitle>Created: {{order.creationDate | date)}}</mat-card-subtitle>
+          </mat-card-content>
+
+
+          <button (click)="deleteOrder(order.id)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+
         </mat-card>
       </div>
     </div>

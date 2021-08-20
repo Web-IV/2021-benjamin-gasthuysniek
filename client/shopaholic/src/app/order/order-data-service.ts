@@ -90,6 +90,13 @@ this.orders$.subscribe((orders: Order[])=> {
       console.log(resp);
     })
   }
+
+  deleteOrder(orderid: number){
+    return this.http
+    .delete(`${environment.apiUrl}/Orders/${orderid}`)
+    .pipe(tap(console.log), catchError(this.handleError))
+    .subscribe();
+  }
   handleError(err: any): Observable<never>{
     let errorMessage: string;
     if (err.error instanceof ErrorEvent) {
